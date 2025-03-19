@@ -1,14 +1,14 @@
+import type { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
+  createRootRouteWithContext,
   HeadContent,
   Link,
   Outlet,
   Scripts,
-  createRootRouteWithContext,
 } from '@tanstack/react-router'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import * as React from 'react'
-import type { QueryClient } from '@tanstack/react-query'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
 import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
@@ -90,7 +90,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             activeOptions={{ exact: true }}
           >
             Home
-          </Link>{' '}
+          </Link>
+          {' '}
           <Link
             to="/posts"
             activeProps={{
@@ -98,7 +99,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }}
           >
             Posts
-          </Link>{' '}
+          </Link>
+          {' '}
           <Link
             // @ts-expect-error
             to="/this-route-does-not-exist"

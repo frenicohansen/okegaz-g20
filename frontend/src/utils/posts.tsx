@@ -3,7 +3,7 @@ import { notFound } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import axios from 'redaxios'
 
-export type PostType = {
+export interface PostType {
   id: string
   title: string
   body: string
@@ -14,15 +14,16 @@ export const fetchPosts = createServerFn({ method: 'GET' }).handler(
     console.info('Fetching posts...')
     return axios
       .get<Array<PostType>>('https://jsonplaceholder.typicode.com/posts')
-      .then((r) => r.data.slice(0, 10))
+      .then(r => r.data.slice(0, 10))
   },
 )
 
-export const postsQueryOptions = () =>
-  queryOptions({
+export function postsQueryOptions() {
+  return queryOptions({
     queryKey: ['posts'],
     queryFn: () => fetchPosts(),
   })
+}
 
 export const fetchPost = createServerFn({ method: 'GET' })
   .validator((d: string) => d)
@@ -30,7 +31,7 @@ export const fetchPost = createServerFn({ method: 'GET' })
     console.info(`Fetching post with id ${data}...`)
     const post = await axios
       .get<PostType>(`https://jsonplaceholder.typicode.com/posts/${data}`)
-      .then((r) => r.data)
+      .then(r => r.data)
       .catch((err) => {
         console.error(err)
         if (err.status === 404) {
@@ -42,8 +43,9 @@ export const fetchPost = createServerFn({ method: 'GET' })
     return post
   })
 
-export const postQueryOptions = (postId: string) =>
-  queryOptions({
+export function postQueryOptions(postId: string) {
+  return queryOptions({
     queryKey: ['post', postId],
     queryFn: () => fetchPost({ data: postId }),
   })
+}
