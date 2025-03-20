@@ -1,11 +1,10 @@
 import type { GeoJSONFeature } from 'ol/format/GeoJSON'
 import type { RefObject } from 'react'
-import { Feature } from 'ol'
 import LayerSwitcher from 'ol-layerswitcher'
+import { defaults as defaultControls } from 'ol/control'
 import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
 import Select from 'ol/interaction/Select'
-import LayerGroup from 'ol/layer/Group'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import WebGLTileLayer from 'ol/layer/WebGLTile'
@@ -218,6 +217,11 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       view: new View({
         center: fromLonLat([-12.5, 16.5]), // Approximate center of Assaba region
         zoom: 8,
+      }),
+      controls: defaultControls({
+        zoom: true,
+        rotate: false,
+        attribution: true,
       }),
     })
     map.setTarget(mapRef.current)

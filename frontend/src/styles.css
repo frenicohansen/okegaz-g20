@@ -126,3 +126,10 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+.ol-zoom.ol-control {
+  top: auto;
+  left: 0.5rem;
+  right: auto;
+  bottom: 0.5rem;
+}
