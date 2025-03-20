@@ -1,6 +1,6 @@
 import { Dashboard } from '@/components/dashboard'
 import { Card } from '@/components/ui/card'
-import { MyMap } from '@/Map'
+import { MyMap } from '@/components/dashboard-map'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({

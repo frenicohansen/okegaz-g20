@@ -18,7 +18,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
-// Define the GeoJSON data types
 interface GeoJSONFeature {
   type: string
   properties: Record<string, any>
@@ -27,13 +26,7 @@ interface GeoJSONFeature {
     coordinates: any[]
   }
 }
-/*
-interface GeoJSONData {
-  type: string
-  name: string
-  features: GeoJSONFeature[]
-}
-*/
+
 export const MyMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<Map | null>(null)
