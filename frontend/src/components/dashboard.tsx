@@ -1,5 +1,5 @@
 'use client'
-import { MyMap } from '@/components/dashboard-map'
+import { DashboardMap } from '@/components/dashboard-map'
 import { cn } from '@/lib/utils'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { useState } from 'react'
@@ -147,7 +147,7 @@ export function Dashboard() {
   return (
     <>
       <div className="rounded-lg bg-card">
-        <MyMap />
+        <DashboardMap />
       </div>
       <ToggleGroup.Root type="multiple" value={selectedScenarios} onValueChange={handleScenarioChange}>
         <div className="flex mt-8 gap-4">

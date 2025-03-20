@@ -26,7 +26,7 @@ interface GeoJSONFeature {
   [key: string]: any
 }
 
-export const MyMap: React.FC = () => {
+export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<Map | null>(null)
   const selectInteractionRef = useRef<Select | null>(null)
