@@ -72,7 +72,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 183.25091552734375,
       "GPP (kg_C/m\u00b2/year)": 600.8397872694034,
       "Population Density (People/km\u00b2)": 11.797093391418457
@@ -116,7 +116,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 294.59027099609375,
       "GPP (kg_C/m\u00b2/year)": 1148.9208908093735,
       "Population Density (People/km\u00b2)": 12.05689811706543
@@ -160,7 +160,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 223.23446655273438,
       "GPP (kg_C/m\u00b2/year)": 852.3985374771481,
       "Population Density (People/km\u00b2)": 12.316702842712402
@@ -204,7 +204,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 191.02297973632812,
       "GPP (kg_C/m\u00b2/year)": 762.2253614758185,
       "Population Density (People/km\u00b2)": 12.576507568359375
@@ -248,7 +248,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 230.87936401367188,
       "GPP (kg_C/m\u00b2/year)": 865.7364134950973,
       "Population Density (People/km\u00b2)": 12.836312294006348
@@ -292,7 +292,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 272.0030822753906,
       "GPP (kg_C/m\u00b2/year)": 1356.4793086255609,
       "Population Density (People/km\u00b2)": 13.133138656616211
@@ -336,7 +336,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 213.04013061523438,
       "GPP (kg_C/m\u00b2/year)": 508.6195778627223,
       "Population Density (People/km\u00b2)": 13.429965019226074
@@ -380,7 +380,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 218.9738006591797,
       "GPP (kg_C/m\u00b2/year)": 671.4713312281868,
       "Population Density (People/km\u00b2)": 13.726790428161621
@@ -424,7 +424,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 162.61788940429688,
       "GPP (kg_C/m\u00b2/year)": 804.706165863387,
       "Population Density (People/km\u00b2)": 14.023616790771484
@@ -468,7 +468,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 331.05035400390625,
       "GPP (kg_C/m\u00b2/year)": 1166.516204088416,
       "Population Density (People/km\u00b2)": 14.320443153381348
@@ -512,7 +512,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 187.69357299804688,
       "GPP (kg_C/m\u00b2/year)": 589.1793252451388,
       "Population Density (People/km\u00b2)": 14.320443153381348
@@ -556,7 +556,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 282.4630126953125,
       "GPP (kg_C/m\u00b2/year)": 1374.15738740236,
       "Population Density (People/km\u00b2)": 14.320443153381348
@@ -600,7 +600,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12753,
       "Percentage": 65.79476861167002,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 225.26072692871094,
       "GPP (kg_C/m\u00b2/year)": 715.6114342695696,
       "Population Density (People/km\u00b2)": 14.320443153381348
@@ -679,7 +679,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 199.193603515625,
       "GPP (kg_C/m\u00b2/year)": 446.9384615384615,
       "Population Density (People/km\u00b2)": 49.91080093383789
@@ -723,7 +723,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 357.7149658203125,
       "GPP (kg_C/m\u00b2/year)": 938.5282051282052,
       "Population Density (People/km\u00b2)": 51.2515983581543
@@ -767,7 +767,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 235.9252471923828,
       "GPP (kg_C/m\u00b2/year)": 639.1025641025641,
       "Population Density (People/km\u00b2)": 52.59239196777344
@@ -800,7 +800,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 204.53172302246094,
       "GPP (kg_C/m\u00b2/year)": 502.07179487179485,
       "Population Density (People/km\u00b2)": 53.933189392089844
@@ -833,7 +833,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 182.011962890625,
       "GPP (kg_C/m\u00b2/year)": 588.6358974358974,
       "Population Density (People/km\u00b2)": 55.27398681640625
@@ -866,7 +866,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 229.44322204589844,
       "GPP (kg_C/m\u00b2/year)": 856.3846153846154,
       "Population Density (People/km\u00b2)": 56.864322662353516
@@ -899,7 +899,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 190.6925811767578,
       "GPP (kg_C/m\u00b2/year)": 283.8820512820513,
       "Population Density (People/km\u00b2)": 58.45465850830078
@@ -932,7 +932,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 197.6353759765625,
       "GPP (kg_C/m\u00b2/year)": 461.8871794871795,
       "Population Density (People/km\u00b2)": 60.04499053955078
@@ -965,7 +965,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 136.86135864257812,
       "GPP (kg_C/m\u00b2/year)": 383.9230769230769,
       "Population Density (People/km\u00b2)": 61.63532638549805
@@ -1009,7 +1009,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 288.0527038574219,
       "GPP (kg_C/m\u00b2/year)": 730.1179487179487,
       "Population Density (People/km\u00b2)": 63.22566223144531
@@ -1053,7 +1053,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 237.9109649658203,
       "GPP (kg_C/m\u00b2/year)": 315.61538461538464,
       "Population Density (People/km\u00b2)": 63.22566223144531
@@ -1097,7 +1097,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 206.52310180664062,
       "GPP (kg_C/m\u00b2/year)": 780.1435897435897,
       "Population Density (People/km\u00b2)": 63.22566223144531
@@ -1141,7 +1141,7 @@
       "LandCoverClass": 255,
       "PixelCount": 855,
       "Percentage": 52.64778325123153,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 204.4575653076172,
       "GPP (kg_C/m\u00b2/year)": 586.974358974359,
       "Population Density (People/km\u00b2)": 63.22566223144531
@@ -1198,7 +1198,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 278.5179138183594,
       "GPP (kg_C/m\u00b2/year)": 888.3477317680087,
       "Population Density (People/km\u00b2)": 5.193639755249023
@@ -1231,7 +1231,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 485.5314636230469,
       "GPP (kg_C/m\u00b2/year)": 1675.3032603841,
       "Population Density (People/km\u00b2)": 5.332516670227051
@@ -1264,7 +1264,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 342.0116882324219,
       "GPP (kg_C/m\u00b2/year)": 1014.3784214891853,
       "Population Density (People/km\u00b2)": 5.471393585205078
@@ -1297,7 +1297,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 321.0413818359375,
       "GPP (kg_C/m\u00b2/year)": 1072.3930964078352,
       "Population Density (People/km\u00b2)": 5.6102705001831055
@@ -1330,7 +1330,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 355.61407470703125,
       "GPP (kg_C/m\u00b2/year)": 1138.5286160913672,
       "Population Density (People/km\u00b2)": 5.749147415161133
@@ -1374,7 +1374,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 399.08062744140625,
       "GPP (kg_C/m\u00b2/year)": 1898.5233203598546,
       "Population Density (People/km\u00b2)": 5.90635347366333
@@ -1407,7 +1407,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 321.8699645996094,
       "GPP (kg_C/m\u00b2/year)": 727.0197154341862,
       "Population Density (People/km\u00b2)": 6.063559532165527
@@ -1440,7 +1440,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 363.9171447753906,
       "GPP (kg_C/m\u00b2/year)": 992.1564473936069,
       "Population Density (People/km\u00b2)": 6.220766067504883
@@ -1473,7 +1473,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 268.2481689453125,
       "GPP (kg_C/m\u00b2/year)": 932.8172653608116,
       "Population Density (People/km\u00b2)": 6.37797212600708
@@ -1506,7 +1506,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 527.641357421875,
       "GPP (kg_C/m\u00b2/year)": 1751.833599183309,
       "Population Density (People/km\u00b2)": 6.535178184509277
@@ -1539,7 +1539,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 310.22454833984375,
       "GPP (kg_C/m\u00b2/year)": 859.6564154916098,
       "Population Density (People/km\u00b2)": 6.535178184509277
@@ -1561,7 +1561,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 494.6271057128906,
       "GPP (kg_C/m\u00b2/year)": 2294.915013079819,
       "Population Density (People/km\u00b2)": 6.535178184509277
@@ -1583,7 +1583,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10255,
       "Percentage": 39.55031046318794,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 346.87860107421875,
       "GPP (kg_C/m\u00b2/year)": 1271.0413449881962,
       "Population Density (People/km\u00b2)": 6.535178184509277
@@ -1662,7 +1662,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 156.62472534179688,
       "GPP (kg_C/m\u00b2/year)": 568.6603375527426,
       "Population Density (People/km\u00b2)": 7.1234917640686035
@@ -1706,7 +1706,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 311.6806945800781,
       "GPP (kg_C/m\u00b2/year)": 1066.090717299578,
       "Population Density (People/km\u00b2)": 7.268216609954834
@@ -1750,7 +1750,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 216.385986328125,
       "GPP (kg_C/m\u00b2/year)": 778.824894514768,
       "Population Density (People/km\u00b2)": 7.412941932678223
@@ -1794,7 +1794,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 176.6912384033203,
       "GPP (kg_C/m\u00b2/year)": 611.9894514767932,
       "Population Density (People/km\u00b2)": 7.557666778564453
@@ -1838,7 +1838,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 169.81422424316406,
       "GPP (kg_C/m\u00b2/year)": 601.8143459915611,
       "Population Density (People/km\u00b2)": 7.702391624450684
@@ -1882,7 +1882,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 215.3330535888672,
       "GPP (kg_C/m\u00b2/year)": 820.2067510548524,
       "Population Density (People/km\u00b2)": 7.865424156188965
@@ -1926,7 +1926,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 164.37205505371094,
       "GPP (kg_C/m\u00b2/year)": 365.084388185654,
       "Population Density (People/km\u00b2)": 8.028456687927246
@@ -1970,7 +1970,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 200.08201599121094,
       "GPP (kg_C/m\u00b2/year)": 565.7995780590717,
       "Population Density (People/km\u00b2)": 8.191488265991211
@@ -2014,7 +2014,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 132.17910766601562,
       "GPP (kg_C/m\u00b2/year)": 450.246835443038,
       "Population Density (People/km\u00b2)": 8.354520797729492
@@ -2058,7 +2058,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 253.74618530273438,
       "GPP (kg_C/m\u00b2/year)": 858.1497890295359,
       "Population Density (People/km\u00b2)": 8.517553329467773
@@ -2102,7 +2102,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 212.8580780029297,
       "GPP (kg_C/m\u00b2/year)": 411.1835443037975,
       "Population Density (People/km\u00b2)": 8.517553329467773
@@ -2146,7 +2146,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 203.89012145996094,
       "GPP (kg_C/m\u00b2/year)": 1098.4535864978902,
       "Population Density (People/km\u00b2)": 8.517553329467773
@@ -2190,7 +2190,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7787,
       "Percentage": 54.93474426807761,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 187.24264526367188,
       "GPP (kg_C/m\u00b2/year)": 634.2552742616034,
       "Population Density (People/km\u00b2)": 8.517553329467773
@@ -2269,7 +2269,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 78.84519958496094,
       "GPP (kg_C/m\u00b2/year)": 969.1176470588235,
       "Population Density (People/km\u00b2)": 10.205870628356934
@@ -2313,7 +2313,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 132.2664337158203,
       "GPP (kg_C/m\u00b2/year)": 1694.0588235294117,
       "Population Density (People/km\u00b2)": 9.937051773071289
@@ -2357,7 +2357,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 112.095947265625,
       "GPP (kg_C/m\u00b2/year)": 1243.3529411764705,
       "Population Density (People/km\u00b2)": 9.668233871459961
@@ -2401,7 +2401,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 79.54670715332031,
       "GPP (kg_C/m\u00b2/year)": 1133.3529411764705,
       "Population Density (People/km\u00b2)": 9.399415016174316
@@ -2445,7 +2445,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 108.2997055053711,
       "GPP (kg_C/m\u00b2/year)": 1307.5882352941176,
       "Population Density (People/km\u00b2)": 9.130596160888672
@@ -2489,7 +2489,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 130.49395751953125,
       "GPP (kg_C/m\u00b2/year)": 1662.8235294117646,
       "Population Density (People/km\u00b2)": 8.953973770141602
@@ -2533,7 +2533,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 72.6376724243164,
       "GPP (kg_C/m\u00b2/year)": 1034.3529411764705,
       "Population Density (People/km\u00b2)": 8.777351379394531
@@ -2577,7 +2577,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 104.98384857177734,
       "GPP (kg_C/m\u00b2/year)": 1117.764705882353,
       "Population Density (People/km\u00b2)": 8.600728988647461
@@ -2621,7 +2621,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 67.43220520019531,
       "GPP (kg_C/m\u00b2/year)": 963.5882352941177,
       "Population Density (People/km\u00b2)": 8.42410659790039
@@ -2665,7 +2665,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 112.58809661865234,
       "GPP (kg_C/m\u00b2/year)": 1544.9411764705883,
       "Population Density (People/km\u00b2)": 8.24748420715332
@@ -2709,7 +2709,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 85.10557556152344,
       "GPP (kg_C/m\u00b2/year)": 1177.3529411764705,
       "Population Density (People/km\u00b2)": 8.24748420715332
@@ -2753,7 +2753,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 109.27838134765625,
       "GPP (kg_C/m\u00b2/year)": 1774.2941176470588,
       "Population Density (People/km\u00b2)": 8.24748420715332
@@ -2797,7 +2797,7 @@
       "LandCoverClass": 255,
       "PixelCount": 562,
       "Percentage": 44.60317460317461,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 107.28324890136719,
       "GPP (kg_C/m\u00b2/year)": 1202.4117647058824,
       "Population Density (People/km\u00b2)": 8.24748420715332
@@ -2876,7 +2876,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 219.24842834472656,
       "GPP (kg_C/m\u00b2/year)": 641.9092284417549,
       "Population Density (People/km\u00b2)": 15.501565933227539
@@ -2920,7 +2920,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 380.3260803222656,
       "GPP (kg_C/m\u00b2/year)": 1093.1376701966717,
       "Population Density (People/km\u00b2)": 15.949634552001953
@@ -2964,7 +2964,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 274.5712585449219,
       "GPP (kg_C/m\u00b2/year)": 776.2965204236006,
       "Population Density (People/km\u00b2)": 16.397703170776367
@@ -3008,7 +3008,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 261.0963439941406,
       "GPP (kg_C/m\u00b2/year)": 654.4629349470499,
       "Population Density (People/km\u00b2)": 16.84577178955078
@@ -3052,7 +3052,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 225.3539581298828,
       "GPP (kg_C/m\u00b2/year)": 729.642965204236,
       "Population Density (People/km\u00b2)": 17.293840408325195
@@ -3096,7 +3096,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 278.4781494140625,
       "GPP (kg_C/m\u00b2/year)": 903.3252647503782,
       "Population Density (People/km\u00b2)": 17.81060218811035
@@ -3140,7 +3140,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 224.8112335205078,
       "GPP (kg_C/m\u00b2/year)": 426.9788199697428,
       "Population Density (People/km\u00b2)": 18.327363967895508
@@ -3184,7 +3184,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 232.84303283691406,
       "GPP (kg_C/m\u00b2/year)": 640.3071104387292,
       "Population Density (People/km\u00b2)": 18.844125747680664
@@ -3228,7 +3228,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 172.14256286621094,
       "GPP (kg_C/m\u00b2/year)": 532.9273827534039,
       "Population Density (People/km\u00b2)": 19.36088752746582
@@ -3272,7 +3272,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 360.1141662597656,
       "GPP (kg_C/m\u00b2/year)": 829.0045385779123,
       "Population Density (People/km\u00b2)": 19.877649307250977
@@ -3316,7 +3316,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 268.8847351074219,
       "GPP (kg_C/m\u00b2/year)": 439.8093797276853,
       "Population Density (People/km\u00b2)": 19.877649307250977
@@ -3360,7 +3360,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 255.51707458496094,
       "GPP (kg_C/m\u00b2/year)": 954.1134644478063,
       "Population Density (People/km\u00b2)": 19.877649307250977
@@ -3404,7 +3404,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3833,
       "Percentage": 57.123695976155,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 251.65211486816406,
       "GPP (kg_C/m\u00b2/year)": 651.5325264750378,
       "Population Density (People/km\u00b2)": 19.877649307250977
@@ -3483,7 +3483,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 196.342529296875,
       "GPP (kg_C/m\u00b2/year)": 639.0016863406408,
       "Population Density (People/km\u00b2)": 26.411394119262695
@@ -3527,7 +3527,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 353.9167785644531,
       "GPP (kg_C/m\u00b2/year)": 1211.8650927487352,
       "Population Density (People/km\u00b2)": 26.833711624145508
@@ -3571,7 +3571,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 249.60598754882812,
       "GPP (kg_C/m\u00b2/year)": 851.1382799325464,
       "Population Density (People/km\u00b2)": 27.256027221679688
@@ -3615,7 +3615,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 232.09823608398438,
       "GPP (kg_C/m\u00b2/year)": 662.0193929173693,
       "Population Density (People/km\u00b2)": 27.6783447265625
@@ -3659,7 +3659,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 190.73434448242188,
       "GPP (kg_C/m\u00b2/year)": 682.3887015177065,
       "Population Density (People/km\u00b2)": 28.10066032409668
@@ -3703,7 +3703,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 238.200439453125,
       "GPP (kg_C/m\u00b2/year)": 838.29173693086,
       "Population Density (People/km\u00b2)": 28.5430965423584
@@ -3747,7 +3747,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 194.5016632080078,
       "GPP (kg_C/m\u00b2/year)": 383.0691399662732,
       "Population Density (People/km\u00b2)": 28.985532760620117
@@ -3791,7 +3791,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 203.90367126464844,
       "GPP (kg_C/m\u00b2/year)": 613.5472175379426,
       "Population Density (People/km\u00b2)": 29.42797088623047
@@ -3835,7 +3835,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 155.3504638671875,
       "GPP (kg_C/m\u00b2/year)": 490.28161888701516,
       "Population Density (People/km\u00b2)": 29.870407104492188
@@ -3879,7 +3879,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 308.1766357421875,
       "GPP (kg_C/m\u00b2/year)": 933.3794266441821,
       "Population Density (People/km\u00b2)": 30.312843322753906
@@ -3923,7 +3923,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 251.2535858154297,
       "GPP (kg_C/m\u00b2/year)": 416.83052276559863,
       "Population Density (People/km\u00b2)": 30.312843322753906
@@ -3967,7 +3967,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 233.8059539794922,
       "GPP (kg_C/m\u00b2/year)": 1061.6703204047217,
       "Population Density (People/km\u00b2)": 30.312843322753906
@@ -4011,7 +4011,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2121,
       "Percentage": 44.82248520710059,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 223.07383728027344,
       "GPP (kg_C/m\u00b2/year)": 712.5455311973019,
       "Population Density (People/km\u00b2)": 30.312843322753906
@@ -4090,7 +4090,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 121.26666259765625,
       "GPP (kg_C/m\u00b2/year)": 580.1746031746031,
       "Population Density (People/km\u00b2)": 45.466617584228516
@@ -4134,7 +4134,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 259.9180908203125,
       "GPP (kg_C/m\u00b2/year)": 970.3492063492064,
       "Population Density (People/km\u00b2)": 46.0926399230957
@@ -4178,7 +4178,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 172.98728942871094,
       "GPP (kg_C/m\u00b2/year)": 782.5555555555555,
       "Population Density (People/km\u00b2)": 46.71866226196289
@@ -4222,7 +4222,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 135.38357543945312,
       "GPP (kg_C/m\u00b2/year)": 702.6349206349206,
       "Population Density (People/km\u00b2)": 47.34468460083008
@@ -4266,7 +4266,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 144.59439086914062,
       "GPP (kg_C/m\u00b2/year)": 787.6825396825396,
       "Population Density (People/km\u00b2)": 47.970706939697266
@@ -4310,7 +4310,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 191.44931030273438,
       "GPP (kg_C/m\u00b2/year)": 885.5396825396825,
       "Population Density (People/km\u00b2)": 48.66362762451172
@@ -4354,7 +4354,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 132.22048950195312,
       "GPP (kg_C/m\u00b2/year)": 493.95238095238096,
       "Population Density (People/km\u00b2)": 49.35654830932617
@@ -4398,7 +4398,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 174.49349975585938,
       "GPP (kg_C/m\u00b2/year)": 711.031746031746,
       "Population Density (People/km\u00b2)": 50.04947280883789
@@ -4442,7 +4442,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 105.82060241699219,
       "GPP (kg_C/m\u00b2/year)": 655.1111111111111,
       "Population Density (People/km\u00b2)": 50.742393493652344
@@ -4486,7 +4486,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 195.79299926757812,
       "GPP (kg_C/m\u00b2/year)": 797.2222222222222,
       "Population Density (People/km\u00b2)": 51.4353141784668
@@ -4530,7 +4530,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 137.95693969726562,
       "GPP (kg_C/m\u00b2/year)": 490.36507936507934,
       "Population Density (People/km\u00b2)": 51.4353141784668
@@ -4574,7 +4574,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 180.28567504882812,
       "GPP (kg_C/m\u00b2/year)": 1003.4285714285714,
       "Population Density (People/km\u00b2)": 51.4353141784668
@@ -4618,7 +4618,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1378,
       "Percentage": 69.07268170426065,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 160.10275268554688,
       "GPP (kg_C/m\u00b2/year)": 622.4603174603175,
       "Population Density (People/km\u00b2)": 51.4353141784668
@@ -4697,7 +4697,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 196.72589111328125,
       "GPP (kg_C/m\u00b2/year)": 554.9433010492332,
       "Population Density (People/km\u00b2)": 4.638942241668701
@@ -4741,7 +4741,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 337.73291015625,
       "GPP (kg_C/m\u00b2/year)": 1279.9958635996773,
       "Population Density (People/km\u00b2)": 4.6441192626953125
@@ -4785,7 +4785,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 242.36245727539062,
       "GPP (kg_C/m\u00b2/year)": 805.5960451977401,
       "Population Density (People/km\u00b2)": 4.649295806884766
@@ -4829,7 +4829,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 212.33802795410156,
       "GPP (kg_C/m\u00b2/year)": 702.6536521388216,
       "Population Density (People/km\u00b2)": 4.654472827911377
@@ -4873,7 +4873,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 244.7434844970703,
       "GPP (kg_C/m\u00b2/year)": 820.317594834544,
       "Population Density (People/km\u00b2)": 4.659649848937988
@@ -4917,7 +4917,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 308.17938232421875,
       "GPP (kg_C/m\u00b2/year)": 1329.9492534301855,
       "Population Density (People/km\u00b2)": 4.669152736663818
@@ -4961,7 +4961,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 227.4329376220703,
       "GPP (kg_C/m\u00b2/year)": 481.30044390637613,
       "Population Density (People/km\u00b2)": 4.678655624389648
@@ -5005,7 +5005,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 242.15493774414062,
       "GPP (kg_C/m\u00b2/year)": 626.645782889427,
       "Population Density (People/km\u00b2)": 4.68815803527832
@@ -5049,7 +5049,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 175.03895568847656,
       "GPP (kg_C/m\u00b2/year)": 735.4848668280872,
       "Population Density (People/km\u00b2)": 4.69766092300415
@@ -5082,7 +5082,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 363.01025390625,
       "GPP (kg_C/m\u00b2/year)": 1106.3307102502017,
       "Population Density (People/km\u00b2)": 4.7071638107299805
@@ -5126,7 +5126,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 208.95285034179688,
       "GPP (kg_C/m\u00b2/year)": 511.8139628732849,
       "Population Density (People/km\u00b2)": 4.7071638107299805
@@ -5170,7 +5170,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 322.9904479980469,
       "GPP (kg_C/m\u00b2/year)": 1546.7856133979014,
       "Population Density (People/km\u00b2)": 4.7071638107299805
@@ -5214,7 +5214,7 @@
       "LandCoverClass": 255,
       "PixelCount": 6295,
       "Percentage": 38.22100789313904,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 241.0260772705078,
       "GPP (kg_C/m\u00b2/year)": 744.7990314769976,
       "Population Density (People/km\u00b2)": 4.7071638107299805
@@ -5293,7 +5293,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 181.57081604003906,
       "GPP (kg_C/m\u00b2/year)": 635.5266393442623,
       "Population Density (People/km\u00b2)": 4.991805553436279
@@ -5337,7 +5337,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 344.6927185058594,
       "GPP (kg_C/m\u00b2/year)": 1164.8524590163934,
       "Population Density (People/km\u00b2)": 5.015296936035156
@@ -5381,7 +5381,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 241.656982421875,
       "GPP (kg_C/m\u00b2/year)": 833.2161885245902,
       "Population Density (People/km\u00b2)": 5.038788795471191
@@ -5425,7 +5425,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 202.15606689453125,
       "GPP (kg_C/m\u00b2/year)": 705.4293032786885,
       "Population Density (People/km\u00b2)": 5.062280178070068
@@ -5469,7 +5469,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 197.46304321289062,
       "GPP (kg_C/m\u00b2/year)": 772.0235655737705,
       "Population Density (People/km\u00b2)": 5.085771560668945
@@ -5513,7 +5513,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 255.2095947265625,
       "GPP (kg_C/m\u00b2/year)": 1040.263319672131,
       "Population Density (People/km\u00b2)": 5.108283042907715
@@ -5557,7 +5557,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 195.33956909179688,
       "GPP (kg_C/m\u00b2/year)": 479.1670081967213,
       "Population Density (People/km\u00b2)": 5.130795001983643
@@ -5601,7 +5601,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 226.3019561767578,
       "GPP (kg_C/m\u00b2/year)": 746.4252049180328,
       "Population Density (People/km\u00b2)": 5.153306484222412
@@ -5645,7 +5645,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 149.1934814453125,
       "GPP (kg_C/m\u00b2/year)": 624.6741803278688,
       "Population Density (People/km\u00b2)": 5.17581844329834
@@ -5689,7 +5689,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 298.91766357421875,
       "GPP (kg_C/m\u00b2/year)": 1130.3872950819673,
       "Population Density (People/km\u00b2)": 5.198329925537109
@@ -5733,7 +5733,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 224.78416442871094,
       "GPP (kg_C/m\u00b2/year)": 516.3504098360655,
       "Population Density (People/km\u00b2)": 5.198329925537109
@@ -5777,7 +5777,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 217.36383056640625,
       "GPP (kg_C/m\u00b2/year)": 1138.325819672131,
       "Population Density (People/km\u00b2)": 5.198329925537109
@@ -5821,7 +5821,7 @@
       "LandCoverClass": 255,
       "PixelCount": 9458,
       "Percentage": 64.34013605442178,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 214.06092834472656,
       "GPP (kg_C/m\u00b2/year)": 704.9047131147541,
       "Population Density (People/km\u00b2)": 5.198329925537109
@@ -5878,7 +5878,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 183.32308959960938,
       "GPP (kg_C/m\u00b2/year)": 669.5194174757281,
       "Population Density (People/km\u00b2)": 143.41738891601562
@@ -5911,7 +5911,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 320.2253112792969,
       "GPP (kg_C/m\u00b2/year)": 1038.2111650485438,
       "Population Density (People/km\u00b2)": 147.65081787109375
@@ -5944,7 +5944,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 250.2267303466797,
       "GPP (kg_C/m\u00b2/year)": 1165.2669902912621,
       "Population Density (People/km\u00b2)": 151.88426208496094
@@ -5977,7 +5977,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 205.8613739013672,
       "GPP (kg_C/m\u00b2/year)": 780.1577669902913,
       "Population Density (People/km\u00b2)": 156.11769104003906
@@ -6010,7 +6010,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 210.2680206298828,
       "GPP (kg_C/m\u00b2/year)": 987.0533980582525,
       "Population Density (People/km\u00b2)": 160.35113525390625
@@ -6043,7 +6043,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 275.27166748046875,
       "GPP (kg_C/m\u00b2/year)": 1131.9660194174758,
       "Population Density (People/km\u00b2)": 166.8272705078125
@@ -6076,7 +6076,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 220.90499877929688,
       "GPP (kg_C/m\u00b2/year)": 570.0679611650486,
       "Population Density (People/km\u00b2)": 173.3033905029297
@@ -6109,7 +6109,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 222.9106903076172,
       "GPP (kg_C/m\u00b2/year)": 713.3640776699029,
       "Population Density (People/km\u00b2)": 179.77952575683594
@@ -6142,7 +6142,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 163.89169311523438,
       "GPP (kg_C/m\u00b2/year)": 774.4733009708738,
       "Population Density (People/km\u00b2)": 186.25564575195312
@@ -6175,7 +6175,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 291.059326171875,
       "GPP (kg_C/m\u00b2/year)": 1285.009708737864,
       "Population Density (People/km\u00b2)": 192.73178100585938
@@ -6208,7 +6208,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 198.6920928955078,
       "GPP (kg_C/m\u00b2/year)": 638.0169902912621,
       "Population Density (People/km\u00b2)": 192.73178100585938
@@ -6241,7 +6241,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 238.3592529296875,
       "GPP (kg_C/m\u00b2/year)": 1406.0922330097087,
       "Population Density (People/km\u00b2)": 192.73178100585938
@@ -6274,7 +6274,7 @@
       "LandCoverClass": 255,
       "PixelCount": 605,
       "Percentage": 52.38095238095239,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 211.9461212158203,
       "GPP (kg_C/m\u00b2/year)": 879.6092233009708,
       "Population Density (People/km\u00b2)": 192.73178100585938
@@ -6342,7 +6342,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 283.8053894042969,
       "GPP (kg_C/m\u00b2/year)": 1124.5597433116413,
       "Population Density (People/km\u00b2)": 10.463821411132812
@@ -6375,7 +6375,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 515.1846313476562,
       "GPP (kg_C/m\u00b2/year)": 1588.7497288503255,
       "Population Density (People/km\u00b2)": 10.64802360534668
@@ -6408,7 +6408,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 369.23846435546875,
       "GPP (kg_C/m\u00b2/year)": 1382.6491323210412,
       "Population Density (People/km\u00b2)": 10.83222484588623
@@ -6441,7 +6441,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 373.23431396484375,
       "GPP (kg_C/m\u00b2/year)": 1262.1195770065076,
       "Population Density (People/km\u00b2)": 11.016427040100098
@@ -6474,7 +6474,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 362.565185546875,
       "GPP (kg_C/m\u00b2/year)": 1322.3352313810556,
       "Population Density (People/km\u00b2)": 11.200629234313965
@@ -6507,7 +6507,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 422.5131530761719,
       "GPP (kg_C/m\u00b2/year)": 1810.0131959508315,
       "Population Density (People/km\u00b2)": 11.397555351257324
@@ -6540,7 +6540,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 334.8095703125,
       "GPP (kg_C/m\u00b2/year)": 954.7174620390456,
       "Population Density (People/km\u00b2)": 11.594481468200684
@@ -6573,7 +6573,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 393.2458801269531,
       "GPP (kg_C/m\u00b2/year)": 1352.8524945770066,
       "Population Density (People/km\u00b2)": 11.791406631469727
@@ -6606,7 +6606,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 305.7791442871094,
       "GPP (kg_C/m\u00b2/year)": 1232.2945589298627,
       "Population Density (People/km\u00b2)": 11.988332748413086
@@ -6639,7 +6639,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 525.0888061523438,
       "GPP (kg_C/m\u00b2/year)": 2109.455892986262,
       "Population Density (People/km\u00b2)": 12.185258865356445
@@ -6672,7 +6672,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 328.3334655761719,
       "GPP (kg_C/m\u00b2/year)": 1105.7105025307303,
       "Population Density (People/km\u00b2)": 12.185258865356445
@@ -6694,7 +6694,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 518.5249633789062,
       "GPP (kg_C/m\u00b2/year)": 2413.9661062906725,
       "Population Density (People/km\u00b2)": 12.185258865356445
@@ -6716,7 +6716,7 @@
       "LandCoverClass": 255,
       "PixelCount": 11286,
       "Percentage": 50.48309178743962,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 368.5318298339844,
       "GPP (kg_C/m\u00b2/year)": 1480.3289949385394,
       "Population Density (People/km\u00b2)": 12.185258865356445
@@ -6795,7 +6795,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 85.95388793945312,
       "GPP (kg_C/m\u00b2/year)": 697.6666666666666,
       "Population Density (People/km\u00b2)": 4.253859996795654
@@ -6839,7 +6839,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 148.15306091308594,
       "GPP (kg_C/m\u00b2/year)": 595.0,
       "Population Density (People/km\u00b2)": 4.241851329803467
@@ -6883,7 +6883,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 125.91053009033203,
       "GPP (kg_C/m\u00b2/year)": 670.6666666666666,
       "Population Density (People/km\u00b2)": 4.2298431396484375
@@ -6927,7 +6927,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 87.83675384521484,
       "GPP (kg_C/m\u00b2/year)": 682.0,
       "Population Density (People/km\u00b2)": 4.21783447265625
@@ -6971,7 +6971,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 116.34756469726562,
       "GPP (kg_C/m\u00b2/year)": 1296.3333333333333,
       "Population Density (People/km\u00b2)": 4.2058258056640625
@@ -7015,7 +7015,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 139.8819580078125,
       "GPP (kg_C/m\u00b2/year)": 659.3333333333334,
       "Population Density (People/km\u00b2)": 4.188188076019287
@@ -7059,7 +7059,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 85.69053649902344,
       "GPP (kg_C/m\u00b2/year)": 336.3333333333333,
       "Population Density (People/km\u00b2)": 4.1705498695373535
@@ -7103,7 +7103,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 119.34066772460938,
       "GPP (kg_C/m\u00b2/year)": 1166.6666666666667,
       "Population Density (People/km\u00b2)": 4.152912139892578
@@ -7147,7 +7147,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 77.39703369140625,
       "GPP (kg_C/m\u00b2/year)": 482.3333333333333,
       "Population Density (People/km\u00b2)": 4.1352739334106445
@@ -7191,7 +7191,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 122.00950622558594,
       "GPP (kg_C/m\u00b2/year)": 1145.6666666666667,
       "Population Density (People/km\u00b2)": 4.117636203765869
@@ -7235,7 +7235,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 94.1697769165039,
       "GPP (kg_C/m\u00b2/year)": 1133.0,
       "Population Density (People/km\u00b2)": 4.117636203765869
@@ -7279,7 +7279,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 127.45425415039062,
       "GPP (kg_C/m\u00b2/year)": 715.0,
       "Population Density (People/km\u00b2)": 4.117636203765869
@@ -7323,7 +7323,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2822,
       "Percentage": 59.38552188552188,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 112.74925994873047,
       "GPP (kg_C/m\u00b2/year)": 663.6666666666666,
       "Population Density (People/km\u00b2)": 4.117636203765869
@@ -7402,7 +7402,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 158.69679260253906,
       "GPP (kg_C/m\u00b2/year)": 641.9745989304813,
       "Population Density (People/km\u00b2)": 8.359711647033691
@@ -7446,7 +7446,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 302.8816833496094,
       "GPP (kg_C/m\u00b2/year)": 1126.3591800356505,
       "Population Density (People/km\u00b2)": 8.598095893859863
@@ -7490,7 +7490,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 221.15164184570312,
       "GPP (kg_C/m\u00b2/year)": 1053.6755793226382,
       "Population Density (People/km\u00b2)": 8.836479187011719
@@ -7534,7 +7534,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 176.44407653808594,
       "GPP (kg_C/m\u00b2/year)": 756.7303921568628,
       "Population Density (People/km\u00b2)": 9.07486343383789
@@ -7578,7 +7578,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 183.3186492919922,
       "GPP (kg_C/m\u00b2/year)": 1002.2941176470588,
       "Population Density (People/km\u00b2)": 9.313246726989746
@@ -7622,7 +7622,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 241.67237854003906,
       "GPP (kg_C/m\u00b2/year)": 1190.6822638146168,
       "Population Density (People/km\u00b2)": 9.557793617248535
@@ -7666,7 +7666,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 177.6883544921875,
       "GPP (kg_C/m\u00b2/year)": 545.1697860962566,
       "Population Density (People/km\u00b2)": 9.802340507507324
@@ -7710,7 +7710,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 206.4192657470703,
       "GPP (kg_C/m\u00b2/year)": 711.5548128342245,
       "Population Density (People/km\u00b2)": 10.046886444091797
@@ -7754,7 +7754,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 139.21966552734375,
       "GPP (kg_C/m\u00b2/year)": 717.2584670231729,
       "Population Density (People/km\u00b2)": 10.291433334350586
@@ -7798,7 +7798,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 242.55357360839844,
       "GPP (kg_C/m\u00b2/year)": 1200.6457219251338,
       "Population Density (People/km\u00b2)": 10.535980224609375
@@ -7842,7 +7842,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 174.83177185058594,
       "GPP (kg_C/m\u00b2/year)": 617.6403743315508,
       "Population Density (People/km\u00b2)": 10.535980224609375
@@ -7886,7 +7886,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 216.9458465576172,
       "GPP (kg_C/m\u00b2/year)": 1590.807486631016,
       "Population Density (People/km\u00b2)": 10.535980224609375
@@ -7930,7 +7930,7 @@
       "LandCoverClass": 255,
       "PixelCount": 7103,
       "Percentage": 59.850016852039104,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 194.2608642578125,
       "GPP (kg_C/m\u00b2/year)": 860.6403743315508,
       "Population Density (People/km\u00b2)": 10.535980224609375
@@ -7987,7 +7987,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 235.3875732421875,
       "GPP (kg_C/m\u00b2/year)": 863.516742081448,
       "Population Density (People/km\u00b2)": 61.00688171386719
@@ -8020,7 +8020,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 465.08697509765625,
       "GPP (kg_C/m\u00b2/year)": 1695.0968325791855,
       "Population Density (People/km\u00b2)": 62.56522750854492
@@ -8053,7 +8053,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 322.22686767578125,
       "GPP (kg_C/m\u00b2/year)": 1101.923076923077,
       "Population Density (People/km\u00b2)": 64.12357330322266
@@ -8086,7 +8086,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 382.2078857421875,
       "GPP (kg_C/m\u00b2/year)": 1115.9547511312217,
       "Population Density (People/km\u00b2)": 65.68192291259766
@@ -8119,7 +8119,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 342.87567138671875,
       "GPP (kg_C/m\u00b2/year)": 1187.0009049773755,
       "Population Density (People/km\u00b2)": 67.24027252197266
@@ -8152,7 +8152,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 369.7243347167969,
       "GPP (kg_C/m\u00b2/year)": 1690.219004524887,
       "Population Density (People/km\u00b2)": 68.97386169433594
@@ -8185,7 +8185,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 308.72662353515625,
       "GPP (kg_C/m\u00b2/year)": 777.793665158371,
       "Population Density (People/km\u00b2)": 70.70745849609375
@@ -8218,7 +8218,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 336.7831115722656,
       "GPP (kg_C/m\u00b2/year)": 873.3574660633484,
       "Population Density (People/km\u00b2)": 72.44104766845703
@@ -8251,7 +8251,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 261.4693908691406,
       "GPP (kg_C/m\u00b2/year)": 886.5981900452489,
       "Population Density (People/km\u00b2)": 74.17464447021484
@@ -8284,7 +8284,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 477.9116516113281,
       "GPP (kg_C/m\u00b2/year)": 1683.2723981900454,
       "Population Density (People/km\u00b2)": 75.90823364257812
@@ -8306,7 +8306,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 287.3950500488281,
       "GPP (kg_C/m\u00b2/year)": 771.785520361991,
       "Population Density (People/km\u00b2)": 75.90823364257812
@@ -8328,7 +8328,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 501.8520202636719,
       "GPP (kg_C/m\u00b2/year)": 2365.245248868778,
       "Population Density (People/km\u00b2)": 75.90823364257812
@@ -8350,7 +8350,7 @@
       "LandCoverClass": 255,
       "PixelCount": 967,
       "Percentage": 46.66988416988417,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 326.3095397949219,
       "GPP (kg_C/m\u00b2/year)": 1159.937556561086,
       "Population Density (People/km\u00b2)": 75.90823364257812
@@ -8429,7 +8429,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 199.16944885253906,
       "GPP (kg_C/m\u00b2/year)": 563.215415821501,
       "Population Density (People/km\u00b2)": 46.704769134521484
@@ -8473,7 +8473,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 339.28485107421875,
       "GPP (kg_C/m\u00b2/year)": 1295.1553752535497,
       "Population Density (People/km\u00b2)": 49.00235366821289
@@ -8517,7 +8517,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 253.98153686523438,
       "GPP (kg_C/m\u00b2/year)": 901.258215010142,
       "Population Density (People/km\u00b2)": 51.29994201660156
@@ -8561,7 +8561,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 214.41517639160156,
       "GPP (kg_C/m\u00b2/year)": 640.4290060851927,
       "Population Density (People/km\u00b2)": 53.59752655029297
@@ -8605,7 +8605,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 231.27227783203125,
       "GPP (kg_C/m\u00b2/year)": 860.1774847870182,
       "Population Density (People/km\u00b2)": 55.89511489868164
@@ -8649,7 +8649,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 304.08880615234375,
       "GPP (kg_C/m\u00b2/year)": 1282.474036511156,
       "Population Density (People/km\u00b2)": 58.805728912353516
@@ -8693,7 +8693,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 219.5140838623047,
       "GPP (kg_C/m\u00b2/year)": 512.7281947261663,
       "Population Density (People/km\u00b2)": 61.71634292602539
@@ -8737,7 +8737,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 228.4510498046875,
       "GPP (kg_C/m\u00b2/year)": 652.8503042596349,
       "Population Density (People/km\u00b2)": 64.62696075439453
@@ -8781,7 +8781,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 162.81497192382812,
       "GPP (kg_C/m\u00b2/year)": 711.8265720081135,
       "Population Density (People/km\u00b2)": 67.5375747680664
@@ -8825,7 +8825,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 350.196533203125,
       "GPP (kg_C/m\u00b2/year)": 1189.644827586207,
       "Population Density (People/km\u00b2)": 70.44818878173828
@@ -8869,7 +8869,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 205.59149169921875,
       "GPP (kg_C/m\u00b2/year)": 483.19553752535495,
       "Population Density (People/km\u00b2)": 70.44818878173828
@@ -8913,7 +8913,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 303.057373046875,
       "GPP (kg_C/m\u00b2/year)": 1588.6356997971602,
       "Population Density (People/km\u00b2)": 70.44818878173828
@@ -8957,7 +8957,7 @@
       "LandCoverClass": 255,
       "PixelCount": 3220,
       "Percentage": 36.884306987399775,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 229.98072814941406,
       "GPP (kg_C/m\u00b2/year)": 792.2476673427992,
       "Population Density (People/km\u00b2)": 70.44818878173828
@@ -9014,7 +9014,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 228.35989379882812,
       "GPP (kg_C/m\u00b2/year)": 613.248679245283,
       "Population Density (People/km\u00b2)": 5.530330181121826
@@ -9047,7 +9047,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 419.6612854003906,
       "GPP (kg_C/m\u00b2/year)": 1766.4362264150943,
       "Population Density (People/km\u00b2)": 5.544381618499756
@@ -9080,7 +9080,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 330.8341369628906,
       "GPP (kg_C/m\u00b2/year)": 866.342641509434,
       "Population Density (People/km\u00b2)": 5.558433532714844
@@ -9113,7 +9113,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 293.25445556640625,
       "GPP (kg_C/m\u00b2/year)": 718.3603773584906,
       "Population Density (People/km\u00b2)": 5.572484970092773
@@ -9146,7 +9146,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 295.99432373046875,
       "GPP (kg_C/m\u00b2/year)": 975.776603773585,
       "Population Density (People/km\u00b2)": 5.586536407470703
@@ -9179,7 +9179,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 374.4313049316406,
       "GPP (kg_C/m\u00b2/year)": 1796.356603773585,
       "Population Density (People/km\u00b2)": 5.624968528747559
@@ -9212,7 +9212,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 276.8408508300781,
       "GPP (kg_C/m\u00b2/year)": 588.0339622641509,
       "Population Density (People/km\u00b2)": 5.663401126861572
@@ -9245,7 +9245,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 314.1159362792969,
       "GPP (kg_C/m\u00b2/year)": 1028.5679245283018,
       "Population Density (People/km\u00b2)": 5.701833248138428
@@ -9267,7 +9267,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 203.86288452148438,
       "GPP (kg_C/m\u00b2/year)": 734.5358490566038,
       "Population Density (People/km\u00b2)": 5.740265846252441
@@ -9289,7 +9289,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 449.2919006347656,
       "GPP (kg_C/m\u00b2/year)": 1590.0890566037735,
       "Population Density (People/km\u00b2)": 5.778697967529297
@@ -9311,7 +9311,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 264.5508728027344,
       "GPP (kg_C/m\u00b2/year)": 682.4158490566037,
       "Population Density (People/km\u00b2)": 5.778697967529297
@@ -9333,7 +9333,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 401.03033447265625,
       "GPP (kg_C/m\u00b2/year)": 2128.0732075471697,
       "Population Density (People/km\u00b2)": 5.778697967529297
@@ -9355,7 +9355,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1294,
       "Percentage": 32.809330628803245,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 298.96380615234375,
       "GPP (kg_C/m\u00b2/year)": 1030.0079245283018,
       "Population Density (People/km\u00b2)": 5.778697967529297
@@ -9434,7 +9434,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 60.070472717285156,
       "GPP (kg_C/m\u00b2/year)": 800.0952380952381,
       "Population Density (People/km\u00b2)": 1.2495065927505493
@@ -9478,7 +9478,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 89.54347229003906,
       "GPP (kg_C/m\u00b2/year)": 1214.7619047619048,
       "Population Density (People/km\u00b2)": 1.2520326375961304
@@ -9522,7 +9522,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 77.20367431640625,
       "GPP (kg_C/m\u00b2/year)": 982.5238095238095,
       "Population Density (People/km\u00b2)": 1.254558801651001
@@ -9566,7 +9566,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 54.813228607177734,
       "GPP (kg_C/m\u00b2/year)": 858.6190476190476,
       "Population Density (People/km\u00b2)": 1.257084846496582
@@ -9610,7 +9610,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 73.54916381835938,
       "GPP (kg_C/m\u00b2/year)": 1070.0,
       "Population Density (People/km\u00b2)": 1.259610891342163
@@ -9654,7 +9654,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 83.85749053955078,
       "GPP (kg_C/m\u00b2/year)": 1394.047619047619,
       "Population Density (People/km\u00b2)": 1.2640178203582764
@@ -9698,7 +9698,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 67.81605529785156,
       "GPP (kg_C/m\u00b2/year)": 708.4285714285714,
       "Population Density (People/km\u00b2)": 1.2684247493743896
@@ -9742,7 +9742,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 72.5196533203125,
       "GPP (kg_C/m\u00b2/year)": 769.047619047619,
       "Population Density (People/km\u00b2)": 1.2728317975997925
@@ -9786,7 +9786,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 48.746803283691406,
       "GPP (kg_C/m\u00b2/year)": 759.1904761904761,
       "Population Density (People/km\u00b2)": 1.2772387266159058
@@ -9830,7 +9830,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 75.460693359375,
       "GPP (kg_C/m\u00b2/year)": 1262.6190476190477,
       "Population Density (People/km\u00b2)": 1.281645655632019
@@ -9874,7 +9874,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 59.08880615234375,
       "GPP (kg_C/m\u00b2/year)": 922.047619047619,
       "Population Density (People/km\u00b2)": 1.281645655632019
@@ -9918,7 +9918,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 83.70008850097656,
       "GPP (kg_C/m\u00b2/year)": 1490.4761904761904,
       "Population Density (People/km\u00b2)": 1.281645655632019
@@ -9962,7 +9962,7 @@
       "LandCoverClass": 255,
       "PixelCount": 15426,
       "Percentage": 46.74545454545454,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 74.07783508300781,
       "GPP (kg_C/m\u00b2/year)": 972.0952380952381,
       "Population Density (People/km\u00b2)": 1.281645655632019
@@ -10041,7 +10041,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 225.94512939453125,
       "GPP (kg_C/m\u00b2/year)": 776.9732711073399,
       "Population Density (People/km\u00b2)": 11.681200981140137
@@ -10085,7 +10085,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 393.6134948730469,
       "GPP (kg_C/m\u00b2/year)": 1293.3368689011456,
       "Population Density (People/km\u00b2)": 11.877798080444336
@@ -10129,7 +10129,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 292.5557556152344,
       "GPP (kg_C/m\u00b2/year)": 896.4094187526517,
       "Population Density (People/km\u00b2)": 12.074395179748535
@@ -10173,7 +10173,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 296.8801574707031,
       "GPP (kg_C/m\u00b2/year)": 800.3725074246925,
       "Population Density (People/km\u00b2)": 12.270992279052734
@@ -10217,7 +10217,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 259.7091979980469,
       "GPP (kg_C/m\u00b2/year)": 836.6228256257955,
       "Population Density (People/km\u00b2)": 12.467589378356934
@@ -10261,7 +10261,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 318.4919128417969,
       "GPP (kg_C/m\u00b2/year)": 1163.0343657191345,
       "Population Density (People/km\u00b2)": 12.68310260772705
@@ -10305,7 +10305,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 257.1490478515625,
       "GPP (kg_C/m\u00b2/year)": 544.7878659312686,
       "Population Density (People/km\u00b2)": 12.898615837097168
@@ -10349,7 +10349,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 277.7920837402344,
       "GPP (kg_C/m\u00b2/year)": 778.7488332626219,
       "Population Density (People/km\u00b2)": 13.114129066467285
@@ -10393,7 +10393,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 208.96128845214844,
       "GPP (kg_C/m\u00b2/year)": 703.4077216801019,
       "Population Density (People/km\u00b2)": 13.329642295837402
@@ -10437,7 +10437,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 412.6834716796875,
       "GPP (kg_C/m\u00b2/year)": 1142.5405176071276,
       "Population Density (People/km\u00b2)": 13.54515552520752
@@ -10481,7 +10481,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 276.7544860839844,
       "GPP (kg_C/m\u00b2/year)": 621.6885871871023,
       "Population Density (People/km\u00b2)": 13.54515552520752
@@ -10525,7 +10525,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 340.71136474609375,
       "GPP (kg_C/m\u00b2/year)": 1487.9406024607551,
       "Population Density (People/km\u00b2)": 13.54515552520752
@@ -10569,7 +10569,7 @@
       "LandCoverClass": 255,
       "PixelCount": 4831,
       "Percentage": 47.460457805285394,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 271.5495300292969,
       "GPP (kg_C/m\u00b2/year)": 924.2842596521001,
       "Population Density (People/km\u00b2)": 13.54515552520752
@@ -10670,7 +10670,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 229.12948608398438,
       "GPP (kg_C/m\u00b2/year)": 703.5559322033898,
       "Population Density (People/km\u00b2)": 14.410938262939453
@@ -10725,7 +10725,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 393.0818176269531,
       "GPP (kg_C/m\u00b2/year)": 1257.0463276836158,
       "Population Density (People/km\u00b2)": 14.675559997558594
@@ -10780,7 +10780,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 288.86199951171875,
       "GPP (kg_C/m\u00b2/year)": 913.219209039548,
       "Population Density (People/km\u00b2)": 14.94018268585205
@@ -10835,7 +10835,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 270.63006591796875,
       "GPP (kg_C/m\u00b2/year)": 779.1028248587571,
       "Population Density (People/km\u00b2)": 15.204804420471191
@@ -10890,7 +10890,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 247.24777221679688,
       "GPP (kg_C/m\u00b2/year)": 903.767231638418,
       "Population Density (People/km\u00b2)": 15.469426155090332
@@ -10945,7 +10945,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 317.9425354003906,
       "GPP (kg_C/m\u00b2/year)": 1232.6079096045198,
       "Population Density (People/km\u00b2)": 15.76236343383789
@@ -11000,7 +11000,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 255.8694305419922,
       "GPP (kg_C/m\u00b2/year)": 577.8293785310734,
       "Population Density (People/km\u00b2)": 16.055301666259766
@@ -11055,7 +11055,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 258.3258361816406,
       "GPP (kg_C/m\u00b2/year)": 813.0813559322033,
       "Population Density (People/km\u00b2)": 16.34823989868164
@@ -11110,7 +11110,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 185.65806579589844,
       "GPP (kg_C/m\u00b2/year)": 770.6485875706214,
       "Population Density (People/km\u00b2)": 16.641176223754883
@@ -11165,7 +11165,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 390.01861572265625,
       "GPP (kg_C/m\u00b2/year)": 1178.2056497175142,
       "Population Density (People/km\u00b2)": 16.934114456176758
@@ -11220,7 +11220,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 264.687255859375,
       "GPP (kg_C/m\u00b2/year)": 631.2022598870057,
       "Population Density (People/km\u00b2)": 16.934114456176758
@@ -11275,7 +11275,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 277.40447998046875,
       "GPP (kg_C/m\u00b2/year)": 1345.1864406779662,
       "Population Density (People/km\u00b2)": 16.934114456176758
@@ -11330,7 +11330,7 @@
       "LandCoverClass": 255,
       "PixelCount": 1731,
       "Percentage": 42.97418073485601,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 260.9179992675781,
       "GPP (kg_C/m\u00b2/year)": 905.0915254237289,
       "Population Density (People/km\u00b2)": 16.934114456176758
@@ -11398,7 +11398,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 234.8487091064453,
       "GPP (kg_C/m\u00b2/year)": 849.6698343741515,
       "Population Density (People/km\u00b2)": 4.023465156555176
@@ -11453,7 +11453,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 404.4704895019531,
       "GPP (kg_C/m\u00b2/year)": 1562.2574667390713,
       "Population Density (People/km\u00b2)": 4.056195259094238
@@ -11497,7 +11497,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 316.7860412597656,
       "GPP (kg_C/m\u00b2/year)": 1048.2292288894923,
       "Population Density (People/km\u00b2)": 4.088925838470459
@@ -11541,7 +11541,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 292.918212890625,
       "GPP (kg_C/m\u00b2/year)": 898.5456828672278,
       "Population Density (People/km\u00b2)": 4.12165641784668
@@ -11585,7 +11585,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 279.95098876953125,
       "GPP (kg_C/m\u00b2/year)": 1022.1648112951399,
       "Population Density (People/km\u00b2)": 4.154386520385742
@@ -11629,7 +11629,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 346.0921630859375,
       "GPP (kg_C/m\u00b2/year)": 1429.6644718979094,
       "Population Density (People/km\u00b2)": 4.188523769378662
@@ -11673,7 +11673,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 269.65155029296875,
       "GPP (kg_C/m\u00b2/year)": 637.7380532174858,
       "Population Density (People/km\u00b2)": 4.222661018371582
@@ -11717,7 +11717,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 287.5859069824219,
       "GPP (kg_C/m\u00b2/year)": 961.1164132500679,
       "Population Density (People/km\u00b2)": 4.256798267364502
@@ -11761,7 +11761,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 212.2287139892578,
       "GPP (kg_C/m\u00b2/year)": 878.7159245180559,
       "Population Density (People/km\u00b2)": 4.290935516357422
@@ -11805,7 +11805,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 421.2376708984375,
       "GPP (kg_C/m\u00b2/year)": 1401.1804914471898,
       "Population Density (People/km\u00b2)": 4.325072765350342
@@ -11849,7 +11849,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 264.8963928222656,
       "GPP (kg_C/m\u00b2/year)": 696.5357045886506,
       "Population Density (People/km\u00b2)": 4.325072765350342
@@ -11893,7 +11893,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 372.52813720703125,
       "GPP (kg_C/m\u00b2/year)": 1821.3516834102634,
       "Population Density (People/km\u00b2)": 4.325072765350342
@@ -11937,7 +11937,7 @@
       "LandCoverClass": 255,
       "PixelCount": 10311,
       "Percentage": 40.92641105025006,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 287.7648620605469,
       "GPP (kg_C/m\u00b2/year)": 1158.0054303556883,
       "Population Density (People/km\u00b2)": 4.325072765350342
@@ -12016,7 +12016,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 136.2556915283203,
       "GPP (kg_C/m\u00b2/year)": 562.7313000276015,
       "Population Density (People/km\u00b2)": 1.312220573425293
@@ -12060,7 +12060,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 225.00453186035156,
       "GPP (kg_C/m\u00b2/year)": 1150.952249516975,
       "Population Density (People/km\u00b2)": 1.3348592519760132
@@ -12104,7 +12104,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 180.95465087890625,
       "GPP (kg_C/m\u00b2/year)": 868.6802373723434,
       "Population Density (People/km\u00b2)": 1.357498049736023
@@ -12148,7 +12148,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 146.71896362304688,
       "GPP (kg_C/m\u00b2/year)": 582.0322936792713,
       "Population Density (People/km\u00b2)": 1.3801367282867432
@@ -12192,7 +12192,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 168.32913208007812,
       "GPP (kg_C/m\u00b2/year)": 859.661606403533,
       "Population Density (People/km\u00b2)": 1.402775526046753
@@ -12236,7 +12236,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 209.23965454101562,
       "GPP (kg_C/m\u00b2/year)": 940.5552028705492,
       "Population Density (People/km\u00b2)": 1.417434573173523
@@ -12280,7 +12280,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 137.60552978515625,
       "GPP (kg_C/m\u00b2/year)": 453.2319900634833,
       "Population Density (People/km\u00b2)": 1.4320937395095825
@@ -12324,7 +12324,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 166.6862030029297,
       "GPP (kg_C/m\u00b2/year)": 583.1493237648358,
       "Population Density (People/km\u00b2)": 1.4467527866363525
@@ -12368,7 +12368,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 114.75424194335938,
       "GPP (kg_C/m\u00b2/year)": 653.7914711565002,
       "Population Density (People/km\u00b2)": 1.461411952972412
@@ -12412,7 +12412,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 209.79164123535156,
       "GPP (kg_C/m\u00b2/year)": 1123.9620480264973,
       "Population Density (People/km\u00b2)": 1.4760710000991821
@@ -12456,7 +12456,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 137.82266235351562,
       "GPP (kg_C/m\u00b2/year)": 498.20618272150153,
       "Population Density (People/km\u00b2)": 1.4760710000991821
@@ -12500,7 +12500,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 191.45352172851562,
       "GPP (kg_C/m\u00b2/year)": 1641.49848192106,
       "Population Density (People/km\u00b2)": 1.4760710000991821
@@ -12544,7 +12544,7 @@
       "LandCoverClass": 255,
       "PixelCount": 23159,
       "Percentage": 58.49709522606719,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 159.78150939941406,
       "GPP (kg_C/m\u00b2/year)": 720.9856472536571,
       "Population Density (People/km\u00b2)": 1.4760710000991821
@@ -12645,7 +12645,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 203.26747131347656,
       "GPP (kg_C/m\u00b2/year)": 689.4436130411544,
       "Population Density (People/km\u00b2)": 7.174684524536133
@@ -12700,7 +12700,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 367.0405578613281,
       "GPP (kg_C/m\u00b2/year)": 1145.9380010689472,
       "Population Density (People/km\u00b2)": 7.4467010498046875
@@ -12755,7 +12755,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 261.0260314941406,
       "GPP (kg_C/m\u00b2/year)": 885.4107429182255,
       "Population Density (People/km\u00b2)": 7.7187180519104
@@ -12810,7 +12810,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 221.6829376220703,
       "GPP (kg_C/m\u00b2/year)": 719.1413682522715,
       "Population Density (People/km\u00b2)": 7.990734577178955
@@ -12865,7 +12865,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 219.39720153808594,
       "GPP (kg_C/m\u00b2/year)": 841.7624265098877,
       "Population Density (People/km\u00b2)": 8.262751579284668
@@ -12920,7 +12920,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 291.6669006347656,
       "GPP (kg_C/m\u00b2/year)": 1044.698022447889,
       "Population Density (People/km\u00b2)": 8.501623153686523
@@ -12975,7 +12975,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 234.49293518066406,
       "GPP (kg_C/m\u00b2/year)": 537.0074826296099,
       "Population Density (People/km\u00b2)": 8.740494728088379
@@ -13030,7 +13030,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 237.1160430908203,
       "GPP (kg_C/m\u00b2/year)": 749.9318546231962,
       "Population Density (People/km\u00b2)": 8.979365348815918
@@ -13085,7 +13085,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 177.6831817626953,
       "GPP (kg_C/m\u00b2/year)": 734.0622661678246,
       "Population Density (People/km\u00b2)": 9.218236923217773
@@ -13140,7 +13140,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 316.6487121582031,
       "GPP (kg_C/m\u00b2/year)": 1053.7544094067343,
       "Population Density (People/km\u00b2)": 9.457108497619629
@@ -13195,7 +13195,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 235.3383026123047,
       "GPP (kg_C/m\u00b2/year)": 572.537680384821,
       "Population Density (People/km\u00b2)": 9.457108497619629
@@ -13250,7 +13250,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 246.4560546875,
       "GPP (kg_C/m\u00b2/year)": 1320.0750935328701,
       "Population Density (People/km\u00b2)": 9.457108497619629
@@ -13305,7 +13305,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8593,
       "Percentage": 54.558730158730164,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 230.47727966308594,
       "GPP (kg_C/m\u00b2/year)": 788.0451630144308,
       "Population Density (People/km\u00b2)": 9.457108497619629
@@ -13384,7 +13384,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 143.0469207763672,
       "GPP (kg_C/m\u00b2/year)": 528.7718894009216,
       "Population Density (People/km\u00b2)": 8.326687812805176
@@ -13428,7 +13428,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 291.810302734375,
       "GPP (kg_C/m\u00b2/year)": 1060.48732718894,
       "Population Density (People/km\u00b2)": 8.54478931427002
@@ -13472,7 +13472,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 198.414794921875,
       "GPP (kg_C/m\u00b2/year)": 986.3732718894009,
       "Population Density (People/km\u00b2)": 8.762889862060547
@@ -13516,7 +13516,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 164.8292236328125,
       "GPP (kg_C/m\u00b2/year)": 662.3202764976959,
       "Population Density (People/km\u00b2)": 8.98099136352539
@@ -13560,7 +13560,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 159.5484619140625,
       "GPP (kg_C/m\u00b2/year)": 666.6440092165899,
       "Population Density (People/km\u00b2)": 9.199092864990234
@@ -13604,7 +13604,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 201.5199432373047,
       "GPP (kg_C/m\u00b2/year)": 838.8767281105991,
       "Population Density (People/km\u00b2)": 9.444098472595215
@@ -13648,7 +13648,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 147.7505340576172,
       "GPP (kg_C/m\u00b2/year)": 387.06451612903226,
       "Population Density (People/km\u00b2)": 9.689104080200195
@@ -13692,7 +13692,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 185.37709045410156,
       "GPP (kg_C/m\u00b2/year)": 613.6163594470046,
       "Population Density (People/km\u00b2)": 9.934110641479492
@@ -13736,7 +13736,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 124.78265380859375,
       "GPP (kg_C/m\u00b2/year)": 503.5241935483871,
       "Population Density (People/km\u00b2)": 10.179116249084473
@@ -13780,7 +13780,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 228.2244873046875,
       "GPP (kg_C/m\u00b2/year)": 853.25,
       "Population Density (People/km\u00b2)": 10.424121856689453
@@ -13824,7 +13824,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 198.3128662109375,
       "GPP (kg_C/m\u00b2/year)": 434.0230414746544,
       "Population Density (People/km\u00b2)": 10.424121856689453
@@ -13868,7 +13868,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 190.58554077148438,
       "GPP (kg_C/m\u00b2/year)": 1272.3663594470047,
       "Population Density (People/km\u00b2)": 10.424121856689453
@@ -13912,7 +13912,7 @@
       "LandCoverClass": 255,
       "PixelCount": 12103,
       "Percentage": 72.35174557627928,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 182.8648223876953,
       "GPP (kg_C/m\u00b2/year)": 667.6820276497696,
       "Population Density (People/km\u00b2)": 10.424121856689453
@@ -13969,7 +13969,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 251.23085021972656,
       "GPP (kg_C/m\u00b2/year)": 701.6072652501714,
       "Population Density (People/km\u00b2)": 6.417980670928955
@@ -14002,7 +14002,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 469.8356628417969,
       "GPP (kg_C/m\u00b2/year)": 1933.6708704592186,
       "Population Density (People/km\u00b2)": 6.435147762298584
@@ -14035,7 +14035,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 356.2087707519531,
       "GPP (kg_C/m\u00b2/year)": 911.8819739547636,
       "Population Density (People/km\u00b2)": 6.452315330505371
@@ -14068,7 +14068,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 343.87432861328125,
       "GPP (kg_C/m\u00b2/year)": 872.4261823166553,
       "Population Density (People/km\u00b2)": 6.469482421875
@@ -14101,7 +14101,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 351.3739013671875,
       "GPP (kg_C/m\u00b2/year)": 1102.2131596984236,
       "Population Density (People/km\u00b2)": 6.486649513244629
@@ -14134,7 +14134,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 394.11676025390625,
       "GPP (kg_C/m\u00b2/year)": 1903.9803975325565,
       "Population Density (People/km\u00b2)": 6.506606101989746
@@ -14156,7 +14156,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 313.6468811035156,
       "GPP (kg_C/m\u00b2/year)": 710.4705962988348,
       "Population Density (People/km\u00b2)": 6.5265631675720215
@@ -14178,7 +14178,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 354.8155517578125,
       "GPP (kg_C/m\u00b2/year)": 967.0512679917751,
       "Population Density (People/km\u00b2)": 6.546519756317139
@@ -14200,7 +14200,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 246.23841857910156,
       "GPP (kg_C/m\u00b2/year)": 876.0551062371487,
       "Population Density (People/km\u00b2)": 6.566476821899414
@@ -14222,7 +14222,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 494.53692626953125,
       "GPP (kg_C/m\u00b2/year)": 1713.8150788211103,
       "Population Density (People/km\u00b2)": 6.586433410644531
@@ -14244,7 +14244,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 293.8675231933594,
       "GPP (kg_C/m\u00b2/year)": 780.1054146675806,
       "Population Density (People/km\u00b2)": 6.586433410644531
@@ -14266,7 +14266,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 496.2828369140625,
       "GPP (kg_C/m\u00b2/year)": 2481.8270047978067,
       "Population Density (People/km\u00b2)": 6.586433410644531
@@ -14288,7 +14288,7 @@
       "LandCoverClass": 255,
       "PixelCount": 2673,
       "Percentage": 26.794306335204492,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 346.6339416503906,
       "GPP (kg_C/m\u00b2/year)": 1341.8618231665525,
       "Population Density (People/km\u00b2)": 6.586433410644531
@@ -14356,7 +14356,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 322.0826416015625,
       "GPP (kg_C/m\u00b2/year)": 1320.2069146542674,
       "Population Density (People/km\u00b2)": 4.668445110321045
@@ -14389,7 +14389,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 543.3981323242188,
       "GPP (kg_C/m\u00b2/year)": 2144.421103944803,
       "Population Density (People/km\u00b2)": 4.823379993438721
@@ -14422,7 +14422,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 415.0273742675781,
       "GPP (kg_C/m\u00b2/year)": 1852.305609719514,
       "Population Density (People/km\u00b2)": 4.978314399719238
@@ -14466,7 +14466,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 391.44476318359375,
       "GPP (kg_C/m\u00b2/year)": 1622.6591420428979,
       "Population Density (People/km\u00b2)": 5.133249282836914
@@ -14510,7 +14510,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 418.5802307128906,
       "GPP (kg_C/m\u00b2/year)": 1855.2986350682465,
       "Population Density (People/km\u00b2)": 5.288183689117432
@@ -14554,7 +14554,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 488.15899658203125,
       "GPP (kg_C/m\u00b2/year)": 2365.7681865906707,
       "Population Density (People/km\u00b2)": 5.4714250564575195
@@ -14587,7 +14587,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 360.93585205078125,
       "GPP (kg_C/m\u00b2/year)": 1283.082795860207,
       "Population Density (People/km\u00b2)": 5.654665946960449
@@ -14631,7 +14631,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 456.7129821777344,
       "GPP (kg_C/m\u00b2/year)": 1761.4142042897854,
       "Population Density (People/km\u00b2)": 5.837907314300537
@@ -14675,7 +14675,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 363.8869323730469,
       "GPP (kg_C/m\u00b2/year)": 1791.7021898905055,
       "Population Density (People/km\u00b2)": 6.021148204803467
@@ -14719,7 +14719,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 614.057861328125,
       "GPP (kg_C/m\u00b2/year)": 2615.1676916154192,
       "Population Density (People/km\u00b2)": 6.204389572143555
@@ -14763,7 +14763,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 364.8126220703125,
       "GPP (kg_C/m\u00b2/year)": 1430.3431078446079,
       "Population Density (People/km\u00b2)": 6.204389572143555
@@ -14807,7 +14807,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 519.7247924804688,
       "GPP (kg_C/m\u00b2/year)": 2911.54012299385,
       "Population Density (People/km\u00b2)": 6.204389572143555
@@ -14840,7 +14840,7 @@
       "LandCoverClass": 255,
       "PixelCount": 8068,
       "Percentage": 37.69741145687319,
-      "LandCoverLabel": NaN,
+      "LandCoverLabel": null,
       "Precipitation (mm)": 433.4400634765625,
       "GPP (kg_C/m\u00b2/year)": 1950.8788810559472,
       "Population Density (People/km\u00b2)": 6.204389572143555
