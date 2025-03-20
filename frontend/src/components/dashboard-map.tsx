@@ -10,7 +10,7 @@ import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
-const { selectedFeature, tiffOpacity, setTiffOpacity, selectedYear, setSelectedYear } = useMap(mapRef)
+  const { selectedDistrict, tiffOpacity, setTiffOpacity, selectedYear, setSelectedYear } = useMap(mapRef)
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -39,17 +39,17 @@ const { selectedFeature, tiffOpacity, setTiffOpacity, selectedYear, setSelectedY
 
   // Get the district name from the selected feature
   const getDistrictName = (): string | null => {
-    if (!selectedFeature)
+    if (!selectedDistrict)
       return null
 
     // Try to get the district name from properties
-    if (selectedFeature.properties && selectedFeature.properties.ADM3_EN) {
-      return selectedFeature.properties.ADM3_EN
+    if (selectedDistrict.properties && selectedDistrict.properties.ADM3_EN) {
+      return selectedDistrict.properties.ADM3_EN
     }
 
     // If not found in properties, check if it's directly on the feature
-    if (selectedFeature.ADM3_EN) {
-      return selectedFeature.ADM3_EN
+    if (selectedDistrict.ADM3_EN) {
+      return selectedDistrict.ADM3_EN
     }
 
     return null
@@ -91,14 +91,14 @@ const { selectedFeature, tiffOpacity, setTiffOpacity, selectedYear, setSelectedY
                         districtData={districtData}
                       />
                     )
-                  : selectedFeature
+                  : selectedDistrict
                     ? (
                         <div>
                           <h3 className="text-lg font-semibold mb-2">
-                            {selectedFeature.ADM3_EN ?? 'Feature Info'}
+                            {selectedDistrict.ADM3_EN ?? 'Feature Info'}
                           </h3>
                           <div className="space-y-2">
-                            {Object.entries(selectedFeature.properties || {}).map(([key, value]) => (
+                            {Object.entries(selectedDistrict.properties || {}).map(([key, value]) => (
                               <div key={key} className="grid grid-cols-2">
                                 <span className="font-medium">
                                   {key}

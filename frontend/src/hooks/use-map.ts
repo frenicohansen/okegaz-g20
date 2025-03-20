@@ -197,7 +197,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [map, setMap] = useState<Map | null>(null)
 
   const selectInteractionRef = useRef<Select | null>(null)
-  const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null)
+  const [selectedDistrict, setSelectedDistrict] = useState<GeoJSONFeature | null>(null)
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
   const [selectedYear, setSelectedYear] = useState<number>(2010)
 
@@ -251,10 +251,10 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
 
         if (featureCount > 0) {
           const feature = features.item(0)
-          setSelectedFeature(feature.getProperties())
+          setSelectedDistrict(feature.getProperties())
         }
         else {
-          setSelectedFeature(null)
+          setSelectedDistrict(null)
         }
       })
     }
@@ -307,7 +307,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }, [map])
 
   return {
-    selectedFeature,
+    selectedDistrict,
     tiffOpacity,
     setTiffOpacity,
     selectedYear,
