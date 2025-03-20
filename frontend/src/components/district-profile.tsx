@@ -47,6 +47,8 @@ interface DistrictDataRow {
 interface DistrictProfileProps {
   districtName: string
   districtData: DistrictDataRow[]
+  selectedYear?: number
+  onYearChange?: (year: number) => void
 }
 
 // Helper function to safely get a number value
@@ -57,7 +59,7 @@ function safeNumber(value: number | null | undefined): number {
   return Number(value)
 }
 
-export function DistrictProfile({ districtName, districtData }: DistrictProfileProps) {
+export function DistrictProfile({ districtName, districtData, selectedYear, onYearChange }: DistrictProfileProps) {
   const [activeMetric, setActiveMetric] = useState<'precipitation' | 'gpp' | 'population'>('precipitation')
 
   if (!districtData || districtData.length === 0) {
@@ -72,14 +74,19 @@ export function DistrictProfile({ districtName, districtData }: DistrictProfileP
   // Sort data by year (ascending)
   const sorted = [...districtData].sort((a, b) => safeNumber(a.Year) - safeNumber(b.Year))
 
-  // Get the latest year for summary stats
-  const latestYear = Math.max(...sorted.map(d => safeNumber(d.Year)))
-  const latestRows = sorted.filter(d => safeNumber(d.Year) === latestYear)
-  const summaryRow = latestRows[0]
+  // Filter data by selected year if provided
+  const filteredData = selectedYear
+    ? sorted.filter(d => safeNumber(d.Year) === selectedYear)
+    : sorted
+
+  // Get the latest year for summary stats (or use selected year if provided)
+  const displayYear = selectedYear || Math.max(...sorted.map(d => safeNumber(d.Year)))
+  const yearRows = sorted.filter(d => safeNumber(d.Year) === displayYear)
+  const summaryRow = yearRows[0]
 
   // Process data for land cover distribution chart
   const yearCoverMap: Record<number, Record<string, number>> = {}
-  for (const row of sorted) {
+  for (const row of filteredData) {
     const year = safeNumber(row.Year)
     const label = row.LandCoverLabel || 'Unknown'
     const percentage = safeNumber(row.Percentage)
@@ -122,7 +129,7 @@ export function DistrictProfile({ districtName, districtData }: DistrictProfileP
       count: number
     }> = {}
 
-    for (const row of sorted) {
+    for (const row of filteredData) {
       const year = safeNumber(row.Year)
       if (!yearData[year]) {
         yearData[year] = {
@@ -164,7 +171,7 @@ export function DistrictProfile({ districtName, districtData }: DistrictProfileP
         }
       })
       .sort((a, b) => a.year - b.year)
-  }, [sorted])
+  }, [filteredData])
 
   // Calculate totals for metrics
   const totals = useMemo(() => {
@@ -347,6 +354,11 @@ export function DistrictProfile({ districtName, districtData }: DistrictProfileP
                   strokeWidth={2}
                   dot={{ r: 4, strokeWidth: 2 }}
                   activeDot={{ r: 6, strokeWidth: 2 }}
+                  onClick={(data) => {
+                    if (onYearChange && data && data.year) {
+                      onYearChange(data.year)
+                    }
+                  }}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -413,7 +425,7 @@ export function DistrictProfile({ districtName, districtData }: DistrictProfileP
                 </tr>
               </thead>
               <tbody>
-                {sorted.map((row, idx) => (
+                {filteredData.map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-2">{row.Year}</td>
                     <td className="p-2">{row.LandCoverLabel || 'Unknown'}</td>
