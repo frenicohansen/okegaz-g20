@@ -53,7 +53,7 @@ export function AreaChartInteractive({ chartConfig, chartData, selectedScenarios
   })
 
   return (
-    <Card className="rounded-none">
+    <Card className="rounded-none shadow-none">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
           <CardTitle>Area Chart - Interactive</CardTitle>
