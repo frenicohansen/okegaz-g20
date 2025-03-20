@@ -1,3 +1,4 @@
+import { Dashboard } from '@/components/dashboard'
 import { Card } from '@/components/ui/card'
 import { MyMap } from '@/Map'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -18,6 +19,7 @@ function App() {
           <MyMap />
         </Card>
       </div>
+      <Dashboard />
     </QueryClientProvider>
   )
 }
