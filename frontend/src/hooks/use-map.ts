@@ -4,6 +4,7 @@ import LayerSwitcher from 'ol-layerswitcher'
 import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
 import Select from 'ol/interaction/Select'
+import LayerGroup from 'ol/layer/Group'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import WebGLTileLayer from 'ol/layer/WebGLTile'
@@ -16,7 +17,7 @@ import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-function createTiffLayer(url: string, yearKey: '2010' | '2015' | '2020', tiffOpacity: number) {
+function createTiffLayer(name: string, url: string, year: number, tiffOpacity: number) {
   const tiffSource = new GeoTIFF({
     sources: [
       {
@@ -52,7 +53,7 @@ function createTiffLayer(url: string, yearKey: '2010' | '2015' | '2020', tiffOpa
     visible: false,
     opacity: tiffOpacity,
     properties: {
-      title: `Population Density ${yearKey}`,
+      title: year.toString(),
       type: 'overlay',
     },
     style: {
@@ -60,6 +61,37 @@ function createTiffLayer(url: string, yearKey: '2010' | '2015' | '2020', tiffOpa
     },
     zIndex: 100,
   })
+}
+
+function getTiffLayers(tiffOpacity: number) {
+  const popdens = new LayerGroup({
+    title: 'Population Density',
+    fold: 'open',
+    layers: [
+      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2010.tif', 2010, tiffOpacity),
+      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2015.tif', 2015, tiffOpacity),
+      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2020.tif', 2020, tiffOpacity),
+    ],
+  })
+
+  const years = Array.from({ length: 14 }, (_, i) => 2010 + i)
+  const carbon = new LayerGroup({
+    title: 'Carbon absorbtion',
+    fold: 'open',
+    layers: years.map(year => createTiffLayer('Carbon absorbtion', `/data_display/carbon_absorbtion/${year}_GP.tif`, year, tiffOpacity)),
+  })
+  const climate = new LayerGroup({
+    title: 'Climate',
+    fold: 'open',
+    layers: years.map(year => createTiffLayer('Climate', `/data_display/climate/${year}R.tif`, year, tiffOpacity)),
+  })
+  const land = new LayerGroup({
+    title: 'Land coverage',
+    fold: 'open',
+    layers: years.map(year => createTiffLayer('Land cover', `/data_display/land_cover/${year}LCT.tif`, year, tiffOpacity)),
+  })
+
+  return [popdens, carbon, climate, land]
 }
 
 function getMapBaseLayers() {
@@ -210,11 +242,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const baseLayers = useMemo(() => getMapBaseLayers(), [])
   const districtLayer = useMemo(() => getDistrictLayer(), [])
   const selectedStyle = useMemo(() => getSelectedStyle(), [])
-  const tiffLayers = useMemo(() => [
-    createTiffLayer('/data_display/pop_density/Assaba_Pop_2010.tif', '2010', tiffOpacity),
-    createTiffLayer('/data_display/pop_density/Assaba_Pop_2015.tif', '2015', tiffOpacity),
-    createTiffLayer('/data_display/pop_density/Assaba_Pop_2020.tif', '2020', tiffOpacity),
-  ], [tiffOpacity])
+  const tiffLayers = useMemo(() => getTiffLayers(tiffOpacity), [tiffOpacity])
 
   useEffect(() => {
     if (!mapRef.current)
