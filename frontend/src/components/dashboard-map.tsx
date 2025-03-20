@@ -48,10 +48,6 @@ export const MyMap: React.FC = () => {
   })
 
   useEffect(() => {
-    console.log(selectedFeature)
-  }, [selectedFeature])
-
-  useEffect(() => {
     if (!mapRef.current)
       return
 
