@@ -29,7 +29,6 @@
     "lucide-react": "^0.483.0",
     "motion": "^12.5.0",
     "ol": "^8.2.0",
-    "ol-ext": "^4.0.27",
     "ol-layerswitcher": "^4.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
