@@ -48,7 +48,7 @@ async function fetchMockChartData(): Promise<ChartApiType[]> {
   })
 }
 
-export function useChartApi(testData = false) {
+export function useChartApi(testData = true) {
   return useQuery({
     queryKey: ['chart-data'],
     queryFn: testData ? fetchMockChartData : fetchChartData,

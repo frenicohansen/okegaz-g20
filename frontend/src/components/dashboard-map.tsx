@@ -15,7 +15,7 @@ import GeoTIFF from 'ol/source/GeoTIFF'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
