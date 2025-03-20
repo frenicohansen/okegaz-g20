@@ -1,27 +1,23 @@
 import { DistrictProfile } from '@/components/district-profile'
 import { MapPanel } from '@/components/map/panel'
 import { SearchDistrict } from '@/components/search-district'
-import { Label } from '@/components/ui/label'
-import { Slider } from '@/components/ui/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useMap } from '@/hooks/use-map'
 import { Info, Map as MapIcon } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-
+import { DistrictDetail } from './district-details'
 import 'ol/ol.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const {
     selectedDistrict,
-    tiffOpacity,
-    setTiffOpacity,
-    selectedYear,
-    setSelectedYear,
     searchDistrict,
     districtNames,
     layers,
     toggleLayerVisibility,
+    selectedYear,
+    setSelectedYear,
   } = useMap(mapRef)
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -70,6 +66,16 @@ export const DashboardMap: React.FC = () => {
   const districtName = getDistrictName()
   const districtData = districtName && districtDataMap[districtName] ? districtDataMap[districtName] : []
 
+  // Set initial selected year when district changes
+  useEffect(() => {
+    if (districtData && districtData.length > 0) {
+      // Find the most recent year in the data
+      const years = districtData.map(item => item.Year)
+      const mostRecentYear = Math.max(...years)
+      setSelectedYear(mostRecentYear)
+    }
+  }, [districtData, setSelectedYear])
+
   return (
     <div className="flex flex-col h-[calc(100vh-120px)]">
       <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -82,128 +88,81 @@ export const DashboardMap: React.FC = () => {
           <MapPanel layers={layers} toggleLayer={toggleLayerVisibility} />
           <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200"></div>
         </div>
-        <div className="flex flex-col">
-          <Tabs defaultValue="info" className="w-full">
-            <TabsList className="w-full">
-              <TabsTrigger value="info" className="flex-1">
-                <Info className="h-4 w-4 mr-2" />
-                Info
-              </TabsTrigger>
-              <TabsTrigger value="details" className="flex-1">
-                <MapIcon className="h-4 w-4 mr-2" />
-                Details
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="info" className="p-4 h-[calc(100vh-350px)] overflow-auto">
-              {isLoading
-                ? (
-                    <div className="flex items-center justify-center h-full text-gray-500">
-                      Loading district data...
-                    </div>
-                  )
-                : districtName && districtData.length > 0
+
+        {/* Details Panel - Increased size for better visibility */}
+        <div className="w-full md:w-1/2 lg:w-2/5 h-[60vh] md:h-full overflow-hidden flex flex-col">
+          <div className="flex-1 overflow-hidden">
+            <Tabs defaultValue="info" className="h-full flex flex-col">
+              <TabsList className="mx-4 mt-2">
+                <TabsTrigger value="info" className="flex items-center gap-1">
+                  <Info className="h-4 w-4" />
+                  District Info
+                </TabsTrigger>
+                <TabsTrigger value="details" className="flex items-center gap-1">
+                  <MapIcon className="h-4 w-4" />
+                  Details
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="info" className="p-4 h-[calc(100vh-350px)] overflow-auto">
+                {isLoading
                   ? (
-                      <DistrictProfile
-                        districtName={districtName}
-                        districtData={districtData}
-                      />
+                      <div className="flex items-center justify-center h-full text-gray-500">
+                        Loading district data...
+                      </div>
                     )
-                  : selectedDistrict
+                  : districtName && districtData.length > 0
                     ? (
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2">
-                            {selectedDistrict.ADM3_EN ?? 'Feature Info'}
-                          </h3>
-                          <div className="space-y-2">
-                            {Object.entries(selectedDistrict.properties || {}).map(([key, value]) => (
-                              <div key={key} className="grid grid-cols-2">
-                                <span className="font-medium">
-                                  {key}
-                                  :
-                                </span>
-                                <span>{value?.toString() || 'N/A'}</span>
-                              </div>
-                            ))}
-                          </div>
-                          {districtName && (
-                            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
-                              <p className="text-sm text-yellow-700">
-                                No detailed data available for district:
-                                {' '}
-                                {districtName}
-                              </p>
-                            </div>
-                          )}
-                        </div>
+                        <DistrictProfile
+                          districtName={districtName}
+                          districtData={districtData}
+                          selectedYear={selectedYear}
+                          onYearChange={setSelectedYear}
+                        />
                       )
-                    : (
-                        <div className="flex items-center justify-center h-full text-gray-500">
-                          Click on a district to see details
-                        </div>
-                      )}
-            </TabsContent>
-            <TabsContent value="details" className="p-4 h-[calc(100vh-350px)] overflow-auto">
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">About Assaba</h3>
-                  <p className="text-sm">
-                    Assaba is a region in southern Mauritania. This dashboard visualizes
-                    districts, roads, and water bodies in the region using GeoJSON data.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-8">
-                  <h3 className="text-lg font-semibold mb-2">Opacity Control</h3>
-
-                  <div className="space-y-4 min-w-[300px]">
-                    <Label>Layer Opacity</Label>
-                    <div>
-                      <span
-                        className="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
-                        aria-hidden="true"
-                      >
-                        <span>Low</span>
-                        <span>High</span>
-                      </span>
-                      <Slider
-                        defaultValue={[0.5]}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                        aria-label="Layer opacity slider"
-                        value={[tiffOpacity]}
-                        onValueChange={value => setTiffOpacity(value[0])}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 min-w-[300px]">
-                    <Label>
-                      Select year:
-                      {' '}
-                      {selectedYear}
-                    </Label>
-                    <div>
-                      <span
-                        className="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
-                        aria-hidden="true"
-                      >
-                        <span>2010</span>
-                        <span>2023</span>
-                      </span>
-                      <Slider
-                        min={2010}
-                        max={2023}
-                        step={1}
-                        value={[selectedYear]}
-                        onValueChange={value => setSelectedYear(value[0])}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
+                    : selectedDistrict
+                      ? (
+                          <div>
+                            <h3 className="text-lg font-semibold mb-2">
+                              {selectedDistrict.ADM3_EN ?? 'Feature Info'}
+                            </h3>
+                            <div className="space-y-2">
+                              {Object.entries(selectedDistrict.properties || {}).map(([key, value]) => (
+                                <div key={key} className="grid grid-cols-2">
+                                  <span className="font-medium">
+                                    {key}
+                                    :
+                                  </span>
+                                  <span>{value?.toString() || 'N/A'}</span>
+                                </div>
+                              ))}
+                            </div>
+                            {districtName && (
+                              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                                <p className="text-sm text-yellow-700">
+                                  No detailed data available for district:
+                                  {' '}
+                                  {districtName}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )
+                      : (
+                          <div className="flex items-center justify-center h-full text-gray-500">
+                            Click on a district to see details
+                          </div>
+                        )}
+              </TabsContent>
+              <TabsContent value="details" className="p-4 h-[calc(100vh-350px)] overflow-auto">
+                <DistrictDetail
+                  districtData={districtData}
+                  districtName={districtName}
+                  selectedYear={selectedYear}
+                  onYearChange={setSelectedYear}
+                />
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </div>
     </div>

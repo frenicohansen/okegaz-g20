@@ -1,7 +1,7 @@
 'use client'
 import type { LinkProps } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouter } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import React, { createContext, useContext, useState } from 'react'
@@ -10,6 +10,7 @@ interface Links {
   label: string
   href: string
   icon: React.JSX.Element | React.ReactNode
+  onClick?: () => void
 }
 
 interface SidebarContextProps {
@@ -164,6 +165,20 @@ export function SidebarLink({
   props?: LinkProps
 }) {
   const { open, animate } = useSidebar()
+  const router = useRouter()
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+
+    // Navigate using TanStack Router
+    router.navigate({ to: link.href })
+
+    // Call the onClick handler if provided
+    if (link.onClick) {
+      link.onClick()
+    }
+  }
+
   return (
     <Link
       to={link.href}
@@ -171,6 +186,7 @@ export function SidebarLink({
         'flex items-center justify-start gap-2 group/sidebar py-2',
         className,
       )}
+      onClick={handleClick}
       {...props}
     >
       {link.icon}
