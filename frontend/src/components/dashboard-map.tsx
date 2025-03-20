@@ -14,22 +14,25 @@ import { OSM, XYZ } from 'ol/source'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
+import Select from 'ol/interaction/Select'
+import { click } from 'ol/events/condition'
 import React, { useEffect, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
 interface GeoJSONFeature {
   type: string
-  properties: Record<string, any>
   geometry: {
     type: string
     coordinates: any[]
-  }
+  },
+  [key: string]: any
 }
 
 export const MyMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<Map | null>(null)
+  const selectInteractionRef = useRef<Select | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null)
   const [layerVisibility, setLayerVisibility] = useState({
     districts: true,
@@ -45,8 +48,18 @@ export const MyMap: React.FC = () => {
   })
 
   useEffect(() => {
+    console.log(selectedFeature)
+  }, [selectedFeature])
+
+  useEffect(() => {
     if (!mapRef.current)
       return
+
+    // Clean up previous select interaction if it exists
+    if (mapInstanceRef.current && selectInteractionRef.current) {
+      mapInstanceRef.current.removeInteraction(selectInteractionRef.current)
+      selectInteractionRef.current = null
+    }
 
     // Create vector sources for each GeoJSON layer
     const districtSource = new VectorSource({
@@ -78,7 +91,26 @@ export const MyMap: React.FC = () => {
         color: '#6666cc',
         width: 2,
       }),
+      zIndex: 1, // Base zIndex for normal features
     })
+
+    // Custom style function for selection to ensure it completely replaces existing styles
+    const createSelectedStyle = () => {
+      return [
+        new Style({
+          fill: new Fill({
+            color: 'rgba(255, 204, 0, 0.4)',
+          }),
+          stroke: new Stroke({
+            color: '#ff9900',
+            width: 3,
+            lineCap: 'round',
+            lineJoin: 'round',
+          }),
+          zIndex: 1000, // Very high zIndex to ensure it's on top
+        })
+      ];
+    }
 
     const regionStyle = new Style({
       fill: new Fill({
@@ -190,6 +222,34 @@ export const MyMap: React.FC = () => {
       controls: defaultControls(),
     })
 
+    // Create select interaction with styling function
+    const currentSelect = new Select({
+      layers: [districtLayer],
+      style: createSelectedStyle,
+      condition: click,
+      multi: false,
+      hitTolerance: 0,
+    })
+
+    if (currentSelect) {
+      map.addInteraction(currentSelect)
+      selectInteractionRef.current = currentSelect
+      
+      currentSelect.on('select', (_e) => {
+        const features = currentSelect.getFeatures()
+        const featureCount = features.getLength()
+                
+        if (featureCount > 0) {
+          const feature = features.item(0)
+          // @ts-expect-error - GeoJSON feature properties
+          setSelectedFeature(feature.getProperties())
+        }
+        else {
+          setSelectedFeature(null)
+        }
+      })
+    }
+
     // Add layer switcher control with proper grouping
     const layerSwitcher = new LayerSwitcher({
       tipLabel: 'Legend',
@@ -197,18 +257,6 @@ export const MyMap: React.FC = () => {
       reverse: true,
     })
     map.addControl(layerSwitcher)
-
-    // Add click interaction to show feature info
-    map.on('click', (evt) => {
-      const feature = map.forEachFeatureAtPixel(evt.pixel, feature => feature)
-      if (feature) {
-        // @ts-expect-error - GeoJSON feature properties
-        setSelectedFeature(feature.getProperties())
-      }
-      else {
-        setSelectedFeature(null)
-      }
-    })
 
     // Calculate statistics when sources are loaded
     const updateStats = () => {
@@ -240,7 +288,13 @@ export const MyMap: React.FC = () => {
     mapInstanceRef.current = map
 
     return () => {
-      map.setTarget(undefined)
+      if (selectInteractionRef.current && mapInstanceRef.current) {
+        mapInstanceRef.current.removeInteraction(selectInteractionRef.current)
+        selectInteractionRef.current = null
+      }
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.setTarget(undefined)
+      }
     }
   }, [layerVisibility])
 
@@ -375,7 +429,7 @@ export const MyMap: React.FC = () => {
                 ? (
                     <div>
                       <h3 className="text-lg font-semibold mb-2">
-                        {selectedFeature.properties?.ADM3_EN || selectedFeature.properties?.name || 'Feature Info'}
+                        {selectedFeature.ADM3_EN ?? 'Feature Info'}
                       </h3>
                       <div className="space-y-2">
                         {Object.entries(selectedFeature.properties || {}).map(([key, value]) => (
@@ -404,6 +458,10 @@ export const MyMap: React.FC = () => {
                     <li className="flex items-center">
                       <div className="w-4 h-4 bg-[rgba(204,204,255,0.3)] border-2 border-[#6666cc] mr-2"></div>
                       <span>Districts</span>
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-4 h-4 bg-[rgba(255,204,0,0.4)] border-2 border-[#ff9900] mr-2"></div>
+                      <span>Selected District</span>
                     </li>
                     <li className="flex items-center">
                       <div className="w-4 h-4 bg-[rgba(255,255,204,0.2)] border-2 border-[#cc9933] mr-2"></div>
