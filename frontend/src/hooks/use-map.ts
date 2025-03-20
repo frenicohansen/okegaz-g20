@@ -28,7 +28,7 @@ function createTiffLayer(name: string, url: string, year: number, tiffOpacity: n
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: true,
+    visible: false,
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
@@ -274,6 +274,15 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
 
         if (featureCount > 0) {
           const feature = features.item(0)
+          const geometry = feature.getGeometry()
+          if (geometry) {
+            const extent = geometry.getExtent()
+            map.getView().fit(extent, {
+              duration: 1000,
+              padding: [50, 50, 50, 50],
+              maxZoom: 10,
+            })
+          }
           setSelectedDistrict(feature.getProperties())
         }
         else {
