@@ -130,3 +130,50 @@ code {
 .ol-zoom.ol-control {
   display: none;
 }
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* Hide unnecessary elements when printing */
+  .print\:hidden,
+  nav,
+  .sidebar,
+  button {
+    display: none !important;
+  }
+
+  /* Show print-only elements */
+  .print\:block {
+    display: block !important;
+  }
+
+  /* Ensure charts are visible */
+  .recharts-surface {
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  /* Improve table readability */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+  }
+
+  /* Ensure cards are visible */
+  .card {
+    border: 1px solid #ddd !important;
+    margin-bottom: 1cm !important;
+    page-break-inside: avoid;
+  }
+}
