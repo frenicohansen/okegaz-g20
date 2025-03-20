@@ -1,6 +1,5 @@
 import type { GeoJSONFeature } from 'ol/format/GeoJSON'
 import type { RefObject } from 'react'
-import LayerSwitcher from 'ol-layerswitcher'
 import { defaults as defaultControls } from 'ol/control'
 import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
@@ -16,6 +15,30 @@ import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
 import { useEffect, useMemo, useRef, useState } from 'react'
+
+export type StyleKey = keyof typeof styles
+export const styles = {
+  Region: {
+    title: 'Region',
+    fill: 'rgba(255, 255, 204, 0.2)',
+    stroke: '#cc9933',
+  },
+  Roads: {
+    title: 'Roads',
+    fill: '#ffffff',
+    stroke: '#ff3333',
+  },
+  Water: {
+    title: 'Water',
+    fill: 'rgba(51, 153, 255, 0.5)',
+    stroke: '#0066cc',
+  },
+  Districts: {
+    title: 'Districts',
+    fill: 'rgba(204, 204, 255, 0.3)',
+    stroke: '#6666cc',
+  },
+}
 
 function createTiffLayer(name: string, url: string, year: number, tiffOpacity: number) {
   const tiffSource = new GeoTIFF({
@@ -73,27 +96,27 @@ function getMapBaseLayers() {
 
   const regionStyle = new Style({
     fill: new Fill({
-      color: 'rgba(255, 255, 204, 0.2)',
+      color: styles.Region.fill,
     }),
     stroke: new Stroke({
-      color: '#cc9933',
+      color: styles.Region.stroke,
       width: 3,
     }),
   })
 
   const roadStyle = new Style({
     stroke: new Stroke({
-      color: '#ff3333',
+      color: styles.Roads.stroke,
       width: 2,
     }),
   })
 
   const waterStyle = new Style({
     fill: new Fill({
-      color: 'rgba(51, 153, 255, 0.5)',
+      color: styles.Water.fill,
     }),
     stroke: new Stroke({
-      color: '#0066cc',
+      color: styles.Water.stroke,
       width: 1,
     }),
   })
@@ -145,7 +168,7 @@ function getMapBaseLayers() {
     },
   })
 
-  return [osmLayer, satelliteLayer, regionLayer, roadLayer, waterLayer]
+  return [satelliteLayer, regionLayer, roadLayer, waterLayer]
 }
 
 function getDistrictLayer() {
@@ -207,6 +230,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const districtLayer = useMemo(() => getDistrictLayer(), [])
   const selectedStyle = useMemo(() => getSelectedStyle(), [])
   const tiffLayers = useMemo(() => getTiffLayers(tiffOpacity), [tiffOpacity])
+  const [layers] = useState([...baseLayers, districtLayer])
 
   useEffect(() => {
     if (!mapRef.current)
@@ -321,24 +345,6 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     }
   }, [map, tiffLayers, selectedYear])
 
-  useEffect(() => {
-    if (!map)
-      return
-
-    const layerSwitcher = new LayerSwitcher({
-      tipLabel: 'Legend',
-      groupSelectStyle: 'group',
-      reverse: true,
-    })
-    map.addControl(layerSwitcher)
-
-    return () => {
-      if (map)
-        map.removeControl(layerSwitcher)
-    }
-  }, [map])
-
-  // Function to search for a district by name and zoom to it
   const searchDistrict = (query: string) => {
     if (!map || !districtSourceRef.current)
       return
@@ -377,6 +383,10 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     }
   }
 
+  const toggleLayerVisibility = (layerTitle: string) => {
+    // toggle the layer visibility
+  }
+
   return {
     selectedDistrict,
     tiffOpacity,
@@ -385,5 +395,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     setSelectedYear,
     searchDistrict,
     districtNames,
+    layers,
+    toggleLayerVisibility,
   }
 }

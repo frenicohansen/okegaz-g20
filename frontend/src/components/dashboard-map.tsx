@@ -1,13 +1,14 @@
+import { DistrictProfile } from '@/components/district-profile'
+import { MapPanel } from '@/components/map/panel'
+import { SearchDistrict } from '@/components/search-district'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useMap } from '@/hooks/use-map'
 import { Info, Map as MapIcon } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-import { DistrictProfile } from './district-profile'
-import { SearchDistrict } from './search-district'
+
 import 'ol/ol.css'
-import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
@@ -19,6 +20,8 @@ export const DashboardMap: React.FC = () => {
     setSelectedYear,
     searchDistrict,
     districtNames,
+    layers,
+    toggleLayerVisibility,
   } = useMap(mapRef)
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -74,11 +77,10 @@ export const DashboardMap: React.FC = () => {
           {/* Search bar positioned on top of the map */}
           <div className="absolute top-2 left-2 right-2 z-10">
             <SearchDistrict districts={districtNames.map(name => ({ value: name, label: name }))} onSelect={searchDistrict} value={getDistrictName() ?? ''} />
-
           </div>
 
+          <MapPanel layers={layers} toggleLayer={toggleLayerVisibility} />
           <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200"></div>
-          {/* Map controls will be rendered directly on the map by OpenLayers */}
         </div>
         <div className="flex flex-col">
           <Tabs defaultValue="info" className="w-full">
