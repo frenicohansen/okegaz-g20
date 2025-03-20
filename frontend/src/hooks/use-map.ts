@@ -1,5 +1,6 @@
 import type { GeoJSONFeature } from 'ol/format/GeoJSON'
 import type { RefObject } from 'react'
+import { Feature } from 'ol'
 import LayerSwitcher from 'ol-layerswitcher'
 import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
@@ -200,6 +201,8 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [selectedDistrict, setSelectedDistrict] = useState<GeoJSONFeature | null>(null)
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
   const [selectedYear, setSelectedYear] = useState<number>(2010)
+  const [districtNames, setDistrictNames] = useState<string[]>([])
+  const districtSourceRef = useRef<VectorSource | null>(null)
 
   const baseLayers = useMemo(() => getMapBaseLayers(), [])
   const districtLayer = useMemo(() => getDistrictLayer(), [])
@@ -232,6 +235,22 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       return
 
     map.addLayer(districtLayer)
+
+    // Store the district source for later use in search
+    if (districtLayer.getSource()) {
+      districtSourceRef.current = districtLayer.getSource() as VectorSource
+
+      // When source is loaded, extract district names
+      districtSourceRef.current.once('change', () => {
+        if (districtSourceRef.current && districtSourceRef.current.getState() === 'ready') {
+          const features = districtSourceRef.current.getFeatures()
+          const names = features
+            .map(feature => feature.get('ADM3_EN'))
+            .filter(name => !!name) // Filter out undefined/null values
+          setDistrictNames(names)
+        }
+      })
+    }
 
     const currentSelect = new Select({
       layers: [districtLayer],
@@ -306,11 +325,52 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     }
   }, [map])
 
+  // Function to search for a district by name and zoom to it
+  const searchDistrict = (query: string) => {
+    if (!map || !districtSourceRef.current)
+      return
+
+    // Get all features from the district source
+    const features = districtSourceRef.current.getFeatures()
+
+    // Find the feature that matches the query (case insensitive)
+    const matchedFeature = features.find((feature) => {
+      const name = feature.get('ADM3_EN')
+      return name && name.toLowerCase().includes(query.toLowerCase())
+    })
+
+    if (matchedFeature) {
+      // Get the geometry and its extent
+      const geometry = matchedFeature.getGeometry()
+      if (geometry) {
+        // Zoom to the feature's extent with padding
+        const extent = geometry.getExtent()
+        map.getView().fit(extent, {
+          duration: 1000,
+          padding: [50, 50, 50, 50],
+          maxZoom: 10,
+        })
+
+        // Select the feature
+        if (selectInteractionRef.current) {
+          selectInteractionRef.current.getFeatures().clear()
+          selectInteractionRef.current.getFeatures().push(matchedFeature)
+          setSelectedDistrict(matchedFeature.getProperties() as GeoJSONFeature)
+        }
+      }
+    }
+    else {
+      console.warn('District not found:', query)
+    }
+  }
+
   return {
     selectedDistrict,
     tiffOpacity,
     setTiffOpacity,
     selectedYear,
     setSelectedYear,
+    searchDistrict,
+    districtNames,
   }
 }
