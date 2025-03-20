@@ -42,7 +42,7 @@ const chartConfig = {
 
 export function DashboardLineChart() {
   return (
-    <Card className="rounded-none">
+    <Card className="rounded-none shadow-none">
       <CardHeader>
         <CardTitle>Line Chart - Multiple</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

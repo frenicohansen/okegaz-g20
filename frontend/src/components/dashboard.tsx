@@ -1,4 +1,5 @@
 'use client'
+import { DashboardMap } from '@/components/dashboard-map'
 import { cn } from '@/lib/utils'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { useState } from 'react'
@@ -145,8 +146,11 @@ export function Dashboard() {
 
   return (
     <>
+      <div className="rounded-lg bg-card">
+        <DashboardMap />
+      </div>
       <ToggleGroup.Root type="multiple" value={selectedScenarios} onValueChange={handleScenarioChange}>
-        <div className="flex p-4 gap-4">
+        <div className="flex mt-8 gap-4">
           {scenarios.map(scenario => (
             <ToggleGroup.Item
               className={cn(
@@ -165,15 +169,13 @@ export function Dashboard() {
           ))}
         </div>
       </ToggleGroup.Root>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
         <div className="bg-white md:col-span-2 lg:col-span-3">
           <AreaChartInteractive chartConfig={chartConfig} chartData={chartData} selectedScenarios={selectedScenarios} />
         </div>
 
         <DashboardBarChart />
-
         <DashboardLineChart />
-
         <DashboardBarChart />
       </div>
     </>

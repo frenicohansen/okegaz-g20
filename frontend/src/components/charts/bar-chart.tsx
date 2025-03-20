@@ -38,7 +38,7 @@ const chartConfig = {
 
 export function DashboardBarChart() {
   return (
-    <Card className="rounded-none">
+    <Card className="rounded-none shadow-none">
       <CardHeader>
         <CardTitle>Bar Chart - Horizontal</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
