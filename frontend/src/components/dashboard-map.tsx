@@ -1,3 +1,5 @@
+import { Label } from '@/components/ui/label'
+import { Slider } from '@/components/ui/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useMap } from '@/hooks/use-map'
 import { Info, Map as MapIcon } from 'lucide-react'
@@ -7,7 +9,7 @@ import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
-  const { selectedFeature, tiffOpacity, setTiffOpacity } = useMap(mapRef)
+  const { selectedFeature, tiffOpacity, setTiffOpacity, selectedYear, setSelectedYear } = useMap(mapRef)
 
   return (
     <div className="flex flex-col h-[calc(100vh-120px)]">
@@ -64,30 +66,52 @@ export const DashboardMap: React.FC = () => {
                   </p>
                 </div>
 
-                <div>
+                <div className="flex flex-col gap-8">
                   <h3 className="text-lg font-semibold mb-2">Opacity Control</h3>
-                  <div className="space-y-1">
-                    <label htmlFor="tiff-opacity" className="text-sm font-medium">
-                      Layer Opacity:
-                    </label>
-                    <input
-                      type="range"
-                      id="tiff-opacity"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={tiffOpacity}
-                      onChange={e => setTiffOpacity(Number.parseFloat(e.target.value))}
-                      className="w-full"
-                    />
+
+                  <div className="space-y-4 min-w-[300px]">
+                    <Label>Layer Opacity</Label>
+                    <div>
+                      <span
+                        className="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
+                        aria-hidden="true"
+                      >
+                        <span>Low</span>
+                        <span>High</span>
+                      </span>
+                      <Slider
+                        defaultValue={[0.5]}
+                        min={0}
+                        max={1}
+                        step={0.1}
+                        aria-label="Layer opacity slider"
+                        value={[tiffOpacity]}
+                        onValueChange={value => setTiffOpacity(value[0])}
+                      />
+                    </div>
                   </div>
 
-                  <div className="mt-2">
-                    <div className="w-full h-4 bg-gradient-to-r from-blue-500 via-green-500 to-red-500 rounded"></div>
-                    <div className="flex justify-between text-xs mt-1">
-                      <span>Low</span>
-                      <span>Medium</span>
-                      <span>High</span>
+                  <div className="space-y-4 min-w-[300px]">
+                    <Label>
+                      Select year:
+                      {' '}
+                      {selectedYear}
+                    </Label>
+                    <div>
+                      <span
+                        className="mb-3 flex w-full items-center justify-between gap-2 text-xs font-medium text-muted-foreground"
+                        aria-hidden="true"
+                      >
+                        <span>2010</span>
+                        <span>2023</span>
+                      </span>
+                      <Slider
+                        min={2010}
+                        max={2023}
+                        step={1}
+                        value={[selectedYear]}
+                        onValueChange={value => setSelectedYear(value[0])}
+                      />
                     </div>
                   </div>
                 </div>

@@ -22,76 +22,37 @@ function createTiffLayer(name: string, url: string, year: number, tiffOpacity: n
     sources: [
       {
         url,
-        nodata: 0,
       },
     ],
-    normalize: true,
-    opaque: false,
-    interpolate: true,
   })
-
-  const colorScale = [
-    'interpolate',
-    ['linear'],
-    ['band', 1],
-    0,
-    [0, 0, 0, 0],
-    0.1,
-    [0, 0, 1, 0.9],
-    0.3,
-    [0, 1, 1, 0.9],
-    0.5,
-    [0, 1, 0, 0.9],
-    0.7,
-    [1, 1, 0, 0.9],
-    0.9,
-    [1, 0, 0, 0.9],
-  ]
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: false,
+    visible: true,
     opacity: tiffOpacity,
     properties: {
-      title: year.toString(),
+      title: `${name} ${year.toString()}`,
       type: 'overlay',
-    },
-    style: {
-      color: colorScale,
     },
     zIndex: 100,
   })
 }
 
 function getTiffLayers(tiffOpacity: number) {
-  const popdens = new LayerGroup({
-    title: 'Population Density',
-    fold: 'open',
-    layers: [
-      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2010.tif', 2010, tiffOpacity),
-      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2015.tif', 2015, tiffOpacity),
-      createTiffLayer('Population Density', '/data_display/pop_density/Assaba_Pop_2020.tif', 2020, tiffOpacity),
-    ],
-  })
-
   const years = Array.from({ length: 14 }, (_, i) => 2010 + i)
-  const carbon = new LayerGroup({
-    title: 'Carbon absorbtion',
-    fold: 'open',
-    layers: years.map(year => createTiffLayer('Carbon absorbtion', `/data_display/carbon_absorbtion/${year}_GP.tif`, year, tiffOpacity)),
-  })
-  const climate = new LayerGroup({
-    title: 'Climate',
-    fold: 'open',
-    layers: years.map(year => createTiffLayer('Climate', `/data_display/climate/${year}R.tif`, year, tiffOpacity)),
-  })
-  const land = new LayerGroup({
-    title: 'Land coverage',
-    fold: 'open',
-    layers: years.map(year => createTiffLayer('Land cover', `/data_display/land_cover/${year}LCT.tif`, year, tiffOpacity)),
+  const carbon = years.map((year) => {
+    return { year, layer: createTiffLayer('Carbon absorbtion', `/data_display/carbon_absorbtion/${year}_GP.tif`, year, tiffOpacity) }
   })
 
-  return [popdens, carbon, climate, land]
+  const climate = years.map((year) => {
+    return { year, layer: createTiffLayer('Climate', `/data_display/climate/${year}R.tif`, year, tiffOpacity) }
+  })
+
+  const land = years.map((year) => {
+    return { year, layer: createTiffLayer('Land cover', `/data_display/land_cover/${year}LCT.tif`, year, tiffOpacity) }
+  })
+
+  return { carbon, climate, land }
 }
 
 function getMapBaseLayers() {
@@ -238,6 +199,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const selectInteractionRef = useRef<Select | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null)
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
+  const [selectedYear, setSelectedYear] = useState<number>(2010)
 
   const baseLayers = useMemo(() => getMapBaseLayers(), [])
   const districtLayer = useMemo(() => getDistrictLayer(), [])
@@ -311,13 +273,21 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     if (!map)
       return
 
-    tiffLayers.forEach(layer => map.addLayer(layer))
+    const layersSelectedYear = Object.values(tiffLayers).map(layers => layers.find(({ year }) => year === selectedYear))
+    layersSelectedYear.forEach((layer) => {
+      if (layer)
+        map.addLayer(layer.layer)
+    })
 
     return () => {
-      if (map)
-        tiffLayers.forEach(layer => map.removeLayer(layer))
+      if (map) {
+        layersSelectedYear.forEach((layer) => {
+          if (layer)
+            map.removeLayer(layer.layer)
+        })
+      }
     }
-  }, [map, tiffLayers])
+  }, [map, tiffLayers, selectedYear])
 
   useEffect(() => {
     if (!map)
@@ -340,5 +310,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     selectedFeature,
     tiffOpacity,
     setTiffOpacity,
+    selectedYear,
+    setSelectedYear,
   }
 }
