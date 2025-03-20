@@ -35,8 +35,6 @@ services:
     volumes:
       - ./src/app:/code/app
       - ./src/.env:/code/.env
-    environment:
-      - PYTHONPATH=/code
 
   db:
     image: postgres:13
