@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ChevronDown, Info, Layers, Map as MapIcon } from 'lucide-react'
+import { Info, Map as MapIcon } from 'lucide-react'
 import LayerSwitcher from 'ol-layerswitcher'
 import { defaults as defaultControls } from 'ol/control'
+import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
+import Select from 'ol/interaction/Select'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import Map from 'ol/Map'
@@ -14,8 +13,6 @@ import { OSM, XYZ } from 'ol/source'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
-import Select from 'ol/interaction/Select'
-import { click } from 'ol/events/condition'
 import React, { useEffect, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
@@ -25,7 +22,7 @@ interface GeoJSONFeature {
   geometry: {
     type: string
     coordinates: any[]
-  },
+  }
   [key: string]: any
 }
 
@@ -34,18 +31,6 @@ export const MyMap: React.FC = () => {
   const mapInstanceRef = useRef<Map | null>(null)
   const selectInteractionRef = useRef<Select | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null)
-  const [layerVisibility, setLayerVisibility] = useState({
-    districts: true,
-    region: true,
-    roads: true,
-    water: true,
-    baseLayer: 'osm',
-  })
-  const [mapStats, setMapStats] = useState({
-    districts: 0,
-    roads: 0,
-    waterBodies: 0,
-  })
 
   useEffect(() => {
     if (!mapRef.current)
@@ -104,8 +89,8 @@ export const MyMap: React.FC = () => {
             lineJoin: 'round',
           }),
           zIndex: 1000, // Very high zIndex to ensure it's on top
-        })
-      ];
+        }),
+      ]
     }
 
     const regionStyle = new Style({
@@ -138,7 +123,6 @@ export const MyMap: React.FC = () => {
     // Create base layers (only one can be visible at a time)
     const osmLayer = new TileLayer({
       source: new OSM(),
-      visible: layerVisibility.baseLayer === 'osm',
       properties: {
         title: 'OpenStreetMap',
         type: 'base',
@@ -150,7 +134,6 @@ export const MyMap: React.FC = () => {
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         attributions: 'Tiles Esri',
       }),
-      visible: layerVisibility.baseLayer === 'satellite',
       properties: {
         title: 'Satellite',
         type: 'base',
@@ -161,7 +144,6 @@ export const MyMap: React.FC = () => {
     const districtLayer = new VectorLayer({
       source: districtSource,
       style: districtStyle,
-      visible: layerVisibility.districts,
       properties: {
         title: 'Districts',
         type: 'overlay',
@@ -171,7 +153,6 @@ export const MyMap: React.FC = () => {
     const regionLayer = new VectorLayer({
       source: regionSource,
       style: regionStyle,
-      visible: layerVisibility.region,
       properties: {
         title: 'Region',
         type: 'overlay',
@@ -181,7 +162,6 @@ export const MyMap: React.FC = () => {
     const roadLayer = new VectorLayer({
       source: roadSource,
       style: roadStyle,
-      visible: layerVisibility.roads,
       properties: {
         title: 'Roads',
         type: 'overlay',
@@ -191,7 +171,6 @@ export const MyMap: React.FC = () => {
     const waterLayer = new VectorLayer({
       source: waterSource,
       style: waterStyle,
-      visible: layerVisibility.water,
       properties: {
         title: 'Water',
         type: 'overlay',
@@ -203,8 +182,8 @@ export const MyMap: React.FC = () => {
       target: mapRef.current,
       layers: [
         // Base layers group (only one visible at a time)
-        osmLayer,
         satelliteLayer,
+        osmLayer,
         // Overlay layers group (can be toggled independently)
         regionLayer,
         districtLayer,
@@ -230,11 +209,11 @@ export const MyMap: React.FC = () => {
     if (currentSelect) {
       map.addInteraction(currentSelect)
       selectInteractionRef.current = currentSelect
-      
+
       currentSelect.on('select', (_e) => {
         const features = currentSelect.getFeatures()
         const featureCount = features.getLength()
-                
+
         if (featureCount > 0) {
           const feature = features.item(0)
           // @ts-expect-error - GeoJSON feature properties
@@ -254,33 +233,6 @@ export const MyMap: React.FC = () => {
     })
     map.addControl(layerSwitcher)
 
-    // Calculate statistics when sources are loaded
-    const updateStats = () => {
-      setMapStats({
-        districts: districtSource.getFeatures().length,
-        roads: roadSource.getFeatures().length,
-        waterBodies: waterSource.getFeatures().length,
-      })
-    }
-
-    districtSource.on('change', () => {
-      if (districtSource.getState() === 'ready') {
-        updateStats()
-      }
-    })
-
-    roadSource.on('change', () => {
-      if (roadSource.getState() === 'ready') {
-        updateStats()
-      }
-    })
-
-    waterSource.on('change', () => {
-      if (waterSource.getState() === 'ready') {
-        updateStats()
-      }
-    })
-
     mapInstanceRef.current = map
 
     return () => {
@@ -292,118 +244,10 @@ export const MyMap: React.FC = () => {
         mapInstanceRef.current.setTarget(undefined)
       }
     }
-  }, [layerVisibility])
-
-  // Toggle layer visibility
-  const toggleLayer = (layer: keyof typeof layerVisibility) => {
-    if (layer === 'baseLayer') {
-      setLayerVisibility(prev => ({
-        ...prev,
-        baseLayer: prev.baseLayer === 'osm' ? 'satellite' : 'osm',
-      }))
-    }
-    else {
-      setLayerVisibility(prev => ({
-        ...prev,
-        [layer]: !prev[layer],
-      }))
-    }
-  }
+  }, [])
 
   return (
     <div className="flex flex-col h-[calc(100vh-120px)]">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Assaba Region Dashboard</h2>
-        <div className="flex space-x-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm">
-                <Layers className="h-4 w-4 mr-2" />
-                Layers
-                <ChevronDown className="h-4 w-4 ml-2" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => toggleLayer('baseLayer')}>
-                <input
-                  type="radio"
-                  checked={layerVisibility.baseLayer === 'osm'}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                OpenStreetMap
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLayer('baseLayer')}>
-                <input
-                  type="radio"
-                  checked={layerVisibility.baseLayer === 'satellite'}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                Satellite
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLayer('districts')}>
-                <input
-                  type="checkbox"
-                  checked={layerVisibility.districts}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                Districts
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLayer('region')}>
-                <input
-                  type="checkbox"
-                  checked={layerVisibility.region}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                Region
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLayer('roads')}>
-                <input
-                  type="checkbox"
-                  checked={layerVisibility.roads}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                Roads
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toggleLayer('water')}>
-                <input
-                  type="checkbox"
-                  checked={layerVisibility.water}
-                  onChange={() => {}}
-                  className="mr-2"
-                />
-                Water Bodies
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-        <Card className="p-4 flex flex-col items-center">
-          <div className="text-lg font-semibold">Districts</div>
-          <div className="text-3xl font-bold">{mapStats.districts}</div>
-        </Card>
-        <Card className="p-4 flex flex-col items-center">
-          <div className="text-lg font-semibold">Roads</div>
-          <div className="text-3xl font-bold">{mapStats.roads}</div>
-        </Card>
-        <Card className="p-4 flex flex-col items-center">
-          <div className="text-lg font-semibold">Water Bodies</div>
-          <div className="text-3xl font-bold">{mapStats.waterBodies}</div>
-        </Card>
-        <Card className="p-4 flex flex-col items-center">
-          <div className="text-lg font-semibold">Total Features</div>
-          <div className="text-3xl font-bold">
-            {mapStats.districts + mapStats.roads + mapStats.waterBodies}
-          </div>
-        </Card>
-      </div>
-
       <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 relative">
           <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200" />
