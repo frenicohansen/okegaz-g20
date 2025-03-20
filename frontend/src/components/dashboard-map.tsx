@@ -2,7 +2,7 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useMap } from '@/hooks/use-map'
-import { Info, Map as MapIcon } from 'lucide-react'
+import { Info, Map as MapIcon, Search } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { DistrictProfile } from './district-profile'
 import 'ol/ol.css'
@@ -10,9 +10,20 @@ import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
-  const { selectedDistrict, tiffOpacity, setTiffOpacity, selectedYear, setSelectedYear } = useMap(mapRef)
+  const {
+    selectedDistrict,
+    tiffOpacity,
+    setTiffOpacity,
+    selectedYear,
+    setSelectedYear,
+    searchDistrict,
+    districtNames,
+  } = useMap(mapRef)
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchResults, setSearchResults] = useState<string[]>([])
+  const [showSearchResults, setShowSearchResults] = useState<boolean>(false)
 
   // Load district data from JSON file
   useEffect(() => {
@@ -58,10 +69,86 @@ export const DashboardMap: React.FC = () => {
   const districtName = getDistrictName()
   const districtData = districtName && districtDataMap[districtName] ? districtDataMap[districtName] : []
 
+  // Handle search input change
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value
+    setSearchQuery(query)
+
+    if (query.length > 0 && districtNames.length > 0) {
+      // Filter district names that match the query
+      const filtered = districtNames.filter(name =>
+        name.toLowerCase().includes(query.toLowerCase()),
+      )
+      setSearchResults(filtered.slice(0, 5)) // Limit to 5 results
+      setShowSearchResults(true)
+    }
+    else {
+      setSearchResults([])
+      setShowSearchResults(false)
+    }
+  }
+
+  // Handle search submission
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery) {
+      searchDistrict(searchQuery)
+      setShowSearchResults(false)
+    }
+  }
+
+  // Handle search result selection
+  const handleSelectSearchResult = (name: string) => {
+    setSearchQuery(name)
+    searchDistrict(name)
+    setShowSearchResults(false)
+  }
+
   return (
     <div className="flex flex-col h-[calc(100vh-120px)]">
       <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 relative">
+          {/* Search bar positioned on top of the map */}
+          <div className="absolute top-2 left-2 right-2 z-10">
+            <form onSubmit={handleSearch} className="flex">
+              <div className="relative flex-grow">
+                <input
+                  type="text"
+                  placeholder="Search for a district..."
+                  className="w-full px-4 py-2 pl-9 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                />
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-gray-400" />
+                </div>
+
+                {/* Search results dropdown */}
+                {showSearchResults && searchResults.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-20">
+                    <ul>
+                      {searchResults.map((name, index) => (
+                        <li
+                          key={index}
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => handleSelectSearchResult(name)}
+                        >
+                          {name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+
           <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200"></div>
           {/* Map controls will be rendered directly on the map by OpenLayers */}
         </div>
