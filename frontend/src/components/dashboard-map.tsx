@@ -5,7 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ChevronDown, Info, Layers, Map as MapIcon } from 'lucide-react'
 import LayerSwitcher from 'ol-layerswitcher'
 import { defaults as defaultControls } from 'ol/control'
+import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
+import Select from 'ol/interaction/Select'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import Map from 'ol/Map'
@@ -14,8 +16,6 @@ import { OSM, XYZ } from 'ol/source'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
-import Select from 'ol/interaction/Select'
-import { click } from 'ol/events/condition'
 import React, { useEffect, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
@@ -25,11 +25,11 @@ interface GeoJSONFeature {
   geometry: {
     type: string
     coordinates: any[]
-  },
+  }
   [key: string]: any
 }
 
-export const MyMap: React.FC = () => {
+export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<Map | null>(null)
   const selectInteractionRef = useRef<Select | null>(null)
@@ -104,8 +104,8 @@ export const MyMap: React.FC = () => {
             lineJoin: 'round',
           }),
           zIndex: 1000, // Very high zIndex to ensure it's on top
-        })
-      ];
+        }),
+      ]
     }
 
     const regionStyle = new Style({
@@ -230,11 +230,11 @@ export const MyMap: React.FC = () => {
     if (currentSelect) {
       map.addInteraction(currentSelect)
       selectInteractionRef.current = currentSelect
-      
+
       currentSelect.on('select', (_e) => {
         const features = currentSelect.getFeatures()
         const featureCount = features.getLength()
-                
+
         if (featureCount > 0) {
           const feature = features.item(0)
           // @ts-expect-error - GeoJSON feature properties

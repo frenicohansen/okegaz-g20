@@ -1,6 +1,6 @@
 import { Dashboard } from '@/components/dashboard'
+import { DashboardMap } from '@/components/dashboard-map'
 import { Card } from '@/components/ui/card'
-import { MyMap } from '@/components/dashboard-map'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
@@ -12,7 +12,7 @@ function App() {
     <div className="p-4">
       <h1 className="text-2xl font-bold text-center mb-4">Assaba Map Viewer</h1>
       <Card className="shadow-lg">
-        <MyMap />
+        <DashboardMap />
       </Card>
       <Dashboard />
     </div>
