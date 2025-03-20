@@ -1,7 +1,6 @@
-import { ComparisonTools } from '@/components/comparison-tools'
 import { Dashboard } from '@/components/dashboard'
 import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/sidebar'
-import { createFileRoute, Link, Outlet, useRouter } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { ChartArea, LandPlot, ReceiptText } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'

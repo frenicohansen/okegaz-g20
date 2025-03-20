@@ -1,9 +1,8 @@
 'use client'
 
-import { Checkbox } from '@/components/ui/checkbox'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ChevronDown, ChevronUp, Eye, EyeOff, Info, Layers } from 'lucide-react'
+import { ChevronDown, Info, Layers } from 'lucide-react'
 import { useState } from 'react'
 import { Switch } from '../ui/switch'
 import LayerLegend from './legend'
