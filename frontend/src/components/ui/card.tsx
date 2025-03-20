@@ -1,8 +1,8 @@
-import * as React from "react"
+import { cn } from '@/lib/utils'
 
-import { cn } from "@/lib/utils"
+import * as React from 'react'
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
@@ -38,11 +38,11 @@ function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   )
