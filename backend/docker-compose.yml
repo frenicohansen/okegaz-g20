@@ -33,7 +33,7 @@ services:
       - db
       - redis
     volumes:
-      - ./src/app:/code/app
+      - ./src/app:/code/src/app
       - ./src/.env:/code/.env
 
   db:
