@@ -7,13 +7,15 @@ import GeoJSON from 'ol/format/GeoJSON'
 import Select from 'ol/interaction/Select'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
+import WebGLTileLayer from 'ol/layer/WebGLTile'
 import Map from 'ol/Map'
 import { fromLonLat } from 'ol/proj'
 import { OSM, XYZ } from 'ol/source'
+import GeoTIFF from 'ol/source/GeoTIFF'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import 'ol/ol.css'
 import 'ol-layerswitcher/dist/ol-layerswitcher.css'
 
@@ -31,6 +33,47 @@ export const DashboardMap: React.FC = () => {
   const mapInstanceRef = useRef<Map | null>(null)
   const selectInteractionRef = useRef<Select | null>(null)
   const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null)
+
+  // TIFF layer controls
+  const [tiffVisible, setTiffVisible] = useState<boolean>(true)
+  const [tiffYear, setTiffYear] = useState<'2010' | '2015' | '2020'>('2010')
+  const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
+
+  // Track when map instance is ready
+  const [mapReady, setMapReady] = useState<boolean>(false)
+
+  // Store references to TIFF layers for each year
+  const tiffLayerRefs = useRef<{
+    2010: WebGLTileLayer | null
+    2015: WebGLTileLayer | null
+    2020: WebGLTileLayer | null
+  }>({
+    2010: null,
+    2015: null,
+    2020: null,
+  })
+
+  // Function to change the year by showing/hiding layers
+  const changeYear = (year: '2010' | '2015' | '2020') => {
+    console.warn(`Changing year to: ${year}`)
+
+    // Hide all TIFF layers
+    Object.entries(tiffLayerRefs.current).forEach(([_, layer]) => {
+      if (layer) {
+        layer.setVisible(false)
+      }
+    })
+
+    // Show only the selected year's layer
+    if (tiffLayerRefs.current[year]) {
+      tiffLayerRefs.current[year]?.setVisible(tiffVisible)
+    }
+    else {
+      console.warn(`TIFF layer for year ${year} not initialized yet`)
+    }
+
+    setTiffYear(year)
+  }
 
   useEffect(() => {
     if (!mapRef.current)
@@ -234,6 +277,7 @@ export const DashboardMap: React.FC = () => {
     map.addControl(layerSwitcher)
 
     mapInstanceRef.current = map
+    setMapReady(true) // Set map as ready for other components
 
     return () => {
       if (selectInteractionRef.current && mapInstanceRef.current) {
@@ -246,11 +290,145 @@ export const DashboardMap: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (mapReady && mapInstanceRef.current) {
+      // Initialize TIFF layers for all years
+      const years: ('2010' | '2015' | '2020')[] = ['2010', '2015', '2020']
+
+      years.forEach((year) => {
+        try {
+          // Try different path formats
+          const basePath = `/data_display/pop_density`
+          const tiffUrl = `${basePath}/Assaba_Pop_${year}.tif`
+          const alternativeTiffUrl = `${basePath}/assaba_pop_${year.toLowerCase()}.tif`
+          const alternativeTiffUrl2 = `${basePath}/Assaba_pop_${year}.tif`
+
+          console.warn(`Initializing TIFF layer for year ${year}, trying paths:`, {
+            primary: tiffUrl,
+            alt1: alternativeTiffUrl,
+            alt2: alternativeTiffUrl2,
+          })
+
+          // Check which file exists
+          const checkFile = async (url: string) => {
+            try {
+              const response = await fetch(url, { method: 'HEAD' })
+              return { url, exists: response.ok, status: response.status }
+            }
+            catch (error) {
+              return { url, exists: false, error }
+            }
+          }
+
+          // Check all possible file paths
+          Promise.all([
+            checkFile(tiffUrl),
+            checkFile(alternativeTiffUrl),
+            checkFile(alternativeTiffUrl2),
+          ]).then((results) => {
+            console.warn(`TIFF file check results for YEAR=${year}:`, results)
+
+            // Find the first file that exists
+            const existingFile = results.find(result => result.exists)
+
+            if (existingFile && mapInstanceRef.current) {
+              console.warn(`Found accessible TIFF file for year ${year}: ${existingFile.url}`)
+              createTiffLayer(existingFile.url, year)
+            }
+            else {
+              console.error(`No accessible TIFF file found for YEAR=${year}`)
+            }
+          })
+
+          // Function to create the TIFF layer
+          const createTiffLayer = (url: string, yearKey: '2010' | '2015' | '2020') => {
+            if (!mapInstanceRef.current)
+              return
+
+            // Define the TIFF source
+            const tiffSource = new GeoTIFF({
+              sources: [
+                {
+                  url,
+                  nodata: 0,
+                },
+              ],
+              normalize: true,
+              opaque: false,
+              interpolate: true,
+            })
+
+            // Define color scale
+            const colorScale = [
+              'interpolate',
+              ['linear'],
+              ['band', 1],
+              0,
+              [0, 0, 0, 0],
+              0.1,
+              [0, 0, 1, 0.9],
+              0.3,
+              [0, 1, 1, 0.9],
+              0.5,
+              [0, 1, 0, 0.9],
+              0.7,
+              [1, 1, 0, 0.9],
+              0.9,
+              [1, 0, 0, 0.9],
+            ]
+
+            // Create the layer
+            const newTiffLayer = new WebGLTileLayer({
+              source: tiffSource,
+              visible: yearKey === tiffYear, // Only show if it's the current year
+              opacity: tiffOpacity,
+              properties: {
+                title: `Population Density ${yearKey}`,
+                type: 'overlay',
+              },
+              style: {
+                color: colorScale,
+              },
+              zIndex: 100,
+            })
+
+            // Store the layer reference
+            tiffLayerRefs.current[yearKey] = newTiffLayer
+
+            // Add the layer to the map
+            mapInstanceRef.current.addLayer(newTiffLayer)
+            console.warn(`Added TIFF layer for year ${yearKey}`)
+          }
+        }
+        catch (error) {
+          console.error(`Error initializing TIFF layer for year ${year}:`, error)
+        }
+      })
+    }
+  }, [mapReady, tiffOpacity])
+
+  // Update layer visibility when tiffVisible changes
+  useEffect(() => {
+    if (tiffLayerRefs.current[tiffYear]) {
+      tiffLayerRefs.current[tiffYear]?.setVisible(tiffVisible)
+    }
+  }, [tiffVisible, tiffYear])
+
+  // Update layer opacity when tiffOpacity changes
+  useEffect(() => {
+    Object.values(tiffLayerRefs.current).forEach((layer) => {
+      if (layer) {
+        layer.setOpacity(tiffOpacity)
+      }
+    })
+  }, [tiffOpacity])
+
   return (
     <div className="flex flex-col h-[calc(100vh-120px)]">
       <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 relative">
           <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200" />
+          {/* TIFF layers are now managed directly in the map component */}
         </div>
         <div className="flex flex-col">
           <Tabs defaultValue="info" className="w-full">
@@ -317,11 +495,80 @@ export const DashboardMap: React.FC = () => {
                     </li>
                   </ul>
                 </div>
+
+                {/* TIFF Layer Controls */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Population Density (TIFF)</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="tiff-visible"
+                        checked={tiffVisible}
+                        onChange={e => setTiffVisible(e.target.checked)}
+                        className="mr-2"
+                      />
+                      <label htmlFor="tiff-visible">Show Population Density</label>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-sm font-medium">Year:</label>
+                      <div className="flex space-x-2">
+                        {['2010', '2015', '2020'].map(year => (
+                          <button
+                            type="button"
+                            key={year}
+                            onClick={() => {
+                              changeYear(year as '2010' | '2015' | '2020')
+                            }}
+                            className={`px-2 py-1 text-sm rounded ${
+                              tiffYear === year
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-200 text-gray-700'
+                            }`}
+                          >
+                            {year}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label htmlFor="tiff-opacity" className="text-sm font-medium">
+                        Opacity:
+                        {' '}
+                        {Math.round(tiffOpacity * 100)}
+                        %
+                      </label>
+                      <input
+                        type="range"
+                        id="tiff-opacity"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={tiffOpacity}
+                        onChange={e => setTiffOpacity(Number.parseFloat(e.target.value))}
+                        className="w-full"
+                      />
+                    </div>
+
+                    <div className="mt-2">
+                      <div className="w-full h-4 bg-gradient-to-r from-blue-500 via-green-500 to-red-500 rounded"></div>
+                      <div className="flex justify-between text-xs mt-1">
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <h3 className="text-lg font-semibold mb-2">About Assaba</h3>
                   <p className="text-sm">
                     Assaba is a region in southern Mauritania. This dashboard visualizes
                     districts, roads, and water bodies in the region using GeoJSON data.
+                    The population density layer shows demographic distribution across different years.
                   </p>
                 </div>
               </div>
