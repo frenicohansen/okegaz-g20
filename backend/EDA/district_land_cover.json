@@ -1,0 +1,16 @@
+{
+    "Aghorat": {
+        "LandCoverTypes": [
+            7,
+            10,
+            16,
+            255
+        ],
+        "LandCoverLabels": [
+            "Open Shrublands",
+            "Grasslands",
+            "Barren or Sparsely Vegetated",
+            "nan"
+        ],
+        "Years": [
+            
