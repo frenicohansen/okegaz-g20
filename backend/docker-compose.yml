@@ -6,15 +6,15 @@ services:
       context: .
       dockerfile: Dockerfile
     # -------- replace with comment to run with gunicorn --------
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8005 --reload
     # command: gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
     env_file:
       - ./src/.env
     # -------- replace with comment if you are using nginx --------
     ports:
-      - "8000:8000"
+      - "8005:8005"
     # expose:
-    #   - "8000"
+    #   - "8005"
     depends_on:
       - db
       - redis
@@ -55,19 +55,19 @@ services:
     expose:
       - "6379"
 
-  #-------- uncomment to run with pgadmin --------
-  # pgadmin:
-  #   container_name: pgadmin4
-  #   image: dpage/pgadmin4:latest
-  #   restart: always
-  #   ports:
-  #     - "5050:80"
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
-  #   env_file:
-  #     - ./src/.env
-  #   depends_on:
-  #     - db
+  # -------- uncomment to run with pgadmin --------
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:latest
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    env_file:
+      - ./src/.env
+    depends_on:
+      - db
 
   #-------- uncomment to run with nginx --------
   # nginx:
@@ -124,4 +124,4 @@ services:
 volumes:
   postgres-data:
   redis-data:
-  #pgadmin-data:
+  pgadmin-data:
