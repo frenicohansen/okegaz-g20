@@ -168,7 +168,7 @@ function getMapBaseLayers() {
     },
   })
 
-  return [satelliteLayer, regionLayer, roadLayer, waterLayer]
+  return [osmLayer, satelliteLayer, regionLayer, roadLayer, waterLayer]
 }
 
 function getDistrictLayer() {
