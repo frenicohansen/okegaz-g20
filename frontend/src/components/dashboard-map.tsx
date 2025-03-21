@@ -9,6 +9,15 @@ import { MapPanel } from "./map/panel";
 import { SearchDistrict } from "./search-district";
 import { Button } from "./ui/button";
 import { useData } from "@/context/DataContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import "ol/ol.css";
 
 export const DashboardMap: React.FC = () => {
@@ -19,14 +28,18 @@ export const DashboardMap: React.FC = () => {
     districtNames,
     layers,
     toggleLayerVisibility,
-    selectedYear,
-    setSelectedYear,
     selectedBase,
     setSelectedBase,
   } = useMap(mapRef);
 
-  const { chartData, scenarios, selectedScenario, setSelectedScenario } =
-    useData();
+  const {
+    chartData,
+    scenarios,
+    selectedScenario,
+    setSelectedScenario,
+    selectedYear,
+    setSelectedYear,
+  } = useData();
 
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>(
     {}
@@ -168,6 +181,7 @@ export const DashboardMap: React.FC = () => {
                   Details
                 </TabsTrigger>
               </TabsList>
+
               <TabsContent
                 value="info"
                 className="p-4 h-[calc(100vh-350px)] overflow-auto"
@@ -177,15 +191,27 @@ export const DashboardMap: React.FC = () => {
                     Loading district data...
                   </div>
                 ) : districtName && districtData.length > 0 ? (
-                  <DistrictProfile
-                    districtName={districtName}
-                    districtData={districtData}
-                    selectedYear={selectedYear}
-                    selectedScenario={selectedScenario}
-                    setSelectedScenario={setSelectedScenario}
-                    onYearChange={setSelectedYear}
-                    scenarios={scenarios}
-                  />
+                  <>
+                    <>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild className="mb-3">
+                          <Button variant="default" className="bg-emerald-600">
+                            Reference Year Pick
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56"></DropdownMenuContent>
+                      </DropdownMenu>
+                    </>
+                    <DistrictProfile
+                      districtName={districtName}
+                      districtData={districtData}
+                      selectedYear={selectedYear}
+                      selectedScenario={selectedScenario}
+                      setSelectedScenario={setSelectedScenario}
+                      onYearChange={setSelectedYear}
+                      scenarios={scenarios}
+                    />
+                  </>
                 ) : selectedDistrict ? (
                   <div>
                     <h3 className="text-lg font-semibold mb-2">

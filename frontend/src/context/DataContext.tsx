@@ -49,6 +49,8 @@ interface DataContextValue {
   setSelectedDistrict: React.Dispatch<React.SetStateAction<string>>;
   selectedScenario: string;
   setSelectedScenario: React.Dispatch<React.SetStateAction<string>>;
+  selectedReferenceYear: number;
+  setSelectedReferenceYear: React.Dispatch<React.SetStateAction<number>>;
 }
 
 // Create the context
@@ -64,6 +66,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   // Keep a separate piece of state for selected year
   const [selectedYear, setSelectedYear] = useState<number>(2010);
+  const [selectedReferenceYear, setSelectedReferenceYear] =
+    useState<number>(2023);
   const [selectedDistrict, setSelectedDistrict] = useState<string>("Assaba");
   const scenarios = [
     {
@@ -85,7 +89,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       id: "population",
       title: "Population",
       description: "Population",
-    }
+    },
   ];
 
   const groupedData = useMemo(() => {
@@ -101,6 +105,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
             precip: row["Precipitation (mm)"],
             population: row["Population Density (People/km²)"],
             landCover: row["LandCoverLabel"],
+            landLabel: row["LandCoverLabel"],
+            percentage: row["Percentage"],
           }));
       }) as {
       date: string;
@@ -122,6 +128,22 @@ export function DataProvider({ children }: { children: ReactNode }) {
           mobile: row["GPP (kg_C/m²/year)"],
           pop: row["Population Density (People/km²)"],
           land: row["PixelCount"],
+        }));
+      });
+  }, [data, selectedDistrict, selectedYear]);
+
+  const chartReferenceData = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows.map((row) => ({
+          date: `${row.Year}-01-01`,
+          desktop: row["Precipitation (mm)"],
+          mobile: row["GPP (kg_C/m²/year)"],
+          pop: row["Population Density (People/km²)"],
+          land: row["PixelCount"],
+          percentage: row["Percentage"],
         }));
       });
   }, [data, selectedDistrict, selectedYear]);
@@ -148,6 +170,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
         setSelectedDistrict,
         selectedScenario,
         setSelectedScenario,
+        selectedReferenceYear,
+        setSelectedReferenceYear,
       }}
     >
       {children}
