@@ -158,7 +158,6 @@ export function AreaChartInteractive({
             axisLine={false}
             tickCount={5}
             minTickGap={50}
-            onClick={() => console.log('clicked')}
             tickFormatter={(value) => {
               const date = new Date(value)
               return date.toLocaleDateString('en-US', {

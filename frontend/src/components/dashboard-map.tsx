@@ -78,8 +78,16 @@ export const DashboardMap: React.FC = () => {
       color: 'hsl(var(--chart-1))',
     },
     mobile: {
-      label: 'GPP',
+      label: 'GPP (kg_C/m²/year)',
       color: 'hsl(var(--chart-2))',
+    },
+    pop: {
+      label: 'Density (People/km²)',
+      color: 'hsl(var(--chart-3))',
+    },
+    land: {
+      label: 'Land Cover',
+      color: 'hsl(var(--chart-4))',
     },
   }
 
