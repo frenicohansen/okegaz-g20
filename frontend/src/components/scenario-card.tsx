@@ -3,21 +3,31 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/card";
+import type { Scenario } from "./district-profile";
 
-type CardProps = React.ComponentProps<typeof Card> & {
-  title: string
-  description: string
+interface ScenarioCardProps {
+  scenario: Scenario;
+  isSelected: boolean;
+  onSelectScenario: (id: string) => void;
 }
 
-export function ScenarioCard({ className, title, description, onClick, ...props }: CardProps) {
+export function ScenarioCard({
+  scenario,
+  isSelected,
+  onSelectScenario,
+}: ScenarioCardProps) {
   return (
-    <Card className={cn('rounded-none shadow-none', className)} {...props}>
+    <Card
+      onClick={() => onSelectScenario(scenario.id)}
+      className={`border p-4 cursor-pointer ${
+        isSelected ? "bg-emerald-100" : "bg-white"
+      }`}
+    >
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle>{scenario.title}</CardTitle>
+        <CardDescription>{scenario.description}</CardDescription>
       </CardHeader>
     </Card>
-  )
+  );
 }
