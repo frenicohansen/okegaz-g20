@@ -58,7 +58,7 @@ export const DashboardMap: React.FC = () => {
     return null;
   }
 
-  const { memoizedDistrictRows } = dataContext;
+  const { chartData } = dataContext;
 
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>(
     {}
@@ -153,7 +153,7 @@ export const DashboardMap: React.FC = () => {
           <div className="bg-white">
             <AreaChartInteractive
               chartConfig={chartConfig}
-              chartData={memoizedDistrictRows}
+              chartData={chartData}
               selectedScenario={selectedScenario}
             />
           </div>

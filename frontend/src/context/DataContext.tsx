@@ -33,7 +33,8 @@ export type DistrictDataMap = Record<string, DistrictDataRow[]>;
 
 // The shape of your Context's value
 interface DataContextValue {
-  memoizedDistrictRows: ChartData[]; // Add this line
+  groupedData: ChartData[]; // Add this line
+  chartData: ChartData[];
   setData: React.Dispatch<React.SetStateAction<DistrictDataMap>>;
   selectedYear: number;
   setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
@@ -49,27 +50,57 @@ export const DataContext = createContext<DataContextValue | undefined>(
 export function DataProvider({ children }: { children: ReactNode }) {
   // Initialize with DistrictData right away
   const [data, setData] = useState<DistrictDataMap>(DistrictData);
-
+  
   // If you'd like to memoize the data reference:
 
   // Keep a separate piece of state for selected year
   const [selectedYear, setSelectedYear] = useState<number>(2010);
   const [selectedDistrict, setSelectedDistrict] = useState<string>("Assaba");
 
-  const memoizedDistrictRows = useMemo(() => {
-    // Get the data for the selected district
-    return []
-  }, [selectedDistrict]);
+  const groupedData = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows
+          .filter((row) => row.Year === selectedYear)
+          .map((row) => ({
+            date: `${row.Year}-01-01`,
+            desktop: row["Precipitation (mm)"],
+            mobile: row["GPP (kg_C/m²/year)"],
+          }));
+      });
+  }, [data, selectedDistrict, selectedYear]);
+
+  const chartData  = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows
+          .map((row) => ({
+            date: `${row.Year}-01-01`,
+            desktop: row["Precipitation (mm)"],
+            mobile: row["GPP (kg_C/m²/year)"],
+          }));
+      });
+  }, [data, selectedDistrict, selectedYear]);
+  
 
   useEffect(() => {
     console.log("selectedDistrict changed to:", selectedDistrict);
   }, [selectedDistrict]);
 
+  useEffect(() => {
+    console.log("data: ", groupedData)
+  }, [selectedDistrict])
+
   return (
     <DataContext.Provider
       value={{
         // Provide the memoizedData so consumer re-renders only when 'data' changes
-        memoizedDistrictRows,
+        groupedData,
+        chartData,
         setData,
         selectedYear,
         setSelectedYear,
