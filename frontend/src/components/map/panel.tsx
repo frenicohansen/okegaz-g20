@@ -1,5 +1,6 @@
 'use client'
 
+import type { BasicLayerInfo } from '@/hooks/use-map'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ChevronDown, Info, Layers } from 'lucide-react'
@@ -8,14 +9,16 @@ import { Switch } from '../ui/switch'
 import LayerLegend from './legend'
 
 interface MapPanelProps {
-  layers: any[]
+  layers: BasicLayerInfo[]
   toggleLayer: (title: string) => void
+  selectedBase: string
+  setSelectedBase: (title: string) => void
 }
 
-export function MapPanel({ layers, toggleLayer }: MapPanelProps) {
+export function MapPanel({ layers, toggleLayer, selectedBase, setSelectedBase }: MapPanelProps) {
   const [activeTab, setActiveTab] = useState('layers')
-  const baseLayers = layers.filter(layer => layer.get('type') === 'base')
-  const overlayLayers = layers.filter(layer => layer.get('type') === 'overlay')
+  const baseLayers = layers.filter(layer => layer.type === 'base')
+  const overlayLayers = layers.filter(layer => layer.type === 'overlay')
 
   return (
     <div className="absolute bottom-2 left-2 z-10 w-72 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
@@ -45,15 +48,18 @@ export function MapPanel({ layers, toggleLayer }: MapPanelProps) {
             <CollapsibleContent className="px-2 py-1 bg-gray-50/50">
               <div className="space-y-2">
                 {baseLayers.map(layer => (
-                  <div key={layer.get('title')} className="flex items-center justify-between p-1.5 rounded hover:bg-white/80">
+                  <div key={layer.title} className="flex items-center justify-between p-1.5 rounded hover:bg-white/80">
                     <div className="flex items-center gap-2 min-w-0">
                       <Layers size={16} className="text-blue-500" />
-                      <span className="text-sm truncate">{layer.get('title')}</span>
+                      <span className="text-sm truncate">{layer.title}</span>
                     </div>
                     <div className="flex items-center">
                       <Switch
-                        checked={layer.getVisible()}
-                        onCheckedChange={() => toggleLayer(layer.get('title'))}
+                        checked={selectedBase === layer.title}
+                        onCheckedChange={() => {
+                          setSelectedBase(layer.title)
+                          toggleLayer(layer.title)
+                        }}
                       />
                     </div>
                   </div>
@@ -74,15 +80,15 @@ export function MapPanel({ layers, toggleLayer }: MapPanelProps) {
             <CollapsibleContent className="px-2 py-1 bg-gray-50/50">
               <div className="space-y-2">
                 {overlayLayers.map(layer => (
-                  <div key={layer.get('title')} className="flex items-center justify-between p-1.5 rounded hover:bg-white/80">
+                  <div key={layer.title} className="flex items-center justify-between p-1.5 rounded hover:bg-white/80">
                     <div className="flex items-center gap-2 min-w-0">
                       <Layers size={16} className="text-purple-500" />
-                      <span className="text-sm truncate">{layer.get('title')}</span>
+                      <span className="text-sm truncate">{layer.title}</span>
                     </div>
                     <div className="flex items-center">
                       <Switch
-                        checked={layer.getVisible()}
-                        onCheckedChange={() => toggleLayer(layer.get('title'))}
+                        checked={layer.visible}
+                        onCheckedChange={() => toggleLayer(layer.title)}
                       />
                     </div>
                   </div>
@@ -98,7 +104,7 @@ export function MapPanel({ layers, toggleLayer }: MapPanelProps) {
             ? (
                 <div className="space-y-4">
                   {overlayLayers.map(layer => (
-                    <LayerLegend key={layer.get('title')} layer={layer} />
+                    <LayerLegend key={layer.title} layer={layer} />
                   ))}
                 </div>
               )
