@@ -1,21 +1,45 @@
-import type { GeoJSONFeature } from "ol/format/GeoJSON";
-import type { RefObject } from "react";
-import LayerSwitcher from "ol-layerswitcher";
-import { defaults as defaultControls } from "ol/control";
-import { click } from "ol/events/condition";
-import GeoJSON from "ol/format/GeoJSON";
-import Select from "ol/interaction/Select";
-import TileLayer from "ol/layer/Tile";
-import VectorLayer from "ol/layer/Vector";
-import WebGLTileLayer from "ol/layer/WebGLTile";
-import Map from "ol/Map";
-import { fromLonLat } from "ol/proj";
-import { OSM, XYZ } from "ol/source";
-import GeoTIFF from "ol/source/GeoTIFF";
-import VectorSource from "ol/source/Vector";
-import { Fill, Stroke, Style } from "ol/style";
-import View from "ol/View";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { GeoJSONFeature } from 'ol/format/GeoJSON'
+import type { RefObject } from 'react'
+import { defaults as defaultControls } from 'ol/control'
+import { click } from 'ol/events/condition'
+import GeoJSON from 'ol/format/GeoJSON'
+import Select from 'ol/interaction/Select'
+import TileLayer from 'ol/layer/Tile'
+import VectorLayer from 'ol/layer/Vector'
+import WebGLTileLayer from 'ol/layer/WebGLTile'
+import Map from 'ol/Map'
+import { fromLonLat } from 'ol/proj'
+import { OSM, XYZ } from 'ol/source'
+import GeoTIFF from 'ol/source/GeoTIFF'
+import VectorSource from 'ol/source/Vector'
+import { Fill, Stroke, Style } from 'ol/style'
+import View from 'ol/View'
+import { useEffect, useMemo, useRef, useState } from 'react'
+
+export type StyleKey = keyof typeof styles
+export const styles = {
+  Region: {
+    title: 'Region',
+    fill: 'rgba(255, 255, 204, 0.2)',
+    stroke: '#cc9933',
+  },
+  Roads: {
+    title: 'Roads',
+    fill: '#ffffff',
+    stroke: '#ff3333',
+  },
+  Water: {
+    title: 'Water',
+    fill: 'rgba(51, 153, 255, 0.5)',
+    stroke: '#0066cc',
+  },
+  Districts: {
+    title: 'Districts',
+    fill: 'rgba(204, 204, 255, 0.3)',
+    stroke: '#6666cc',
+  },
+}
+
 import { useData } from "@/context/DataContext";
 
 const scenarios = [
@@ -48,11 +72,12 @@ function createTiffLayer(
         url,
       },
     ],
-  });
+    projection: 'EPSG:4326',
+  })
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: false,
+    visible: true,
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
@@ -121,32 +146,31 @@ function getMapBaseLayers() {
 
   const regionStyle = new Style({
     fill: new Fill({
-      color: "rgba(255, 255, 204, 0.2)",
+      color: styles.Region.fill,
     }),
     stroke: new Stroke({
-      color: "#cc9933",
+      color: styles.Region.stroke,
       width: 3,
     }),
   });
 
   const roadStyle = new Style({
     stroke: new Stroke({
-      color: "#ff3333",
+      color: styles.Roads.stroke,
       width: 2,
     }),
   });
 
   const waterStyle = new Style({
     fill: new Fill({
-      color: "rgba(51, 153, 255, 0.5)",
+      color: styles.Water.fill,
     }),
     stroke: new Stroke({
-      color: "#0066cc",
+      color: styles.Water.stroke,
       width: 1,
     }),
   });
 
-  // Create base layers (only one can be visible at a time)
   const osmLayer = new TileLayer({
     source: new OSM(),
     properties: {
@@ -241,6 +265,12 @@ function getSelectedStyle() {
   ];
 }
 
+export interface BasicLayerInfo {
+  title: string
+  visible: boolean
+  type: 'base' | 'overlay'
+}
+
 export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [map, setMap] = useState<Map | null>(null);
 
@@ -253,10 +283,20 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [districtNames, setDistrictNames] = useState<string[]>([]);
   const districtSourceRef = useRef<VectorSource | null>(null);
 
-  const baseLayers = useMemo(() => getMapBaseLayers(), []);
-  const districtLayer = useMemo(() => getDistrictLayer(), []);
-  const selectedStyle = useMemo(() => getSelectedStyle(), []);
-  const tiffLayers = useMemo(() => getTiffLayers(tiffOpacity), [tiffOpacity]);
+  const baseLayers = useMemo(() => getMapBaseLayers(), [])
+  const districtLayer = useMemo(() => getDistrictLayer(), [])
+  const selectedStyle = useMemo(() => getSelectedStyle(), [])
+  const tiffLayers = useMemo(() => getTiffLayers(tiffOpacity), [tiffOpacity])
+  const [layers, setLayers] = useState<BasicLayerInfo[]>([])
+  const [selectedBase, setSelectedBase] = useState('OpenStreetMap')
+
+  useEffect(() => {
+    setLayers([
+      ...baseLayers.map(layer => ({ title: layer.get('title'), visible: layer.getVisible(), type: layer.get('type') })),
+      { title: districtLayer.get('title'), visible: districtLayer.getVisible(), type: districtLayer.get('type') },
+    ])
+  }, [baseLayers, districtLayer])
+
   const { setSelectedDistrict: setSelectedDistrictStr } = useData();
 
   useEffect(() => {
@@ -283,6 +323,18 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       }
     };
   }, [baseLayers, mapRef]);
+
+
+  useEffect(() => {
+    if (!map)
+      return
+
+    map.getLayers().forEach((layer) => {
+      if (layer.get('type') === 'base') {
+        layer.setVisible(layer.get('title') === selectedBase)
+      }
+    })
+  }, [map, selectedBase])
 
   useEffect(() => {
     if (!map) return;
@@ -375,21 +427,6 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     };
   }, [map, tiffLayers, selectedYear]);
 
-  useEffect(() => {
-    if (!map) return;
-
-    const layerSwitcher = new LayerSwitcher({
-      tipLabel: "Legend",
-      groupSelectStyle: "group",
-      reverse: true,
-    });
-    map.addControl(layerSwitcher);
-
-    return () => {
-      if (map) map.removeControl(layerSwitcher);
-    };
-  }, [map]);
-
   // Function to search for a district by name and zoom to it
   const searchDistrict = (query: string) => {
     if (!map || !districtSourceRef.current) return;
@@ -425,10 +462,33 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     } else {
       console.warn("District not found:", query);
     }
-  };
+  }
+
+  const toggleLayerVisibility = (layerTitle: string) => {
+    if (map) {
+      map.getAllLayers().forEach((layer) => {
+        const title = layer.getProperties().title
+        if (title === layerTitle && layer.get('type') === 'overlay') {
+          layer.setVisible(!layer.getVisible())
+          setLayers((prevLayers) => {
+            return prevLayers.map((prevLayer) => {
+              if (prevLayer.title === layerTitle) {
+                return { ...prevLayer, visible: layer.getVisible() }
+              }
+              return prevLayer
+            })
+          })
+        }
+      })
+    }
+  }
 
   return {
     scenarios,
+    layers,
+    selectedBase,
+    setSelectedBase,
+    toggleLayerVisibility,
     selectedDistrict,
     selectedScenario,
     setSelectedScenario,
@@ -438,5 +498,5 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     setSelectedYear,
     searchDistrict,
     districtNames,
-  };
+  }
 }

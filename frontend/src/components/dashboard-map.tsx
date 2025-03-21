@@ -1,11 +1,14 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useMap } from '@/hooks/use-map'
+import { Info, Map as MapIcon } from 'lucide-react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
+import { DistrictDetail } from './district-details'
+import { DistrictProfile } from './district-profile'
+import { MapPanel } from './map/panel'
+import { SearchDistrict } from './search-district'
+import 'ol/ol.css'
 // dashboard-map.tsx
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useMap } from "@/hooks/use-map";
-import { Info, Map as MapIcon } from "lucide-react";
-import React, { useEffect, useRef, useState, useContext } from "react";
-import { DistrictDetail } from "./district-details";
-import { DistrictProfile } from "./district-profile";
-import { SearchDistrict } from "./search-district";
+
 import { AreaChartInteractive } from "./charts/area-chart";
 import { DataContext } from "@/context/DataContext";
 /**
@@ -40,8 +43,12 @@ export const DashboardMap: React.FC = () => {
     setSelectedScenario,
     searchDistrict,
     districtNames,
+    layers,
+    toggleLayerVisibility,
     selectedYear,
     setSelectedYear,
+    selectedBase,
+    setSelectedBase,
   } = useMap(mapRef);
 
   const dataContext = useContext(DataContext);
@@ -150,6 +157,13 @@ export const DashboardMap: React.FC = () => {
               selectedScenario={selectedScenario}
             />
           </div>
+
+          <MapPanel
+            selectedBase={selectedBase}
+            setSelectedBase={setSelectedBase}
+            layers={layers}
+            toggleLayer={toggleLayerVisibility}
+          />
         </div>
 
         {/* Details Panel - Increased size for better visibility */}
