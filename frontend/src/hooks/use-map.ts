@@ -47,11 +47,12 @@ function createTiffLayer(name: string, url: string, year: number, tiffOpacity: n
         url,
       },
     ],
+    projection: 'EPSG:4326',
   })
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: false,
+    visible: true,
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
