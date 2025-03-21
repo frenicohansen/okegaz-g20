@@ -18,6 +18,8 @@ export const DashboardMap: React.FC = () => {
     toggleLayerVisibility,
     selectedYear,
     setSelectedYear,
+    selectedBase,
+    setSelectedBase,
   } = useMap(mapRef)
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -91,6 +93,8 @@ export const DashboardMap: React.FC = () => {
           </div>
 
           <MapPanel
+            selectedBase={selectedBase}
+            setSelectedBase={setSelectedBase}
             layers={layers}
             toggleLayer={toggleLayerVisibility}
           />

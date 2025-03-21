@@ -1,12 +1,12 @@
-import type { StyleKey } from '@/hooks/use-map'
+import type { BasicLayerInfo, StyleKey } from '@/hooks/use-map'
 import { styles } from '@/hooks/use-map'
 
 interface MapLegendProps {
-  layer: any
+  layer: BasicLayerInfo
 }
 
 export default function MapLegend({ layer }: MapLegendProps) {
-  const title = layer.get('title') as StyleKey
+  const title = layer.title as StyleKey
   return (
     <div className="flex items-center space-x-2">
       <div

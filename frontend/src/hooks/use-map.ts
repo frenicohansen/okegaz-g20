@@ -121,7 +121,6 @@ function getMapBaseLayers() {
     }),
   })
 
-  // Create base layers (only one can be visible at a time)
   const osmLayer = new TileLayer({
     source: new OSM(),
     properties: {
@@ -216,6 +215,12 @@ function getSelectedStyle() {
   ]
 }
 
+export interface BasicLayerInfo {
+  title: string
+  visible: boolean
+  type: 'base' | 'overlay'
+}
+
 export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [map, setMap] = useState<Map | null>(null)
 
@@ -230,7 +235,15 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const districtLayer = useMemo(() => getDistrictLayer(), [])
   const selectedStyle = useMemo(() => getSelectedStyle(), [])
   const tiffLayers = useMemo(() => getTiffLayers(tiffOpacity), [tiffOpacity])
-  const [layers] = useState([...baseLayers, districtLayer])
+  const [layers, setLayers] = useState<BasicLayerInfo[]>([])
+  const [selectedBase, setSelectedBase] = useState('OpenStreetMap')
+
+  useEffect(() => {
+    setLayers([
+      ...baseLayers.map(layer => ({ title: layer.get('title'), visible: layer.getVisible(), type: layer.get('type') })),
+      { title: districtLayer.get('title'), visible: districtLayer.getVisible(), type: districtLayer.get('type') },
+    ])
+  }, [baseLayers, districtLayer])
 
   useEffect(() => {
     if (!mapRef.current)
@@ -257,6 +270,17 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       }
     }
   }, [baseLayers, mapRef])
+
+  useEffect(() => {
+    if (!map)
+      return
+
+    map.getLayers().forEach((layer) => {
+      if (layer.get('type') === 'base') {
+        layer.setVisible(layer.get('title') === selectedBase)
+      }
+    })
+  }, [map, selectedBase])
 
   useEffect(() => {
     if (!map)
@@ -384,7 +408,22 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }
 
   const toggleLayerVisibility = (layerTitle: string) => {
-    // toggle the layer visibility
+    if (map) {
+      map.getAllLayers().forEach((layer) => {
+        const title = layer.getProperties().title
+        if (title === layerTitle && layer.get('type') === 'overlay') {
+          layer.setVisible(!layer.getVisible())
+          setLayers((prevLayers) => {
+            return prevLayers.map((prevLayer) => {
+              if (prevLayer.title === layerTitle) {
+                return { ...prevLayer, visible: layer.getVisible() }
+              }
+              return prevLayer
+            })
+          })
+        }
+      })
+    }
   }
 
   return {
@@ -397,5 +436,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     districtNames,
     layers,
     toggleLayerVisibility,
+    selectedBase,
+    setSelectedBase,
   }
 }
