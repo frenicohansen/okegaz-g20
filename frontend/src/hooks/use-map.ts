@@ -384,7 +384,15 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }
 
   const toggleLayerVisibility = (layerTitle: string) => {
-    // toggle the layer visibility
+    if (!map)
+      return
+
+    map.getLayers().forEach((layer) => {
+      if (layer.get('type') === 'base') {
+        // Show the clicked one, hide all other base layers
+        layer.setVisible(layer.get('title') === layerTitle)
+      }
+    })
   }
 
   return {

@@ -25,6 +25,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { DistrictReport } from './district-report'
 
 // Types for metrics
 type MetricType = 'precip' | 'gpp' | 'popDensity'
@@ -58,6 +59,23 @@ export function ComparisonTools() {
 
   // Merge district data for the selected metric
   const mergedData = mergeDistrictData(selectedDistricts, selectedMetric)
+
+  // Transform data for DistrictReport component
+  const transformDataForReport = (
+    data: Record<string, number | number[]>[],
+    districtName: string,
+  ): any[] => {
+    if (!data.length || !selectedDistricts.length)
+      return []
+
+    // Find the selected district's data
+    const districtData = selectedDistricts.find(d => d.districtName === districtName)
+    if (!districtData)
+      return []
+
+    // Return the original district data which matches the expected format
+    return districtData.data
+  }
 
   return (
     <div ref={printRef} className="p-4 space-y-4">
@@ -109,6 +127,13 @@ export function ComparisonTools() {
           </Select>
         </div>
       </div>
+
+      {selectedDistricts.length > 0 && mergedData.length > 0 && (
+        <DistrictReport
+          districtData={transformDataForReport(mergedData, selectedDistricts[0]?.districtName || '')}
+          districtName={selectedDistricts[0]?.districtName || ''}
+        />
+      )}
 
       {/* Selected Districts */}
       {selectedDistricts.length > 0 && (
