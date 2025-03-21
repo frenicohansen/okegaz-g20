@@ -1,11 +1,11 @@
-import { DistrictProfile } from '@/components/district-profile'
-import { MapPanel } from '@/components/map/panel'
-import { SearchDistrict } from '@/components/search-district'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useMap } from '@/hooks/use-map'
 import { Info, Map as MapIcon } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { DistrictDetail } from './district-details'
+import { DistrictProfile } from './district-profile'
+import { MapPanel } from './map/panel'
+import { SearchDistrict } from './search-district'
 import 'ol/ol.css'
 
 export const DashboardMap: React.FC = () => {
@@ -77,16 +77,23 @@ export const DashboardMap: React.FC = () => {
   }, [districtData, setSelectedYear])
 
   return (
-    <div className="flex flex-col h-[calc(100vh-120px)]">
-      <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2 relative">
-          {/* Search bar positioned on top of the map */}
-          <div className="absolute top-2 left-2 right-2 z-10">
-            <SearchDistrict districts={districtNames.map(name => ({ value: name, label: name }))} onSelect={searchDistrict} value={getDistrictName() ?? ''} />
+    <div className="flex flex-col h-screen">
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Map Container - Reduced size for better UI balance */}
+        <div className="w-full md:w-1/2 lg:w-3/5 h-[40vh] md:h-full relative">
+          <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200" />
+          <div className="absolute top-4 left-4 z-10 bg-white rounded-md shadow-md p-2 max-w-xs">
+            <SearchDistrict
+              districts={districtNames.map(district => ({ value: district, label: district }))}
+              value={districtName || ''}
+              onSelect={searchDistrict}
+            />
           </div>
 
-          <MapPanel layers={layers} toggleLayer={toggleLayerVisibility} />
-          <div ref={mapRef} className="w-full h-full rounded-lg overflow-hidden border border-gray-200"></div>
+          <MapPanel
+            layers={layers}
+            toggleLayer={toggleLayerVisibility}
+          />
         </div>
 
         {/* Details Panel - Increased size for better visibility */}
