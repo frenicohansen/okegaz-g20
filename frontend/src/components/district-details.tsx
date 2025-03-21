@@ -1,19 +1,23 @@
-// Shadcn UI components (using your own implementations; see for example your card.tsx and table.tsx in the repository :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1})
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { ChartConfig } from './ui/chart'
 
+// Shadcn UI components (using your own implementations; see for example your card.tsx and table.tsx in the repository :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1})
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
   TableBody,
   TableCell,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { useEffect, useState } from "react";
+} from '@/components/ui/table'
 
+import { useData } from '@/context/DataContext'
+
+import { useEffect, useState } from 'react'
 import {
   Bar,
   BarChart,
   CartesianGrid,
+  LabelList,
   Legend,
   Line,
   LineChart,
@@ -21,50 +25,64 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts";
-
-import { useData } from "@/context/DataContext";
+} from 'recharts'
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart'
 
 // Define the type for the raw district data from district_data.json
 interface DistrictDataRow {
-  Year: number;
-  District: string;
-  LandCoverClass: number;
-  PixelCount: number;
-  Percentage: number;
-  LandCoverLabel: string | null;
-  "Precipitation (mm)": number | null;
-  "GPP (kg_C/m²/year)": number | null;
-  "Population Density (People/km²)": number | null;
+  'Year': number
+  'District': string
+  'LandCoverClass': number
+  'PixelCount': number
+  'Percentage': number
+  'LandCoverLabel': string | null
+  'Precipitation (mm)': number | null
+  'GPP (kg_C/m²/year)': number | null
+  'Population Density (People/km²)': number | null
 }
 
 // Define the type for processed data we'll use in charts
 interface ProcessedDistrictData {
-  year: number;
-  openShrublands: number;
-  grasslands: number;
-  croplands: number;
-  barren: number;
-  unknown: number;
-  precip: number;
-  gpp: number;
-  popDensity: number;
-  isSelected: boolean;
+  year: number
+  openShrublands: number
+  grasslands: number
+  croplands: number
+  barren: number
+  unknown: number
+  precip: number
+  gpp: number
+  popDensity: number
+  isSelected: boolean
 }
 
 interface DistrictDetailProps {
-  districtData: DistrictDataRow[];
-  districtName: string | null;
-  selectedYear?: number;
-  onYearChange?: (year: number) => void;
+  districtData: DistrictDataRow[]
+  districtName: string | null
+  selectedYear?: number
+  onYearChange?: (year: number) => void
 }
+
+const chartConfig = {
+  precip: {
+    label: 'Precipitation(mm)',
+    color: 'hsl(var(--chart-1))',
+  },
+  gpp: {
+    label: 'GPP (kg_C/m²/year)',
+    color: 'hsl(var(--chart-2))',
+  },
+  popDensity: {
+    label: 'Population Density (People/km²)',
+    color: 'hsl(var(--chart-3))',
+  },
+} satisfies ChartConfig
 
 // Helper function to safely get a number value
 function safeNumber(value: number | null | undefined): number {
   if (value === null || value === undefined || Number.isNaN(Number(value))) {
-    return 0;
+    return 0
   }
-  return Number(value);
+  return Number(value)
 }
 
 export function DistrictDetail({
@@ -72,28 +90,29 @@ export function DistrictDetail({
   districtName,
   onYearChange,
 }: DistrictDetailProps) {
-  const { selectedYear, groupedData, setSelectedYear } = useData();
+  const { selectedYear, groupedData, setSelectedYear } = useData()
   const [processedData, setProcessedData] = useState<ProcessedDistrictData[]>(
-    []
-  );
-  const [availableYears, setAvailableYears] = useState<number[]>([]);
+    [],
+  )
+  const [availableYears, setAvailableYears] = useState<number[]>([])
 
   // Process the raw district data into a format suitable for charts
   useEffect(() => {
+    console.log(processedData)
     if (!districtData || districtData.length === 0) {
-      setProcessedData([]);
-      return;
+      setProcessedData([])
+      return
     }
 
     // Extract unique years from the district data
-    const years = [...new Set(districtData.map((item) => item.Year))].sort(
-      (a, b) => a - b
-    );
-    setAvailableYears(years);
+    const years = [...new Set(districtData.map(item => item.Year))].sort(
+      (a, b) => a - b,
+    )
+    setAvailableYears(years)
 
     // Group data by year
     const dataByYear = districtData.reduce<Record<number, any>>((acc, item) => {
-      const year = item.Year;
+      const year = item.Year
       if (!acc[year]) {
         acc[year] = {
           year,
@@ -102,42 +121,47 @@ export function DistrictDetail({
           croplands: 0,
           barren: 0,
           unknown: 0,
-          precip: safeNumber(item["Precipitation (mm)"]),
-          gpp: safeNumber(item["GPP (kg_C/m²/year)"]),
-          popDensity: safeNumber(item["Population Density (People/km²)"]),
+          precip: safeNumber(item['Precipitation (mm)']),
+          gpp: safeNumber(item['GPP (kg_C/m²/year)']),
+          popDensity: safeNumber(item['Population Density (People/km²)']),
           isSelected: selectedYear === year,
-        };
+        }
       }
 
       // Add land cover percentages based on label
-      const label = (item.LandCoverLabel || "").toLowerCase();
-      if (label.includes("shrub")) {
-        acc[year].openShrublands += item.Percentage;
-      } else if (label.includes("grass")) {
-        acc[year].grasslands += item.Percentage;
-      } else if (label.includes("crop")) {
-        acc[year].croplands += item.Percentage;
-      } else if (label.includes("barren") || label.includes("sparse")) {
-        acc[year].barren += item.Percentage;
-      } else {
-        acc[year].unknown += item.Percentage;
+      const label = item.LandCoverLabel || ''
+      console.log(label)
+      if (label === 'Open Shrublands') {
+        acc[year].openShrublands += item.Percentage
+      }
+      else if (label === 'Grasslands') {
+        acc[year].grasslands += item.Percentage
+      }
+      else if (label === 'Croplands') {
+        acc[year].croplands += item.Percentage
+      }
+      else if (label === 'Barren or Sparsely Vegetated') {
+        acc[year].barren += item.Percentage
+      }
+      else {
+        acc[year].unknown += item.Percentage
       }
 
-      return acc;
-    }, {});
+      return acc
+    }, {})
 
     // Convert to array and sort by year
-    const processed = Object.values(dataByYear).sort((a, b) => a.year - b.year);
-    setProcessedData(processed);
-  }, [districtData, selectedYear]);
+    const processed = Object.values(dataByYear).sort((a, b) => a.year - b.year)
+    setProcessedData(processed)
+  }, [districtData, selectedYear])
 
   // Filter data based on the selected year
   const filteredData = selectedYear
-    ? processedData.filter((item) => item.year === selectedYear)
-    : processedData;
+    ? processedData.filter(item => item.year === selectedYear)
+    : processedData
 
   // Filter raw data based on the selected year
-  const filteredRawData = districtData.sort((a, b) => a.Year - b.Year);
+  const filteredRawData = districtData.sort((a, b) => a.Year - b.Year)
 
   if (!districtName) {
     return (
@@ -147,13 +171,15 @@ export function DistrictDetail({
           Please select a district on the map to view detailed information.
         </p>
       </div>
-    );
+    )
   }
 
   return (
     <div className="p-4 space-y-6">
       <h2 className="text-2xl font-bold">
-        {districtName} District Details
+        {districtName}
+        {' '}
+        District Details
         {selectedYear && ` (${selectedYear})`}
       </h2>
       <p className="text-muted-foreground">
@@ -177,7 +203,7 @@ export function DistrictDetail({
             <CardHeader>
               <CardTitle>
                 Land Cover Distribution
-                {selectedYear ? `(${selectedYear})` : "Over Time"}
+                {selectedYear ? `(${selectedYear})` : 'Over Time'}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -190,9 +216,8 @@ export function DistrictDetail({
                   <XAxis dataKey="year" />
                   <YAxis />
                   <Tooltip
-                    formatter={(value) =>
-                      typeof value === "number" ? `${value.toFixed(2)}%` : value
-                    }
+                    formatter={value =>
+                      typeof value === 'number' ? `${value.toFixed(2)}%` : value}
                   />
                   <Legend />
                   <Bar
@@ -222,12 +247,12 @@ export function DistrictDetail({
             <CardHeader>
               <CardTitle>
                 Environmental Metrics
-                {selectedYear ? `(${selectedYear})` : "Over Time"}
+                {selectedYear ? `(${selectedYear})` : 'Over Time'}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart
+                <BarChart
                   data={filteredData}
                   margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
                 >
@@ -235,30 +260,26 @@ export function DistrictDetail({
                   <XAxis dataKey="year" />
                   <YAxis />
                   <Tooltip
-                    formatter={(value) =>
-                      typeof value === "number" ? value.toFixed(2) : value
-                    }
+                    formatter={value =>
+                      typeof value === 'number' ? `${value.toFixed(2)}%` : value}
                   />
                   <Legend />
-                  <Line
-                    type="monotone"
+                  <Bar
                     dataKey="precip"
-                    stroke="#8884d8"
+                    fill="#8884d8"
                     name="Precipitation (mm)"
                   />
-                  <Line
-                    type="monotone"
+                  <Bar
                     dataKey="gpp"
-                    stroke="#82ca9d"
+                    fill="#82ca9d"
                     name="GPP (kg_C/m²/year)"
                   />
-                  <Line
-                    type="monotone"
+                  <Bar
                     dataKey="popDensity"
-                    stroke="#ff7300"
+                    fill="#ff8042"
                     name="Population Density (People/km²)"
                   />
-                </LineChart>
+                </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
@@ -268,7 +289,7 @@ export function DistrictDetail({
             <CardHeader>
               <CardTitle>
                 Raw Data
-                {selectedYear ? `(${selectedYear})` : ""}
+                {selectedYear ? `(${selectedYear})` : ''}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -291,16 +312,19 @@ export function DistrictDetail({
                         <TableCell>
                           {row.LandCoverLabel || `Class ${row.LandCoverClass}`}
                         </TableCell>
-                        <TableCell>{row.Percentage.toFixed(2)}%</TableCell>
                         <TableCell>
-                          {row["Precipitation (mm)"]?.toFixed(2) || "N/A"}
+                          {row.Percentage.toFixed(2)}
+                          %
                         </TableCell>
                         <TableCell>
-                          {row["GPP (kg_C/m²/year)"]?.toFixed(2) || "N/A"}
+                          {row['Precipitation (mm)']?.toFixed(2) || 'N/A'}
                         </TableCell>
                         <TableCell>
-                          {row["Population Density (People/km²)"]?.toFixed(2) ||
-                            "N/A"}
+                          {row['GPP (kg_C/m²/year)']?.toFixed(2) || 'N/A'}
+                        </TableCell>
+                        <TableCell>
+                          {row['Population Density (People/km²)']?.toFixed(2)
+                            || 'N/A'}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -312,5 +336,5 @@ export function DistrictDetail({
         </>
       )}
     </div>
-  );
+  )
 }
