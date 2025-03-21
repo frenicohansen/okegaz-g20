@@ -58,21 +58,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const memoizedDistrictRows = useMemo(() => {
     // Get the data for the selected district
-    const districtData = data[selectedDistrict];
-
-    // Filter the data for the selected year
-    const districtDataForYear = districtData.filter(
-      (row) => row.Year === selectedYear
-    );
-
-    // Transform the data into the format used by Recharts
-    const chartData = districtDataForYear.map((row) => ({
-      date: row.District,
-      desktop: row["Population Density (People/km²)"],
-      mobile: row["GPP (kg_C/m²/year)"],
-    }));
-
-    return chartData;
+    return []
   }, [selectedDistrict]);
 
   useEffect(() => {
