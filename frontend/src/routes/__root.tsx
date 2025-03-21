@@ -39,7 +39,7 @@ function Logo() {
         animate={{ opacity: 1 }}
         className="font-medium text-black dark:text-white whitespace-pre"
       >
-        G20 Global Land Initiative
+        Saheel X G20 Innovative
       </motion.span>
     </Link>
   )
