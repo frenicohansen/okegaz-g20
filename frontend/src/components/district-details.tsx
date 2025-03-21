@@ -82,7 +82,6 @@ export function DistrictDetail({
   useEffect(() => {
     if (!districtData || districtData.length === 0) {
       setProcessedData([]);
-      setAvailableYears([]);
       return;
     }
 
@@ -138,10 +137,7 @@ export function DistrictDetail({
     : processedData;
 
   // Filter raw data based on the selected year
-  const filteredRawData = selectedYear
-    ? districtData.filter((item) => item.Year === selectedYear)
-    : districtData;
-
+  const filteredRawData = districtData.sort((a, b) => a.Year - b.Year);
 
   if (!districtName) {
     return (

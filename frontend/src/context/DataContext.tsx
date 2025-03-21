@@ -40,6 +40,8 @@ interface DataContextValue {
     precip: number;
     population: number;
     landCover: string | null;
+    landLabel: string | null;
+    percentage: number;
   }[]; // Adjusted type
   chartData: ChartData[];
   setData: React.Dispatch<React.SetStateAction<DistrictDataMap>>;
@@ -51,6 +53,15 @@ interface DataContextValue {
   setSelectedScenario: React.Dispatch<React.SetStateAction<string>>;
   selectedReferenceYear: number;
   setSelectedReferenceYear: React.Dispatch<React.SetStateAction<number>>;
+  groupedReferenceData: {
+    date: string;
+    gpp: number;
+    precip: number;
+    population: number;
+    landCover: string | null;
+    landLabel: string | null;
+    percentage: number;
+  }[]; // Adjusted type;
 }
 
 // Create the context
@@ -71,9 +82,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [selectedDistrict, setSelectedDistrict] = useState<string>("Assaba");
   const scenarios = [
     {
-      id: "carbon",
-      title: "Carbon absorbtion",
-      description: "Carbon absorbtion",
+      id: "land",
+      title: "Land Degradation Rate",
+      description: "Land degradation rate in the district",
     },
     {
       id: "climate",
@@ -81,13 +92,23 @@ export function DataProvider({ children }: { children: ReactNode }) {
       description: "Climate",
     },
     {
-      id: "land",
+      id: "carbon",
       title: "Land cover",
       description: "Land cover",
     },
     {
       id: "population",
       title: "Population",
+      description: "Population",
+    },
+    {
+      id: "carbon",
+      title: "Conflict Risk Score",
+      description: "Population",
+    },
+    {
+      id: "population",
+      title: "Population Density Growth Factor",
       description: "Population",
     },
   ];
@@ -114,8 +135,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
       precip: number;
       population: number;
       landCover: string | null;
+      landLabel: string | null;
+      percentage: number;
     }[];
-  }, [data, selectedDistrict, selectedYear]);
+  }, [data, selectedDistrict, selectedYear, selectedReferenceYear]);
 
   const chartData = useMemo(() => {
     if (!data) return [];
@@ -130,30 +153,47 @@ export function DataProvider({ children }: { children: ReactNode }) {
           land: row["PixelCount"],
         }));
       });
-  }, [data, selectedDistrict, selectedYear]);
+  }, [data, selectedDistrict, selectedYear, selectedReferenceYear]);
 
-  const chartReferenceData = useMemo(() => {
+  const groupedReferenceData = useMemo(() => {
     if (!data) return [];
     return Object.entries(data)
       .filter(([district]) => district === selectedDistrict)
       .flatMap(([district, districtRows]) => {
-        return districtRows.map((row) => ({
-          date: `${row.Year}-01-01`,
-          desktop: row["Precipitation (mm)"],
-          mobile: row["GPP (kg_C/m²/year)"],
-          pop: row["Population Density (People/km²)"],
-          land: row["PixelCount"],
-          percentage: row["Percentage"],
-        }));
-      });
-  }, [data, selectedDistrict, selectedYear]);
+        return districtRows
+          .filter((row) => row.Year === selectedReferenceYear)
+          .map((row) => ({
+            date: `${row.Year}-01-01`,
+            gpp: row["GPP (kg_C/m²/year)"],
+            precip: row["Precipitation (mm)"],
+            population: row["Population Density (People/km²)"],
+            landCover: row["LandCoverLabel"],
+            landLabel: row["LandCoverLabel"],
+            percentage: row["Percentage"],
+          }));
+      }) as {
+      date: string;
+      gpp: number;
+      precip: number;
+      population: number;
+      landCover: string | null;
+      landLabel: string | null;
+      percentage: number;
+    }[];
+  }, [
+    data,
+    selectedDistrict,
+    selectedYear,
+    selectedReferenceYear,
+    selectedDistrict,
+  ]);
 
   useEffect(() => {
     console.log("selectedDistrict changed to:", selectedDistrict);
   }, [selectedDistrict]);
 
   useEffect(() => {
-    console.log("data: ", groupedData);
+    console.log("data Reference: ", groupedReferenceData);
   }, [selectedDistrict]);
 
   return (
@@ -172,6 +212,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         setSelectedScenario,
         selectedReferenceYear,
         setSelectedReferenceYear,
+        groupedReferenceData,
       }}
     >
       {children}

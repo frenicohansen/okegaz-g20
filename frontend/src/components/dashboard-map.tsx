@@ -39,6 +39,8 @@ export const DashboardMap: React.FC = () => {
     setSelectedScenario,
     selectedYear,
     setSelectedYear,
+    selectedReferenceYear,
+    setSelectedReferenceYear,
   } = useData();
 
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>(
@@ -199,7 +201,23 @@ export const DashboardMap: React.FC = () => {
                             Reference Year Pick
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56"></DropdownMenuContent>
+                        <DropdownMenuContent className="w-56">
+                          {Array.from({ length: 14 }, (_, i) => 2010 + i).map(
+                            (year) => (
+                              <DropdownMenuItem
+                                key={year}
+                                onClick={() => setSelectedReferenceYear(year)}
+                                className={
+                                  selectedReferenceYear === year
+                                    ? "font-bold bg-muted"
+                                    : ""
+                                }
+                              >
+                                {year}
+                              </DropdownMenuItem>
+                            )
+                          )}
+                        </DropdownMenuContent>
                       </DropdownMenu>
                     </>
                     <DistrictProfile

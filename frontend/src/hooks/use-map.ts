@@ -107,7 +107,19 @@ function getTiffLayers(tiffOpacity: number) {
     };
   });
 
-  return { carbon, climate, land };
+  const population = years.map((year) => {
+    return {
+      year,
+      layer: createTiffLayer(
+        "population",
+        `/data_display/pop_density/Assaba_Pop_${year}.tif`,
+        year,
+        tiffOpacity
+      ),
+    };
+  });
+
+  return { carbon, climate, land, population };
 }
 
 function getMapBaseLayers() {
