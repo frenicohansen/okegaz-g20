@@ -11,6 +11,7 @@ import {
   ChartLegendContent,
 } from "@/components/ui/chart";
 import { AreaChart, Area, CartesianGrid, XAxis, ReferenceLine } from "recharts";
+import { Slider } from "@/components/ui/slider";
 
 interface ChartData {
   date: string;
@@ -39,6 +40,18 @@ function getScenarioConfig(scenario: string) {
       fillId: "fillMobile",
       strokeVar: "--color-mobile",
     };
+  } else if (scenario === "population") {
+    return {
+      dataKey: "population",
+      fillId: "fillPopulation",
+      strokeVar: "black",
+    };
+  } else if (scenario === "land") {
+    return {
+      dataKey: "land",
+      fillId: "fillLandCover",
+      strokeVar: "--color-landCover",
+    };
   }
   // Add more if needed...
   return null;
@@ -49,9 +62,9 @@ export function AreaChartInteractive({
   chartData,
   selectedScenario,
 }: AreaChartInteractiveProps) {
-  const { setSelectedYear } = useData();
+  const { selectedYear, setSelectedYear } = useData();
 
-  const [selectedDate, setSelectedDate] = useState<string | null>("2010-01-01");
+  const [selectedDate, setSelectedDate] = useState<string>("2010-01-01");
 
   const handleClick = (e: any) => {
     if (!e || !e.activeLabel) return;
@@ -64,88 +77,122 @@ export function AreaChartInteractive({
   const scenarioConfig = getScenarioConfig(selectedScenario);
 
   return (
-    <Card className="rounded-none shadow-none">
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="h-[250px] w-full">
-          <AreaChart data={chartData} onClick={handleClick}>
-            <defs>
-              <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-desktop)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-desktop)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-
-              <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-mobile)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-mobile)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-            </defs>
-
-            <CartesianGrid />
-            <XAxis
-              dataKey="date"
-              tickLine={true}
-              axisLine={false}
-              tickCount={5}
-              minTickGap={50}
-              onClick={() => console.log("clicked")}
-              tickFormatter={(value) => {
-                const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  year: "numeric",
-                });
-              }}
-            />
-
-            <ReferenceLine
-              x={selectedDate}
-              strokeWidth={2}
-              strokeDasharray="3 3"
-            />
-
-            <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  labelFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", {
-                      year: "numeric",
-                    })
-                  }
-                  indicator="dot"
-                />
-              }
-            />
-
-            {/* Render an <Area> only if scenarioConfig is valid */}
-            {scenarioConfig && (
-              <Area
-                type="natural"
-                dataKey={scenarioConfig.dataKey}
-                fill={`url(#${scenarioConfig.fillId})`}
-                stroke={`var(${scenarioConfig.strokeVar})`}
+    <div>
+      <div className="py-2 pt-4 px-4">
+        <Slider
+          className=""
+          min={2010}
+          max={2023}
+          step={1}
+          value={[selectedYear]}
+          onValueChange={([val]) => {
+            const isoDate = `${val}-01-01`;
+            setSelectedYear(val);
+            setSelectedDate(isoDate); // keep chart and UI in sync
+          }}
+        />
+      </div>
+      <ChartContainer config={chartConfig} className="h-[250px] w-full">
+        <AreaChart data={chartData} onClick={handleClick}>
+          <defs>
+            <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor="var(--color-desktop)"
+                stopOpacity={0.8}
               />
-            )}
+              <stop
+                offset="95%"
+                stopColor="var(--color-desktop)"
+                stopOpacity={0.1}
+              />
+            </linearGradient>
 
-            <ChartLegend content={<ChartLegendContent />} />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+            <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor="var(--color-mobile)"
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor="var(--color-mobile)"
+                stopOpacity={0.1}
+              />
+            </linearGradient>
+
+            <linearGradient id="fillPopulation" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor="var(--color-population)"
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor="var(--color-population)"
+                stopOpacity={0.1}
+              />
+            </linearGradient>
+
+            <linearGradient id="fillLandCover" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor="var(--color-landCover)"
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor="var(--color-landCover)"
+                stopOpacity={0.1}
+              />
+            </linearGradient>
+          </defs>
+
+          <CartesianGrid />
+          <XAxis
+            dataKey="date"
+            tickLine={true}
+            axisLine={false}
+            tickCount={5}
+            minTickGap={50}
+            onClick={() => console.log("clicked")}
+            tickFormatter={(value) => {
+              const date = new Date(value);
+              return date.toLocaleDateString("en-US", {
+                year: "numeric",
+              });
+            }}
+          />
+
+          <ReferenceLine x={1} strokeWidth={2} />
+
+          <ChartTooltip
+            cursor={false}
+            content={
+              <ChartTooltipContent
+                labelFormatter={(value) =>
+                  new Date(value).toLocaleDateString("en-US", {
+                    year: "numeric",
+                  })
+                }
+                indicator="dot"
+              />
+            }
+          />
+
+          {/* Render an <Area> only if scenarioConfig is valid */}
+          {scenarioConfig && (
+            <Area
+              type="natural"
+              dataKey={scenarioConfig.dataKey}
+              fill={`url(#${scenarioConfig.fillId})`}
+              stroke={`var(${scenarioConfig.strokeVar})`}
+            />
+          )}
+
+          <ChartLegend content={<ChartLegendContent />} />
+        </AreaChart>
+      </ChartContainer>
+    </div>
   );
 }

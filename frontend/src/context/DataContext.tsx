@@ -33,13 +33,22 @@ export type DistrictDataMap = Record<string, DistrictDataRow[]>;
 
 // The shape of your Context's value
 interface DataContextValue {
-  groupedData: ChartData[]; // Add this line
+  scenarios: { id: string; title: string; description: string }[];
+  groupedData: {
+    date: string;
+    gpp: number;
+    precip: number;
+    population: number;
+    landCover: string | null;
+  }[]; // Adjusted type
   chartData: ChartData[];
   setData: React.Dispatch<React.SetStateAction<DistrictDataMap>>;
   selectedYear: number;
   setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
   selectedDistrict: string;
   setSelectedDistrict: React.Dispatch<React.SetStateAction<string>>;
+  selectedScenario: string;
+  setSelectedScenario: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Create the context
@@ -50,12 +59,34 @@ export const DataContext = createContext<DataContextValue | undefined>(
 export function DataProvider({ children }: { children: ReactNode }) {
   // Initialize with DistrictData right away
   const [data, setData] = useState<DistrictDataMap>(DistrictData);
-  
+  const [selectedScenario, setSelectedScenario] = useState<string>("carbon");
   // If you'd like to memoize the data reference:
 
   // Keep a separate piece of state for selected year
   const [selectedYear, setSelectedYear] = useState<number>(2010);
   const [selectedDistrict, setSelectedDistrict] = useState<string>("Assaba");
+  const scenarios = [
+    {
+      id: "carbon",
+      title: "Carbon absorbtion",
+      description: "Carbon absorbtion",
+    },
+    {
+      id: "climate",
+      title: "Climate",
+      description: "Climate",
+    },
+    {
+      id: "land",
+      title: "Land cover",
+      description: "Land cover",
+    },
+    {
+      id: "population",
+      title: "Population",
+      description: "Population",
+    }
+  ];
 
   const groupedData = useMemo(() => {
     if (!data) return [];
@@ -66,39 +97,48 @@ export function DataProvider({ children }: { children: ReactNode }) {
           .filter((row) => row.Year === selectedYear)
           .map((row) => ({
             date: `${row.Year}-01-01`,
-            desktop: row["Precipitation (mm)"],
-            mobile: row["GPP (kg_C/m²/year)"],
+            gpp: row["GPP (kg_C/m²/year)"],
+            precip: row["Precipitation (mm)"],
+            population: row["Population Density (People/km²)"],
+            landCover: row["LandCoverLabel"],
           }));
-      });
+      }) as {
+      date: string;
+      gpp: number;
+      precip: number;
+      population: number;
+      landCover: string | null;
+    }[];
   }, [data, selectedDistrict, selectedYear]);
 
-  const chartData  = useMemo(() => {
+  const chartData = useMemo(() => {
     if (!data) return [];
     return Object.entries(data)
       .filter(([district]) => district === selectedDistrict)
       .flatMap(([district, districtRows]) => {
-        return districtRows
-          .map((row) => ({
-            date: `${row.Year}-01-01`,
-            desktop: row["Precipitation (mm)"],
-            mobile: row["GPP (kg_C/m²/year)"],
-          }));
+        return districtRows.map((row) => ({
+          date: `${row.Year}-01-01`,
+          desktop: row["Precipitation (mm)"],
+          mobile: row["GPP (kg_C/m²/year)"],
+          pop: row["Population Density (People/km²)"],
+          land: row["PixelCount"],
+        }));
       });
   }, [data, selectedDistrict, selectedYear]);
-  
 
   useEffect(() => {
     console.log("selectedDistrict changed to:", selectedDistrict);
   }, [selectedDistrict]);
 
   useEffect(() => {
-    console.log("data: ", groupedData)
-  }, [selectedDistrict])
+    console.log("data: ", groupedData);
+  }, [selectedDistrict]);
 
   return (
     <DataContext.Provider
       value={{
         // Provide the memoizedData so consumer re-renders only when 'data' changes
+        scenarios,
         groupedData,
         chartData,
         setData,
@@ -106,6 +146,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
         setSelectedYear,
         selectedDistrict,
         setSelectedDistrict,
+        selectedScenario,
+        setSelectedScenario,
       }}
     >
       {children}

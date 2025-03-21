@@ -42,24 +42,6 @@ export const styles = {
   },
 }
 
-const scenarios = [
-  {
-    id: 'carbon',
-    title: 'Carbon absorbtion',
-    description: 'Carbon absorbtion',
-  },
-  {
-    id: 'climate',
-    title: 'Climate',
-    description: 'Climate',
-  },
-  {
-    id: 'land',
-    title: 'Land cover',
-    description: 'Land cover',
-  },
-]
-
 function createTiffLayer(
   name: string,
   url: string,
@@ -276,7 +258,6 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const selectInteractionRef = useRef<Select | null>(null)
   const [selectedDistrict, setSelectedDistrict]
     = useState<GeoJSONFeature | null>(null)
-  const [selectedScenario, setSelectedScenario] = useState<string>('carbon')
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
   const [selectedYear, setSelectedYear] = useState<number>(2010)
   const [districtNames, setDistrictNames] = useState<string[]>([])
@@ -493,14 +474,11 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }
 
   return {
-    scenarios,
     layers,
     selectedBase,
     setSelectedBase,
     toggleLayerVisibility,
     selectedDistrict,
-    selectedScenario,
-    setSelectedScenario,
     tiffOpacity,
     setTiffOpacity,
     selectedYear,

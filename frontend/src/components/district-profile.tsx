@@ -7,9 +7,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 
-import React, { useMemo, useState } from 'react'
+import { useData } from "@/context/DataContext";
+
+import React, { useMemo, useState } from "react";
 import {
   Area,
   Bar,
@@ -70,9 +72,7 @@ export function DistrictProfile({
   onYearChange,
   scenarios,
 }: DistrictProfileProps) {
-  const [activeMetric, setActiveMetric] = useState<
-    "precipitation" | "gpp" | "population"
-  >("precipitation");
+  const { groupedData } = useData();
 
   if (!districtData || districtData.length === 0) {
     return (
@@ -136,104 +136,6 @@ export function DistrictProfile({
   }
   const labelList = Array.from(allLabels);
 
-  // Process data for time series charts (precipitation, GPP, population)
-  const timeSeriesData = useMemo(() => {
-    // Group by year and compute averages
-    const yearData: Record<
-      number,
-      {
-        precipitation: number;
-        gpp: number;
-        population: number;
-        count: number;
-      }
-    > = {};
-
-    for (const row of filteredData) {
-      const year = safeNumber(row.Year);
-      if (!yearData[year]) {
-        yearData[year] = {
-          precipitation: 0,
-          gpp: 0,
-          population: 0,
-          count: 0,
-        };
-      }
-
-      // Only add values that are not null/undefined/NaN
-      const precip = safeNumber(row["Precipitation (mm)"]);
-      const gpp = safeNumber(row["GPP (kg_C/m²/year)"]);
-      const pop = safeNumber(row["Population Density (People/km²)"]);
-
-      if (precip > 0) {
-        yearData[year].precipitation += precip;
-        yearData[year].count += 1;
-      }
-
-      if (gpp > 0) {
-        yearData[year].gpp += gpp;
-      }
-
-      if (pop > 0) {
-        yearData[year].population += pop;
-      }
-    }
-
-    // Calculate averages and format for chart
-    return Object.entries(yearData)
-      .map(([year, data]) => {
-        const count = Math.max(1, data.count); // Avoid division by zero
-        return {
-          year: Number(year),
-          precipitation: data.precipitation / count,
-          gpp: data.gpp / count,
-          population: data.population / count,
-        };
-      })
-      .sort((a, b) => a.year - b.year);
-  }, [filteredData]);
-
-  // Calculate totals for metrics
-  const totals = useMemo(() => {
-    const result = {
-      precipitation: 0,
-      gpp: 0,
-      population: 0,
-    };
-
-    if (timeSeriesData.length === 0) {
-      return result;
-    }
-
-    return {
-      precipitation: timeSeriesData.reduce(
-        (sum, item) => sum + (item.precipitation || 0),
-        0
-      ),
-      gpp: timeSeriesData.reduce((sum, item) => sum + (item.gpp || 0), 0),
-      population: timeSeriesData.reduce(
-        (sum, item) => sum + (item.population || 0),
-        0
-      ),
-    };
-  }, [timeSeriesData]);
-
-  // Chart configurations
-  const chartConfig = {
-    precipitation: {
-      label: "Precipitation",
-      color: "hsl(var(--chart-1))",
-    },
-    gpp: {
-      label: "GPP",
-      color: "hsl(var(--chart-2))",
-    },
-    population: {
-      label: "Population Density",
-      color: "hsl(var(--chart-3))",
-    },
-  };
-
   // Format values for display
   const formatValue = (value: number, metric: string) => {
     // Handle NaN or invalid values
@@ -253,12 +155,6 @@ export function DistrictProfile({
     }
   };
 
-  // Calculate average for display
-  const getAverage = (total: number) => {
-    const count = timeSeriesData.length || 1; // Avoid division by zero
-    return total / count;
-  };
-
   return (
     <div
       className="overflow-y-auto space-y-6"
@@ -276,7 +172,7 @@ export function DistrictProfile({
               <div className="flex flex-col">
                 <span className="text-sm text-muted-foreground">GPP</span>
                 <span className="text-lg font-bold">
-                  {safeNumber(summaryRow["GPP (kg_C/m²/year)"]).toFixed(1)} kg
+                  {safeNumber(groupedData[0]?.gpp).toFixed(1)} kg
                   C/m²/yr
                 </span>
               </div>
@@ -286,7 +182,7 @@ export function DistrictProfile({
                 </span>
                 <span className="text-lg font-bold">
                   {safeNumber(
-                    summaryRow["Population Density (People/km²)"]
+                    groupedData[0].population
                   ).toFixed(1)}{" "}
                   People/km²
                 </span>
