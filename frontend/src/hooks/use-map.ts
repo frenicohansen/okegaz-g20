@@ -51,7 +51,7 @@ function createTiffLayer(name: string, url: string, year: number, tiffOpacity: n
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: false,
+    visible: true,
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
@@ -218,7 +218,7 @@ function getSelectedStyle() {
 export interface BasicLayerInfo {
   title: string
   visible: boolean
-  type: 'base' | 'overlay'
+  type: 'base' | 'overlay' | 'tiff'
 }
 
 export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
@@ -239,11 +239,14 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [selectedBase, setSelectedBase] = useState('OpenStreetMap')
 
   useEffect(() => {
+    const layersSelectedYear = Object.values(tiffLayers).map(layers => layers.find(({ year }) => year === selectedYear))
+
     setLayers([
       ...baseLayers.map(layer => ({ title: layer.get('title'), visible: layer.getVisible(), type: layer.get('type') })),
+      ...layersSelectedYear.map(layer => ({ title: layer?.layer.get('title') ?? '', visible: layer?.layer.getVisible() ?? false, type: 'tiff' })),
       { title: districtLayer.get('title'), visible: districtLayer.getVisible(), type: districtLayer.get('type') },
     ])
-  }, [baseLayers, districtLayer])
+  }, [selectedYear])
 
   useEffect(() => {
     if (!mapRef.current)
