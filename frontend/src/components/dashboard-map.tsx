@@ -1,41 +1,45 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DataContext } from '@/context/DataContext'
+import { useData } from '@/context/DataContext'
 import { useMap } from '@/hooks/use-map'
-import { Info, Map as MapIcon, PanelLeft } from 'lucide-react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Info, Map as MapIcon } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AreaChartInteractive } from './charts/area-chart'
 import { DistrictDetail } from './district-details'
 import { DistrictProfile } from './district-profile'
 import { MapPanel } from './map/panel'
 import { SearchDistrict } from './search-district'
 import { Button } from './ui/button'
+
 import 'ol/ol.css'
 
 export const DashboardMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const {
-    scenarios,
     selectedDistrict,
-    selectedScenario,
-    setSelectedScenario,
     searchDistrict,
     districtNames,
     layers,
     toggleLayerVisibility,
-    selectedYear,
-    setSelectedYear,
     selectedBase,
     setSelectedBase,
   } = useMap(mapRef)
 
-  const dataContext = useContext(DataContext)
-
-  if (!dataContext) {
-    console.error('DataContext is undefined')
-    return null
-  }
-
-  const { memoizedDistrictRows } = dataContext
+  const {
+    chartData,
+    scenarios,
+    selectedScenario,
+    setSelectedScenario,
+    selectedYear,
+    setSelectedYear,
+    selectedReferenceYear,
+    setSelectedReferenceYear,
+  } = useData()
 
   const [districtDataMap, setDistrictDataMap] = useState<Record<string, any[]>>(
     {},
@@ -138,10 +142,10 @@ export const DashboardMap: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white">
+          <div className="flex flex-col gap-1 bg-white">
             <AreaChartInteractive
               chartConfig={chartConfig}
-              chartData={memoizedDistrictRows}
+              chartData={chartData}
               selectedScenario={selectedScenario}
             />
           </div>
@@ -164,6 +168,7 @@ export const DashboardMap: React.FC = () => {
                   Details
                 </TabsTrigger>
               </TabsList>
+
               <TabsContent
                 value="info"
                 className="p-4 h-[calc(100vh-350px)] overflow-auto"
@@ -176,15 +181,43 @@ export const DashboardMap: React.FC = () => {
                     )
                   : districtName && districtData.length > 0
                     ? (
-                        <DistrictProfile
-                          districtName={districtName}
-                          districtData={districtData}
-                          selectedYear={selectedYear}
-                          selectedScenario={selectedScenario}
-                          setSelectedScenario={setSelectedScenario}
-                          onYearChange={setSelectedYear}
-                          scenarios={scenarios}
-                        />
+                        <>
+                          <>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild className="mb-3">
+                                <Button variant="default" className="bg-emerald-600">
+                                  Reference Year Pick
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent className="w-56">
+                                {Array.from({ length: 14 }, (_, i) => 2010 + i).map(
+                                  year => (
+                                    <DropdownMenuItem
+                                      key={year}
+                                      onClick={() => setSelectedReferenceYear(year)}
+                                      className={
+                                        selectedReferenceYear === year
+                                          ? 'font-bold bg-muted'
+                                          : ''
+                                      }
+                                    >
+                                      {year}
+                                    </DropdownMenuItem>
+                                  ),
+                                )}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </>
+                          <DistrictProfile
+                            districtName={districtName}
+                            districtData={districtData}
+                            selectedYear={selectedYear}
+                            selectedScenario={selectedScenario}
+                            setSelectedScenario={setSelectedScenario}
+                            onYearChange={setSelectedYear}
+                            scenarios={scenarios}
+                          />
+                        </>
                       )
                     : selectedDistrict
                       ? (

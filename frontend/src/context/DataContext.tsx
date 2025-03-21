@@ -33,12 +33,35 @@ export type DistrictDataMap = Record<string, DistrictDataRow[]>;
 
 // The shape of your Context's value
 interface DataContextValue {
-  memoizedDistrictRows: ChartData[]; // Add this line
+  scenarios: { id: string; title: string; description: string }[];
+  groupedData: {
+    date: string;
+    gpp: number;
+    precip: number;
+    population: number;
+    landCover: string | null;
+    landLabel: string | null;
+    percentage: number;
+  }[]; // Adjusted type
+  chartData: ChartData[];
   setData: React.Dispatch<React.SetStateAction<DistrictDataMap>>;
   selectedYear: number;
   setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
   selectedDistrict: string;
   setSelectedDistrict: React.Dispatch<React.SetStateAction<string>>;
+  selectedScenario: string;
+  setSelectedScenario: React.Dispatch<React.SetStateAction<string>>;
+  selectedReferenceYear: number;
+  setSelectedReferenceYear: React.Dispatch<React.SetStateAction<number>>;
+  groupedReferenceData: {
+    date: string;
+    gpp: number;
+    precip: number;
+    population: number;
+    landCover: string | null;
+    landLabel: string | null;
+    percentage: number;
+  }[]; // Adjusted type;
 }
 
 // Create the context
@@ -49,32 +72,147 @@ export const DataContext = createContext<DataContextValue | undefined>(
 export function DataProvider({ children }: { children: ReactNode }) {
   // Initialize with DistrictData right away
   const [data, setData] = useState<DistrictDataMap>(DistrictData);
-
+  const [selectedScenario, setSelectedScenario] = useState<string>("carbon");
   // If you'd like to memoize the data reference:
 
   // Keep a separate piece of state for selected year
   const [selectedYear, setSelectedYear] = useState<number>(2010);
+  const [selectedReferenceYear, setSelectedReferenceYear] =
+    useState<number>(2023);
   const [selectedDistrict, setSelectedDistrict] = useState<string>("Assaba");
+  const scenarios = [
+    {
+      id: "land",
+      title: "Land Degradation Rate",
+      description: "Land degradation rate in the district",
+    },
+    {
+      id: "climate",
+      title: "Climate",
+      description: "Climate",
+    },
+    {
+      id: "carbon",
+      title: "Land cover",
+      description: "Land cover",
+    },
+    {
+      id: "population",
+      title: "Population",
+      description: "Population",
+    },
+    {
+      id: "carbon",
+      title: "Conflict Risk Score",
+      description: "Population",
+    },
+    {
+      id: "population",
+      title: "Population Density Growth Factor",
+      description: "Population",
+    },
+  ];
 
-  const memoizedDistrictRows = useMemo(() => {
-    // Get the data for the selected district
-    return []
-  }, [selectedDistrict]);
+  const groupedData = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows
+          .filter((row) => row.Year === selectedYear)
+          .map((row) => ({
+            date: `${row.Year}-01-01`,
+            gpp: row["GPP (kg_C/m²/year)"],
+            precip: row["Precipitation (mm)"],
+            population: row["Population Density (People/km²)"],
+            landCover: row["LandCoverLabel"],
+            landLabel: row["LandCoverLabel"],
+            percentage: row["Percentage"],
+          }));
+      }) as {
+      date: string;
+      gpp: number;
+      precip: number;
+      population: number;
+      landCover: string | null;
+      landLabel: string | null;
+      percentage: number;
+    }[];
+  }, [data, selectedDistrict, selectedYear, selectedReferenceYear]);
+
+  const chartData = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows.map((row) => ({
+          date: `${row.Year}-01-01`,
+          desktop: row["Precipitation (mm)"],
+          mobile: row["GPP (kg_C/m²/year)"],
+          pop: row["Population Density (People/km²)"],
+          land: row["PixelCount"],
+        }));
+      });
+  }, [data, selectedDistrict, selectedYear, selectedReferenceYear]);
+
+  const groupedReferenceData = useMemo(() => {
+    if (!data) return [];
+    return Object.entries(data)
+      .filter(([district]) => district === selectedDistrict)
+      .flatMap(([district, districtRows]) => {
+        return districtRows
+          .filter((row) => row.Year === selectedReferenceYear)
+          .map((row) => ({
+            date: `${row.Year}-01-01`,
+            gpp: row["GPP (kg_C/m²/year)"],
+            precip: row["Precipitation (mm)"],
+            population: row["Population Density (People/km²)"],
+            landCover: row["LandCoverLabel"],
+            landLabel: row["LandCoverLabel"],
+            percentage: row["Percentage"],
+          }));
+      }) as {
+      date: string;
+      gpp: number;
+      precip: number;
+      population: number;
+      landCover: string | null;
+      landLabel: string | null;
+      percentage: number;
+    }[];
+  }, [
+    data,
+    selectedDistrict,
+    selectedYear,
+    selectedReferenceYear,
+    selectedDistrict,
+  ]);
 
   useEffect(() => {
     console.log("selectedDistrict changed to:", selectedDistrict);
+  }, [selectedDistrict]);
+
+  useEffect(() => {
+    console.log("data Reference: ", groupedReferenceData);
   }, [selectedDistrict]);
 
   return (
     <DataContext.Provider
       value={{
         // Provide the memoizedData so consumer re-renders only when 'data' changes
-        memoizedDistrictRows,
+        scenarios,
+        groupedData,
+        chartData,
         setData,
         selectedYear,
         setSelectedYear,
         selectedDistrict,
         setSelectedDistrict,
+        selectedScenario,
+        setSelectedScenario,
+        selectedReferenceYear,
+        setSelectedReferenceYear,
+        groupedReferenceData,
       }}
     >
       {children}

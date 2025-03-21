@@ -5,18 +5,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { Scenario } from "./district-profile";
+import { cn } from "@/lib/utils";
 
 interface ScenarioCardProps {
   scenario: Scenario;
   isSelected: boolean;
+  displayedPercentage: string | undefined;
   onSelectScenario: (id: string) => void;
 }
 
 export function ScenarioCard({
   scenario,
   isSelected,
+  displayedPercentage,
   onSelectScenario,
 }: ScenarioCardProps) {
+  const percentageValue = displayedPercentage ? displayedPercentage : "0%";
   return (
     <Card
       onClick={() => onSelectScenario(scenario.id)}
@@ -26,6 +30,18 @@ export function ScenarioCard({
     >
       <CardHeader>
         <CardTitle>{scenario.title}</CardTitle>
+
+        <p
+          className={cn(
+            "text-xl font-semibold",
+            Number(percentageValue.replace("%", "")) < 0
+              ? "text-destructive"
+              : "text-emerald-600"
+          )}
+        >
+          {percentageValue}
+        </p>
+
         <CardDescription>{scenario.description}</CardDescription>
       </CardHeader>
     </Card>

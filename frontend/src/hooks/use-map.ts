@@ -14,8 +14,8 @@ import { OSM, XYZ } from 'ol/source'
 import GeoTIFF from 'ol/source/GeoTIFF'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
-
 import View from 'ol/View'
+
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 export type StyleKey = keyof typeof styles
@@ -47,29 +47,12 @@ export const styles = {
   },
 }
 
-const scenarios = [
-  {
-    id: 'carbon',
-    title: 'Carbon absorbtion',
-    description: 'Carbon absorbtion',
-  },
-  {
-    id: 'climate',
-    title: 'Climate',
-    description: 'Climate',
-  },
-  {
-    id: 'land',
-    title: 'Land cover',
-    description: 'Land cover',
-  },
-]
-
 function createTiffLayer(
   name: string,
   url: string,
   year: number,
   tiffOpacity: number,
+  _visible = false,
 ) {
   const tiffSource = new GeoTIFF({
     sources: [
@@ -129,7 +112,19 @@ function getTiffLayers(tiffOpacity: number) {
     }
   })
 
-  return { carbon, climate, land }
+  const population = years.map((year) => {
+    return {
+      year,
+      layer: createTiffLayer(
+        'population',
+        `/data_display/pop_density/Assaba_Pop_${year}.tif`,
+        year,
+        tiffOpacity,
+      ),
+    }
+  })
+
+  return { carbon, climate, land, population }
 }
 
 function getMapBaseLayers() {
@@ -281,9 +276,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const selectInteractionRef = useRef<Select | null>(null)
   const [selectedDistrict, setSelectedDistrict]
     = useState<GeoJSONFeature | null>(null)
-  const [selectedScenario, setSelectedScenario] = useState<string>('carbon')
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
-  const [selectedYear, setSelectedYear] = useState<number>(2023)
   const [districtNames, setDistrictNames] = useState<string[]>([])
   const districtSourceRef = useRef<VectorSource | null>(null)
 
@@ -294,13 +287,29 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   const [layers, setLayers] = useState<BasicLayerInfo[]>([])
   const [selectedBase, setSelectedBase] = useState('OpenStreetMap')
 
+  const { selectedYear } = useData()
+
   useEffect(() => {
-    const layersSelectedYear = Object.values(tiffLayers).map(layers => layers.find(({ year }) => year === selectedYear))
+    const layersSelectedYear = Object.values(tiffLayers).map(layers =>
+      layers.find(({ year }) => year === selectedYear),
+    )
 
     setLayers([
-      ...baseLayers.map(layer => ({ title: layer.get('title'), visible: layer.getVisible(), type: layer.get('type') })),
-      ...layersSelectedYear.map(layer => ({ title: layer?.layer.get('title') ?? '', visible: layer?.layer.getVisible() ?? false, type: 'tiff' })),
-      { title: districtLayer.get('title'), visible: districtLayer.getVisible(), type: districtLayer.get('type') },
+      ...baseLayers.map(layer => ({
+        title: layer.get('title'),
+        visible: layer.getVisible(),
+        type: layer.get('type'),
+      })),
+      ...layersSelectedYear.map(layer => ({
+        title: layer?.layer.get('title') ?? '',
+        visible: layer?.layer.getVisible() ?? false,
+        type: 'tiff',
+      })),
+      {
+        title: districtLayer.get('title'),
+        visible: districtLayer.getVisible(),
+        type: districtLayer.get('type'),
+      },
       { title: 'Conflicts', visible: true, type: 'overlay' },
     ])
   }, [selectedYear])
@@ -422,23 +431,28 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     if (!map)
       return
 
-    const layersSelectedYear = Object.values(tiffLayers).map(layers =>
-      layers.find(({ year }) => year === selectedYear),
+    const layersSelectedYear = Object.entries(tiffLayers).map(
+      ([_, yearlyLayers]) =>
+        yearlyLayers.find(({ year }) => year === selectedYear),
     )
-    layersSelectedYear.forEach((layer) => {
-      if (layer)
-        map.addLayer(layer.layer)
+
+    layersSelectedYear.forEach((layerObj) => {
+      if (layerObj) {
+        const { layer } = layerObj
+        const saved = layers.find(l => l.title === layer.get('title'))
+        layer.setVisible(saved?.visible ?? true) // reapply saved visibility
+        map.addLayer(layer)
+      }
     })
 
     return () => {
-      if (map) {
-        layersSelectedYear.forEach((layer) => {
-          if (layer)
-            map.removeLayer(layer.layer)
-        })
-      }
+      layersSelectedYear.forEach((layerObj) => {
+        if (layerObj) {
+          map.removeLayer(layerObj.layer)
+        }
+      })
     }
-  }, [map, tiffLayers, selectedYear])
+  }, [map, tiffLayers, selectedYear, layers]) // ⬅️ include `layers` dependency
 
   useEffect(() => {
     if (!map)
@@ -560,18 +574,13 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }
 
   return {
-    scenarios,
     layers,
     selectedBase,
     setSelectedBase,
     toggleLayerVisibility,
     selectedDistrict,
-    selectedScenario,
-    setSelectedScenario,
     tiffOpacity,
     setTiffOpacity,
-    selectedYear,
-    setSelectedYear,
     searchDistrict,
     districtNames,
   }

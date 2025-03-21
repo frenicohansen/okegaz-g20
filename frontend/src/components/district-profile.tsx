@@ -7,9 +7,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 
-import React, { useMemo, useState } from 'react'
+import { useData } from "@/context/DataContext";
+
+import React, { useMemo, useState } from "react";
 import {
   Area,
   Bar,
@@ -67,12 +69,11 @@ export function DistrictProfile({
   selectedYear,
   selectedScenario,
   setSelectedScenario,
+
   onYearChange,
   scenarios,
 }: DistrictProfileProps) {
-  const [activeMetric, setActiveMetric] = useState<
-    "precipitation" | "gpp" | "population"
-  >("precipitation");
+  const { groupedData, groupedReferenceData, chartData } = useData();
 
   if (!districtData || districtData.length === 0) {
     return (
@@ -136,128 +137,76 @@ export function DistrictProfile({
   }
   const labelList = Array.from(allLabels);
 
-  // Process data for time series charts (precipitation, GPP, population)
-  const timeSeriesData = useMemo(() => {
-    // Group by year and compute averages
-    const yearData: Record<
-      number,
-      {
-        precipitation: number;
-        gpp: number;
-        population: number;
-        count: number;
-      }
-    > = {};
+  const degradedClasses = new Set([
+    "Barren or Sparsely Vegetated",
+    "Open Shrublands",
+    // optionally:
+    // "Croplands",
+    // "Urban and Built-up"
+  ]);
 
-    for (const row of filteredData) {
-      const year = safeNumber(row.Year);
-      if (!yearData[year]) {
-        yearData[year] = {
-          precipitation: 0,
-          gpp: 0,
-          population: 0,
-          count: 0,
-        };
-      }
+  // const landDegradationRate = useMemo(() => {
+  //   if (!groupedData || !groupedReferenceData) return null;
 
-      // Only add values that are not null/undefined/NaN
-      const precip = safeNumber(row["Precipitation (mm)"]);
-      const gpp = safeNumber(row["GPP (kg_C/m²/year)"]);
-      const pop = safeNumber(row["Population Density (People/km²)"]);
+  //   const getDegradedSum = (rows: typeof groupedData) =>
+  //     rows
+  //       .filter((row) => row.landLabel && degradedClasses.has(row.landLabel))
+  //       .reduce((acc, row) => acc + (row.percentage ?? 0), 0);
 
-      if (precip > 0) {
-        yearData[year].precipitation += precip;
-        yearData[year].count += 1;
-      }
+  //   const currentDegraded = getDegradedSum(groupedData);
+  //   const referenceDegraded = getDegradedSum(groupedReferenceData);
 
-      if (gpp > 0) {
-        yearData[year].gpp += gpp;
-      }
+  //   const change = currentDegraded - referenceDegraded;
+  //   const percentChange =
+  //     referenceDegraded === 0 ? 0 : (change / referenceDegraded) * 100;
 
-      if (pop > 0) {
-        yearData[year].population += pop;
-      }
-    }
+  //   return {
+  //     currentDegradedPercent: currentDegraded.toFixed(2),
+  //     referenceDegradedPercent: referenceDegraded.toFixed(2),
+  //     totalRate: `${percentChange.toFixed(2)}%`,
+  //   };
+  // }, [groupedData, groupedReferenceData]);
 
-    // Calculate averages and format for chart
-    return Object.entries(yearData)
-      .map(([year, data]) => {
-        const count = Math.max(1, data.count); // Avoid division by zero
-        return {
-          year: Number(year),
-          precipitation: data.precipitation / count,
-          gpp: data.gpp / count,
-          population: data.population / count,
-        };
-      })
-      .sort((a, b) => a.year - b.year);
-  }, [filteredData]);
+  const percentageData = useMemo(() => {
+    // change data when selected date and reference date are selected
+    if (!groupedData || !groupedReferenceData) return null;
 
-  // Calculate totals for metrics
-  const totals = useMemo(() => {
-    const result = {
-      precipitation: 0,
-      gpp: 0,
-      population: 0,
-    };
+    // use random data, allowing for negative values
+    const currentDegraded = Math.random() * 100; // Range: -100 to 100
+    const referenceDegraded = Math.random() * 100; // Range: -100 to 100
 
-    if (timeSeriesData.length === 0) {
-      return result;
-    }
+    const change = currentDegraded - referenceDegraded;
+    const percentChange =
+      referenceDegraded === 0
+        ? 0
+        : (change / Math.abs(referenceDegraded)) * 100;
 
     return {
-      precipitation: timeSeriesData.reduce(
-        (sum, item) => sum + (item.precipitation || 0),
-        0
-      ),
-      gpp: timeSeriesData.reduce((sum, item) => sum + (item.gpp || 0), 0),
-      population: timeSeriesData.reduce(
-        (sum, item) => sum + (item.population || 0),
-        0
-      ),
+      currentDegradedPercent: currentDegraded.toFixed(2),
+      referenceDegradedPercent: referenceDegraded.toFixed(2),
+      totalRate: `${percentChange >= 0 ? "+" : ""}${percentChange.toFixed(2)}%`,
     };
-  }, [timeSeriesData]);
+  }, [groupedData, groupedReferenceData]);
 
-  // Chart configurations
-  const chartConfig = {
-    precipitation: {
-      label: "Precipitation",
-      color: "hsl(var(--chart-1))",
-    },
-    gpp: {
-      label: "GPP",
-      color: "hsl(var(--chart-2))",
-    },
-    population: {
-      label: "Population Density",
-      color: "hsl(var(--chart-3))",
-    },
-  };
+  const percentageDataMap = useMemo(() => {
+    const scenarioIds = ["land", "climate", "land2", "population"];
 
-  // Format values for display
-  const formatValue = (value: number, metric: string) => {
-    // Handle NaN or invalid values
-    if (value === null || value === undefined || Number.isNaN(value)) {
-      return "N/A";
-    }
+    const result: Record<string, { totalRate: string }> = {};
 
-    switch (metric) {
-      case "precipitation":
-        return `${value.toFixed(2)} mm`;
-      case "gpp":
-        return `${value.toFixed(2)} kg C/m²/yr`;
-      case "population":
-        return `${value.toFixed(2)} ppl/km²`;
-      default:
-        return value.toFixed(2);
-    }
-  };
+    scenarioIds.forEach((id) => {
+      const base = 10 + Math.random() * 60;
+      const variation = (Math.random() - 0.5) * 0.4 * base;
+      const current = base + variation;
+      const diff = current - base;
+      const percentChange = base === 0 ? 0 : (diff / Math.abs(base)) * 100;
 
-  // Calculate average for display
-  const getAverage = (total: number) => {
-    const count = timeSeriesData.length || 1; // Avoid division by zero
-    return total / count;
-  };
+      result[id] = {
+        totalRate: `${percentChange >= 0 ? "+" : ""}${percentChange.toFixed(2)}%`,
+      };
+    });
+
+    return result;
+  }, [groupedData, groupedReferenceData]);
 
   return (
     <div
@@ -276,8 +225,7 @@ export function DistrictProfile({
               <div className="flex flex-col">
                 <span className="text-sm text-muted-foreground">GPP</span>
                 <span className="text-lg font-bold">
-                  {safeNumber(summaryRow["GPP (kg_C/m²/year)"]).toFixed(1)} kg
-                  C/m²/yr
+                  {safeNumber(groupedData[0]?.gpp).toFixed(1)} kg C/m²/yr
                 </span>
               </div>
               <div className="flex flex-col">
@@ -285,10 +233,7 @@ export function DistrictProfile({
                   Population Density
                 </span>
                 <span className="text-lg font-bold">
-                  {safeNumber(
-                    summaryRow["Population Density (People/km²)"]
-                  ).toFixed(1)}{" "}
-                  People/km²
+                  {safeNumber(groupedData[0].population).toFixed(1)} People/km²
                 </span>
               </div>
             </div>
@@ -303,12 +248,15 @@ export function DistrictProfile({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
-            {scenarios.map((scenarioObj) => {
+            {scenarios.slice(0, 4).map((scenarioObj) => {
               return (
                 <ScenarioCard
                   key={scenarioObj.id}
                   scenario={scenarioObj}
-                  isSelected={selectedScenario === scenarioObj.id}
+                  isSelected={false}
+                  displayedPercentage={
+                    percentageDataMap[scenarioObj.id]?.totalRate
+                  }
                   onSelectScenario={(id) => setSelectedScenario(id)}
                 />
               );
@@ -316,94 +264,25 @@ export function DistrictProfile({
           </div>
         </CardContent>
       </Card>
-
-      {/* Land Cover Distribution Chart */}
       <Card>
-        <CardHeader>
-          <CardTitle>Land Cover Distribution</CardTitle>
-          <CardDescription>
-            Changes in land cover types over the years
-          </CardDescription>
+        <CardHeader className="">
+          <CardTitle className="text-lg">Social</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={landCoverChartData}
-                margin={{ top: 10, right: 30, left: 0, bottom: 20 }}
-              >
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                <XAxis dataKey="year" />
-                <YAxis tickFormatter={(value) => `${value}%`} />
-                <Tooltip
-                  formatter={(value, name) => {
-                    const numValue = Number(value);
-                    return [
-                      Number.isNaN(numValue)
-                        ? "N/A"
-                        : `${numValue.toFixed(2)}%`,
-                      name,
-                    ];
-                  }}
-                  labelFormatter={(value) => `Year: ${value}`}
+          <div className="grid grid-cols-2 gap-4">
+            {scenarios.slice(5, 7).map((scenarioObj) => {
+              return (
+                <ScenarioCard
+                  key={scenarioObj.id}
+                  scenario={scenarioObj}
+                  isSelected={false}
+                  displayedPercentage={
+                    percentageDataMap[scenarioObj.id]?.totalRate
+                  }
+                  onSelectScenario={(id) => setSelectedScenario(id)}
                 />
-                <Legend />
-                {labelList.map((label) => (
-                  <Bar
-                    key={label}
-                    dataKey={label}
-                    stackId="landcover"
-                    fill={randomColorForLabel(label)}
-                  />
-                ))}
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Optional: Data Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Raw Data</CardTitle>
-          <CardDescription>Complete dataset for {districtName}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b">
-                  <th className="p-2 text-left font-medium">Year</th>
-                  <th className="p-2 text-left font-medium">Land Cover</th>
-                  <th className="p-2 text-left font-medium">%</th>
-                  <th className="p-2 text-left font-medium">Precip (mm)</th>
-                  <th className="p-2 text-left font-medium">GPP</th>
-                  <th className="p-2 text-left font-medium">Pop Density</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredData.map((row, idx) => (
-                  <tr key={idx} className="border-b hover:bg-muted/50">
-                    <td className="p-2">{row.Year}</td>
-                    <td className="p-2">{row.LandCoverLabel || "Unknown"}</td>
-                    <td className="p-2">
-                      {safeNumber(row.Percentage).toFixed(2)}%
-                    </td>
-                    <td className="p-2">
-                      {safeNumber(row["Precipitation (mm)"]).toFixed(2)}
-                    </td>
-                    <td className="p-2">
-                      {safeNumber(row["GPP (kg_C/m²/year)"]).toFixed(2)}
-                    </td>
-                    <td className="p-2">
-                      {safeNumber(
-                        row["Population Density (People/km²)"]
-                      ).toFixed(2)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              );
+            })}
           </div>
         </CardContent>
       </Card>

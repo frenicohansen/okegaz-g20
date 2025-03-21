@@ -19,13 +19,6 @@ const links = [
     ),
   },
   {
-    label: 'District Profile',
-    href: '/district-profile',
-    icon: (
-      <LandPlot className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-  {
     label: 'Reports',
     href: '/comparison',
     icon: (
@@ -46,7 +39,7 @@ function Logo() {
         animate={{ opacity: 1 }}
         className="font-medium text-black dark:text-white whitespace-pre"
       >
-        G20 Global Land Initiative
+        Saheel X G20 Innovative
       </motion.span>
     </Link>
   )
