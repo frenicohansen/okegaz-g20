@@ -113,8 +113,6 @@ export const DashboardMap: React.FC = () => {
     }
   }, [districtData, setSelectedYear])
 
-  const [isPanelOpen, setIsPanelOpen] = useState(false)
-
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-col md:flex-row h-full">
@@ -132,24 +130,12 @@ export const DashboardMap: React.FC = () => {
                 onSelect={searchDistrict}
               />
             </div>
-            <div className="absolute bottom-2 left-2 z-10">
-              <Button
-                variant="secondary"
-                size="icon"
-                onClick={() => setIsPanelOpen(!isPanelOpen)}
-                className="bg-white/90 hover:bg-white shadow-md"
-              >
-                <PanelLeft className={`h-5 w-5 transition-transform ${isPanelOpen ? '' : 'rotate-180'}`} />
-              </Button>
-            </div>
-            {isPanelOpen && (
-              <MapPanel
-                selectedBase={selectedBase}
-                setSelectedBase={setSelectedBase}
-                layers={layers}
-                toggleLayer={toggleLayerVisibility}
-              />
-            )}
+            <MapPanel
+              layers={layers}
+              toggleLayer={toggleLayerVisibility}
+              selectedBase={selectedBase}
+              setSelectedBase={setSelectedBase}
+            />
           </div>
 
           <div className="bg-white">

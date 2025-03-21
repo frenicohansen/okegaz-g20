@@ -1,10 +1,12 @@
 'use client'
 
 import type { BasicLayerInfo } from '@/hooks/use-map'
+import type { RefObject } from 'react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ChevronDown, Info, Layers } from 'lucide-react'
-import { useState } from 'react'
+import { ChevronDown, Info, Layers, PanelLeft } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Button } from '../ui/button'
 import { Switch } from '../ui/switch'
 import LayerLegend from './legend'
 
@@ -16,13 +18,64 @@ interface MapPanelProps {
 }
 
 export function MapPanel({ layers, toggleLayer, selectedBase, setSelectedBase }: MapPanelProps) {
+  const [isPanelOpen, setIsPanelOpen] = useState(false)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const toggleButtonRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      // If panel is open and click is outside panel and not on the toggle button
+      if (
+        isPanelOpen
+        && panelRef.current
+        && !panelRef.current.contains(event.target as Node)
+        && toggleButtonRef.current
+        && !toggleButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsPanelOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isPanelOpen])
+  return (
+    <>
+      <div className="absolute bottom-2 left-2 z-10">
+        <Button
+          ref={toggleButtonRef}
+          variant="secondary"
+          size="icon"
+          onClick={() => setIsPanelOpen(!isPanelOpen)}
+          className="bg-white/90 hover:bg-white shadow-md"
+        >
+          <PanelLeft className={`h-5 w-5 transition-transform ${isPanelOpen ? '' : 'rotate-180'}`} />
+        </Button>
+      </div>
+      {isPanelOpen && (
+        <MapPanelContent
+          ref={panelRef}
+          selectedBase={selectedBase}
+          setSelectedBase={setSelectedBase}
+          layers={layers}
+          toggleLayer={toggleLayer}
+        />
+      )}
+    </>
+
+  )
+}
+
+export function MapPanelContent({ layers, toggleLayer, selectedBase, setSelectedBase, ref }: MapPanelProps & { ref: RefObject<HTMLDivElement | null> }) {
   const [activeTab, setActiveTab] = useState('layers')
   const baseLayers = layers.filter(layer => layer.type === 'base')
   const overlayLayers = layers.filter(layer => layer.type === 'overlay')
   const tiffLayers = layers.filter(layer => layer.type === 'tiff')
 
   return (
-    <div className="absolute bottom-12 left-2 z-10 w-72 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
+    <div ref={ref} className="absolute bottom-12 left-2 z-10 w-72 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
       <Tabs defaultValue="layers" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2 mb-4">
           <TabsTrigger value="layers" className="flex items-center gap-2">
