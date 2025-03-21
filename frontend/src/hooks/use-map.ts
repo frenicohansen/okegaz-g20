@@ -14,8 +14,8 @@ import { OSM, XYZ } from 'ol/source'
 import GeoTIFF from 'ol/source/GeoTIFF'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
-import View from 'ol/View'
 
+import View from 'ol/View'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 export type StyleKey = keyof typeof styles
@@ -39,6 +39,11 @@ export const styles = {
     title: 'Districts',
     fill: 'rgba(204, 204, 255, 0.3)',
     stroke: '#6666cc',
+  },
+  Conflicts: {
+    title: 'Conflicts',
+    fill: 'rgba(255, 153, 153, 0.5)',
+    stroke: '#cc3333',
   },
 }
 
@@ -76,7 +81,7 @@ function createTiffLayer(
 
   return new WebGLTileLayer({
     source: tiffSource,
-    visible: true,
+    visible: false,
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
@@ -278,7 +283,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     = useState<GeoJSONFeature | null>(null)
   const [selectedScenario, setSelectedScenario] = useState<string>('carbon')
   const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
-  const [selectedYear, setSelectedYear] = useState<number>(2010)
+  const [selectedYear, setSelectedYear] = useState<number>(2023)
   const [districtNames, setDistrictNames] = useState<string[]>([])
   const districtSourceRef = useRef<VectorSource | null>(null)
 
@@ -296,6 +301,7 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       ...baseLayers.map(layer => ({ title: layer.get('title'), visible: layer.getVisible(), type: layer.get('type') })),
       ...layersSelectedYear.map(layer => ({ title: layer?.layer.get('title') ?? '', visible: layer?.layer.getVisible() ?? false, type: 'tiff' })),
       { title: districtLayer.get('title'), visible: districtLayer.getVisible(), type: districtLayer.get('type') },
+      { title: 'Conflicts', visible: true, type: 'overlay' },
     ])
   }, [selectedYear])
 
@@ -433,6 +439,67 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       }
     }
   }, [map, tiffLayers, selectedYear])
+
+  useEffect(() => {
+    if (!map)
+      return
+
+    const conflictLayer = new VectorLayer({
+      source: new VectorSource({
+        url: `/ConflictChoropleth/${selectedYear}_ConflictChoropleth.geojson`,
+        format: new GeoJSON(),
+      }),
+      style: (feature) => {
+        const properties = feature.getProperties()
+        const conflictLevel = properties.cluster_label || 0
+
+        let color
+        switch (conflictLevel) {
+          case 1:
+            color = 'rgba(255, 255, 178, 0.7)'
+            break
+          case 2:
+            color = 'rgba(254, 217, 118, 0.7)'
+            break
+          case 3:
+            color = 'rgba(254, 178, 76, 0.7)'
+            break
+          case 4:
+            color = 'rgba(253, 141, 60, 0.7)'
+            break
+          case 5:
+            color = 'rgba(240, 59, 32, 0.7)'
+            break
+          case 6:
+            color = 'rgba(189, 0, 38, 0.7)'
+            break
+          default:
+            color = 'rgba(247, 247, 247, 0.4)'
+        }
+
+        return new Style({
+          fill: new Fill({
+            color,
+          }),
+          stroke: new Stroke({
+            color: styles.Conflicts.stroke,
+            width: 1,
+          }),
+        })
+      },
+      properties: {
+        title: 'Conflicts',
+        type: 'overlay',
+      },
+    })
+    map.addLayer(conflictLayer)
+
+    return () => {
+      if (map) {
+        map.removeLayer(conflictLayer)
+      }
+    }
+  }, [map, selectedYear])
 
   // Function to search for a district by name and zoom to it
   const searchDistrict = (query: string) => {
