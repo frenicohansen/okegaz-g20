@@ -10,11 +10,8 @@ import {
 } from '@/components/ui/select'
 import { useSelectedDistricts } from '@/hooks/use-selected-districts'
 import { X } from 'lucide-react'
-// src/components/comparison-tools.tsx
 import { useRef, useState } from 'react'
-// For printing
 import { useReactToPrint } from 'react-to-print'
-
 import {
   CartesianGrid,
   Legend,
@@ -51,34 +48,66 @@ export function ComparisonTools() {
   // For printing
   const printRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
-    documentTitle: 'District Comparison',
+    documentTitle: 'District Comparison Report',
     onPrintError: error => console.error('Print failed:', error),
     onAfterPrint: () => console.warn('Printed successfully'),
     contentRef: printRef,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .print-break-inside-avoid {
+          break-inside: avoid;
+        }
+      }
+    `,
   })
 
   // Merge district data for the selected metric
   const mergedData = mergeDistrictData(selectedDistricts, selectedMetric)
 
   // Transform data for DistrictReport component
-  const transformDataForReport = (
-    data: Record<string, number | number[]>[],
-    districtName: string,
-  ): any[] => {
-    if (!data.length || !selectedDistricts.length)
+  function transformDataForReport(data: any[]): any[] {
+    if (!data || data.length === 0) {
       return []
+    }
 
-    // Find the selected district's data
-    const districtData = selectedDistricts.find(d => d.districtName === districtName)
-    if (!districtData)
-      return []
+    // The district data might be in different formats depending on the source
+    // Check if the data already has the expected structure
+    const firstItem = data[0]
 
-    // Return the original district data which matches the expected format
-    return districtData.data
+    // If data already has the expected structure, return it as is
+    if (
+      'Year' in firstItem
+      && 'District' in firstItem
+      && 'LandCoverClass' in firstItem
+      && 'Percentage' in firstItem
+    ) {
+      return data
+    }
+
+    // Otherwise, transform the data to match the expected format
+    return data.map(item => ({
+      'Year': item.Year || item.year,
+      'District': item.District || item.district,
+      'LandCoverClass': item.LandCoverClass || 0,
+      'PixelCount': item.PixelCount || 0,
+      'Percentage': item.Percentage || 0,
+      'LandCoverLabel': item.LandCoverLabel || null,
+      'Precipitation (mm)': item['Precipitation (mm)'] || item.precip || null,
+      'GPP (kg_C/m²/year)': item['GPP (kg_C/m²/year)'] || item.gpp || null,
+      'Population Density (People/km²)': item['Population Density (People/km²)'] || item.popDensity || null,
+    }))
   }
 
   return (
-    <div ref={printRef} className="p-4 space-y-4">
+    <div className="p-4 space-y-4" ref={printRef}>
       <h2 className="text-2xl font-bold">Compare & Analyze</h2>
       <p className="text-muted-foreground">
         Select multiple districts or metrics to compare time-series data.
@@ -109,9 +138,9 @@ export function ComparisonTools() {
           </Select>
         </div>
 
-        {/* Metric Selection */}
+        {/* Metric Selection for Chart */}
         <div className="flex-1">
-          <label className="text-sm font-medium">Select Metric</label>
+          <label className="text-sm font-medium">Chart Metric</label>
           <Select
             value={selectedMetric}
             onValueChange={value => setSelectedMetric(value as MetricType)}
@@ -127,13 +156,6 @@ export function ComparisonTools() {
           </Select>
         </div>
       </div>
-
-      {selectedDistricts.length > 0 && mergedData.length > 0 && (
-        <DistrictReport
-          districtData={transformDataForReport(mergedData, selectedDistricts[0]?.districtName || '')}
-          districtName={selectedDistricts[0]?.districtName || ''}
-        />
-      )}
 
       {/* Selected Districts */}
       {selectedDistricts.length > 0 && (
@@ -160,7 +182,7 @@ export function ComparisonTools() {
       )}
 
       {/* Comparison Chart */}
-      <Card>
+      <Card className="print-break-inside-avoid mb-8">
         <CardHeader>
           <CardTitle>
             {metricLabels[selectedMetric]}
@@ -204,55 +226,47 @@ export function ComparisonTools() {
         </CardContent>
       </Card>
 
-      {/* Summary Table */}
+      {/* District Report Section */}
       {selectedDistricts.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Summary Statistics</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <table className="w-full border-collapse">
-              <thead>
-                <tr>
-                  <th className="text-left p-2 border">District</th>
-                  <th className="text-left p-2 border">Min</th>
-                  <th className="text-left p-2 border">Max</th>
-                  <th className="text-left p-2 border">Average</th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedDistricts.map((district) => {
-                  const stats = calculateStats(district.data, selectedMetric)
-                  return (
-                    <tr key={district.districtName}>
-                      <td className="p-2 border">{district.districtName}</td>
-                      <td className="p-2 border">{stats.min.toFixed(2)}</td>
-                      <td className="p-2 border">{stats.max.toFixed(2)}</td>
-                      <td className="p-2 border">{stats.avg.toFixed(2)}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </CardContent>
-        </Card>
+        <div className="print-break-inside-avoid mb-8">
+          <DistrictReport
+            districtData={transformDataForReport(selectedDistricts[0].data)}
+            districtName={selectedDistricts[0].districtName}
+          />
+        </div>
       )}
 
+      {/* Print Button */}
       <Button
-        onClick={() => handlePrint()}
-        className="bg-blue-600 text-white print:hidden" // Hide button when printing
+        className="bg-blue-600 hover:bg-blue-700 text-white print:hidden mb-4 flex items-center gap-2"
         disabled={selectedDistricts.length === 0}
+        onClick={handlePrint}
       >
-        Print / Export
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print / Export Report
       </Button>
 
       {/* Print-only header */}
-      <div className="hidden print:block print:mb-4">
-        <h3 className="text-lg font-semibold">G20 Global Land Initiative - District Comparison</h3>
-        <p>
-          Printed on:
-          {new Date().toLocaleDateString()}
-        </p>
+      <div className="hidden print:block print:mb-8">
+        <h1 className="text-2xl font-bold mb-2">G20 Global Land Initiative - District Comparison Report</h1>
+        <div className="flex justify-between items-center border-b pb-2 mb-4">
+          <p className="text-sm">
+            Generated on:
+            {' '}
+            {new Date().toLocaleDateString()}
+            {' '}
+            {new Date().toLocaleTimeString()}
+          </p>
+          <p className="text-sm">
+            Districts:
+            {' '}
+            {selectedDistricts.map(d => d.districtName).join(', ')}
+          </p>
+        </div>
       </div>
     </div>
   )
@@ -315,40 +329,6 @@ function mergeDistrictData(
 
   // Convert merged object to array sorted by year
   return Object.values(merged).sort((a: any, b: any) => a.year - b.year)
-}
-
-// Helper function to calculate statistics for a district's data
-function calculateStats(data: any[], metric: MetricType) {
-  const metricMap: Record<MetricType, string> = {
-    precip: 'Precipitation (mm)',
-    gpp: 'GPP (kg_C/m²/year)',
-    popDensity: 'Population Density (People/km²)',
-  }
-
-  // Extract unique values for the metric (one per year)
-  const uniqueYearValues = new Map<number, number>()
-
-  data.forEach((item) => {
-    const year = item.Year
-    const value = item[metricMap[metric]]
-
-    if (value !== null && !uniqueYearValues.has(year)) {
-      uniqueYearValues.set(year, Number(value))
-    }
-  })
-
-  const values = Array.from(uniqueYearValues.values())
-
-  if (values.length === 0) {
-    return { min: 0, max: 0, avg: 0 }
-  }
-
-  const min = Math.min(...values)
-  const max = Math.max(...values)
-  const sum = values.reduce((acc, val) => acc + val, 0)
-  const avg = sum / values.length
-
-  return { min, max, avg }
 }
 
 // Helper function to pick a consistent color for each district

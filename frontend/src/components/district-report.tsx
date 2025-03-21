@@ -1,7 +1,6 @@
-// Add this to your comparison-tools.tsx file or create a new file called district-report.tsx
-
 import { Button } from '@/components/ui/button'
-import { useRef } from 'react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { useMemo, useRef, useState } from 'react'
 import { useReactToPrint } from 'react-to-print'
 import {
   Bar,
@@ -16,7 +15,7 @@ import {
   YAxis,
 } from 'recharts'
 
-// Define the type for the raw district data
+/* Define the type for the raw district data */
 interface DistrictDataRow {
   'Year': number
   'District': string
@@ -35,7 +34,7 @@ interface DistrictReportProps {
   region?: string
 }
 
-// Helper function to safely get a number value
+/* Helper function to safely get a number value */
 function safeNumber(value: number | null | undefined): number {
   if (value === null || value === undefined || Number.isNaN(Number(value))) {
     return 0
@@ -43,14 +42,11 @@ function safeNumber(value: number | null | undefined): number {
   return Number(value)
 }
 
-// Process the raw district data into a format suitable for charts
+/* Process the raw district data into a format suitable for charts and tables */
 function processDistrictData(districtData: DistrictDataRow[]) {
   if (!districtData || districtData.length === 0) {
     return []
   }
-
-  // Extract unique years from the district data
-  const _years = [...new Set(districtData.map(item => item.Year))].sort((a, b) => a - b)
 
   // Group data by year
   const dataByYear = districtData.reduce<Record<number, any>>((acc, item) => {
@@ -94,7 +90,7 @@ function processDistrictData(districtData: DistrictDataRow[]) {
   return Object.values(dataByYear).sort((a, b) => a.year - b.year)
 }
 
-// Calculate rainfall variability index
+/* Calculate rainfall variability index */
 function calculateRainfallVariabilityIndex(processedData: any[]) {
   if (processedData.length < 2)
     return { arvi: 0, min: 0, max: 0, minYear: 0, maxYear: 0, avg: 0 }
@@ -106,7 +102,7 @@ function calculateRainfallVariabilityIndex(processedData: any[]) {
   const min = Math.min(...rainfallValues)
   const max = Math.max(...rainfallValues)
   const avg = rainfallValues.reduce((sum, val) => sum + val, 0) / rainfallValues.length
-  const arvi = (max - min) / avg // Annual Rainfall Variability Index
+  const arvi = (max - min) / avg
 
   const minYear = processedData.find(d => d.precip === min)?.year || 0
   const maxYear = processedData.find(d => d.precip === max)?.year || 0
@@ -121,7 +117,7 @@ function calculateRainfallVariabilityIndex(processedData: any[]) {
   }
 }
 
-// Calculate population trends
+/* Calculate population trends */
 function calculatePopulationTrends(processedData: any[]) {
   if (processedData.length < 2)
     return { change: 0, avgChange: 0, trend: 'steady', years: 0, projectedPopulation: 0 }
@@ -149,266 +145,462 @@ function calculatePopulationTrends(processedData: any[]) {
     avgChange,
     trend,
     years: yearsDiff,
-    projectedPopulation: lastPopDensity * (1 + (avgChange / 100) * 5), // Project 5 years into future
+    projectedPopulation: lastPopDensity * (1 + (avgChange / 100) * 5), // Project 5 years into the future
   }
 }
 
+/* StackedBar component for visualizing land cover distribution in a table cell */
+function StackedBar({ values }: { values: { label: string, value: number, color: string }[] }) {
+  const total = values.reduce((sum, item) => sum + item.value, 0)
+  return (
+    <div className="flex h-4 w-full rounded overflow-hidden border">
+      {values.map((item, i) => {
+        if (item.value <= 0)
+          return null
+        const widthPercent = (item.value / total) * 100
+        return (
+          <div
+            key={i}
+            style={{ width: `${widthPercent}%`, backgroundColor: item.color }}
+            title={`${item.label}: ${item.value.toFixed(2)}%`}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+/* LandCoverTable component for displaying cleaned, readable data */
+export function LandCoverTable({ processedData }: { processedData: any[] }) {
+  return (
+    <div className="overflow-x-auto mt-8">
+      <table className="min-w-full border-collapse text-sm">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="border p-2 text-left">Year</th>
+            <th className="border p-2 text-left">Open Shrublands</th>
+            <th className="border p-2 text-left">Grasslands</th>
+            <th className="border p-2 text-left">Croplands</th>
+            <th className="border p-2 text-left">Barren Land</th>
+            <th className="border p-2 text-left">Other</th>
+            <th className="border p-2 text-left">Total (%)</th>
+            <th className="border p-2 text-left">Visualization</th>
+          </tr>
+        </thead>
+        <tbody>
+          {processedData.map((data, index) => {
+            const total = data.openShrublands + data.grasslands + data.croplands + data.barren + data.unknown
+            const barValues = [
+              { label: 'Open Shrublands', value: data.openShrublands, color: '#8884d8' },
+              { label: 'Grasslands', value: data.grasslands, color: '#82ca9d' },
+              { label: 'Croplands', value: data.croplands, color: '#ff8042' },
+              { label: 'Barren Land', value: data.barren, color: '#d3d3d3' },
+              { label: 'Other', value: data.unknown, color: '#ffc658' },
+            ]
+            return (
+              <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                <td className="border p-2">{data.year}</td>
+                <td className="border p-2">{data.openShrublands.toFixed(2)}%</td>
+                <td className="border p-2">{data.grasslands.toFixed(2)}%</td>
+                <td className="border p-2">{data.croplands.toFixed(2)}%</td>
+                <td className="border p-2">{data.barren.toFixed(2)}%</td>
+                <td className="border p-2">{data.unknown.toFixed(2)}%</td>
+                <td className="border p-2">{total.toFixed(2)}%</td>
+                <td className="border p-2">
+                  <StackedBar values={barValues} />
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/* Main DistrictReport component that integrates charts, tables, and print functionality */
 export function DistrictReport({ districtData, districtName, region = 'Sahel' }: DistrictReportProps) {
   const reportRef = useRef<HTMLDivElement>(null)
+  const [selectedDistrict, setSelectedDistrict] = useState(districtName)
+  const [selectedMetrics, setSelectedMetrics] = useState<string[]>(['popDensity', 'precip', 'gpp'])
+  const [availableDistricts, setAvailableDistricts] = useState<string[]>([])
 
-  const processedData = processDistrictData(districtData)
+  // Get all available districts from the data
+  useMemo(() => {
+    const districts = [...new Set(districtData.map(item => item.District))].sort()
+    setAvailableDistricts(districts)
+    if (!districts.includes(selectedDistrict) && districts.length > 0) {
+      setSelectedDistrict(districts[0])
+    }
+  }, [districtData, selectedDistrict])
+
+  // Filter data for selected district
+  const filteredData = useMemo(() => {
+    return districtData.filter(item => item.District === selectedDistrict)
+  }, [districtData, selectedDistrict])
+
+  const processedData = processDistrictData(filteredData)
   const rainfallStats = calculateRainfallVariabilityIndex(processedData)
   const populationStats = calculatePopulationTrends(processedData)
-
-  // Latest year data for cover page
   const latestYearData = processedData.length > 0 ? processedData[processedData.length - 1] : null
-
-  // Calculate year range for display
   const yearRange = processedData.length > 0
     ? `${processedData[0].year}-${processedData[processedData.length - 1].year}`
     : 'N/A'
 
   const handlePrint = useReactToPrint({
-    documentTitle: `${districtName}_District_Report`,
+    documentTitle: `${selectedDistrict}_District_Report`,
     onAfterPrint: () => console.warn('Printed successfully'),
     contentRef: reportRef,
   })
 
+  // Handle metric selection toggle
+  const toggleMetric = (metric: string) => {
+    setSelectedMetrics(prev =>
+      prev.includes(metric)
+        ? prev.filter(m => m !== metric)
+        : [...prev, metric],
+    )
+  }
+
   return (
     <>
-      <Button
-        onClick={() => handlePrint()}
-        className="mb-4"
-        variant="outline"
-      >
-        Generate PDF Report
-      </Button>
+      <div className="mb-6 p-4 border rounded-md bg-gray-50">
+        <div className="flex flex-col md:flex-row gap-4 mb-4">
+          <div className="flex-1">
+            <label className="block text-sm font-medium mb-1">
+              Select District
+            </label>
+            <Select
+              value={selectedDistrict}
+              onValueChange={(value: string) => setSelectedDistrict(value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select district" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableDistricts.map(district => (
+                  <SelectItem key={district} value={district}>
+                    {district}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <div className="hidden">
-        <div ref={reportRef} className="p-4 bg-white">
-          {/* Cover Page */}
-          <div className="relative h-[297mm] w-[210mm] p-8 flex flex-col" style={{ pageBreakAfter: 'always' }}>
-            <div className="absolute inset-0 z-0 opacity-10">
-              <img
-                src="/background-image.jpg"
-                alt="Background"
-                className="w-full h-full object-cover"
-                style={{ filter: 'brightness(0.9)' }}
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
+          <div className="flex-1">
+            <label className="block text-sm font-medium mb-1">
+              Select Metrics to Compare
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  checked={selectedMetrics.includes('popDensity')}
+                  onChange={() => toggleMetric('popDensity')}
+                  className="mr-1"
+                />
+                <span className="text-sm">Population</span>
+              </label>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  checked={selectedMetrics.includes('precip')}
+                  onChange={() => toggleMetric('precip')}
+                  className="mr-1"
+                />
+                <span className="text-sm">Precipitation</span>
+              </label>
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  checked={selectedMetrics.includes('gpp')}
+                  onChange={() => toggleMetric('gpp')}
+                  className="mr-1"
+                />
+                <span className="text-sm">GPP</span>
+              </label>
             </div>
+          </div>
 
-            <div className="flex justify-between mb-8 z-10">
-              <img
-                src="/UN_logo.png"
-                alt="UN Logo"
-                className="h-12"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
-              <img
-                src="/G20_logo.png"
-                alt="G20 Logo"
-                className="h-12"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                }}
-              />
+          <div className="flex items-end">
+            <Button onClick={() => handlePrint()} variant="outline">
+              Generate PDF Report
+            </Button>
+          </div>
+        </div>
+
+        {/* Metrics Comparison Chart */}
+        {processedData.length > 0 && (
+          <div className="mt-4 border p-4 rounded-md bg-white">
+            <h3 className="text-lg font-bold mb-2 text-center">Metrics Comparison</h3>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={processedData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="year" />
+                  <YAxis yAxisId="left" orientation="left" />
+                  <YAxis yAxisId="right" orientation="right" />
+                  <Tooltip />
+                  <Legend />
+                  {selectedMetrics.includes('popDensity') && (
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="popDensity"
+                      stroke="#8884d8"
+                      name="Population Density (People/km²)"
+                      strokeWidth={2}
+                    />
+                  )}
+                  {selectedMetrics.includes('precip') && (
+                    <Line
+                      yAxisId="right"
+                      type="monotone"
+                      dataKey="precip"
+                      stroke="#82ca9d"
+                      name="Precipitation (mm)"
+                      strokeWidth={2}
+                    />
+                  )}
+                  {selectedMetrics.includes('gpp') && (
+                    <Line
+                      yAxisId="right"
+                      type="monotone"
+                      dataKey="gpp"
+                      stroke="#ff7300"
+                      name="GPP (kg_C/m²/year)"
+                      strokeWidth={2}
+                    />
+                  )}
+                </LineChart>
+              </ResponsiveContainer>
             </div>
+          </div>
+        )}
+      </div>
 
-            <div className="flex-grow"></div>
-
-            <div className="z-10 mb-8">
-              <h1 className="text-3xl font-bold mb-2">
-                District:
-                {' '}
-                {districtName}
-              </h1>
-              <h2 className="text-xl mb-4">
-                Region:
-                {' '}
-                {region}
-              </h2>
-              <p className="text-lg mb-2">
-                GPP:
-                {' '}
-                {latestYearData?.gpp.toFixed(2) || 'N/A'}
-                {' '}
-                kg C/m³/year
-              </p>
-              <p className="text-lg">
-                Population Density:
-                {' '}
-                {latestYearData?.popDensity.toFixed(2) || 'N/A'}
-                {' '}
-                people/km²
+      {/* Printable report content - hidden on screen, visible when printing */}
+      <div className="hidden print:block">
+        <div ref={reportRef} className="p-8 bg-white max-w-4xl mx-auto">
+          {/* G20/UN Cover Page */}
+          <div className="text-center mb-12 pb-4 page-break-after">
+            <div className="flex justify-center mb-6">
+              {/* Use inline SVG instead of external images to avoid loading issues during printing */}
+              <div className="h-24 mr-4 flex items-center justify-center">
+                <div className="text-2xl font-bold">G20</div>
+              </div>
+              <div className="h-24 flex items-center justify-center">
+                <div className="text-2xl font-bold">UN</div>
+              </div>
+            </div>
+            <h1 className="text-4xl font-bold mb-4">
+              G20 Global Land Initiative
+            </h1>
+            <h2 className="text-2xl mb-6">
+              United Nations Convention to Combat Desertification
+            </h2>
+            <div className="border-t border-b py-4 max-w-md mx-auto my-8">
+              <h3 className="text-3xl font-bold mb-2">District Report</h3>
+              <p className="text-xl mb-4">{selectedDistrict}</p>
+              <p className="text-gray-500">
+                Generated on: {new Date().toLocaleDateString()}
               </p>
             </div>
           </div>
 
-          {/* Data Pages */}
-          <div className="p-8">
-            <div className="grid grid-cols-2 gap-8 mb-8">
-              {/* Population Density Trends */}
-              <div>
-                <h2 className="text-xl font-bold mb-2">Population Density Trends</h2>
-                <p className="text-sm mb-4">
-                  Over the past
-                  {' '}
-                  {processedData.length > 0 ? (processedData[processedData.length - 1].year - processedData[0].year) : 'N/A'}
-                  {' '}
-                  years, the population has shown
-                  {' '}
-                  {populationStats.change > 5 ? 'growth' : populationStats.change < -5 ? 'decline' : 'stagnation'}
-                  {' '}
-                  trends.
-                  The annual population change averaged
-                  {' '}
-                  {populationStats.avgChange.toFixed(2)}
-                  % per year,
-                  indicating a
-                  {' '}
-                  {Math.abs(populationStats.avgChange) < 1 ? 'steady' : 'volatile'}
-                  {' '}
-                  pattern.
-                  If trends continue, the district's population is expected to reach
-                  {' '}
-                  {populationStats.projectedPopulation.toFixed(2)}
-                  {' '}
-                  by
-                  {' '}
-                  {new Date().getFullYear() + 5}
-                  .
-                </p>
+          {/* Report Header */}
+          <div className="text-center mb-8 border-b pb-4">
+            <h1 className="text-3xl font-bold mb-2">
+              {selectedDistrict}
+              {' '}
+              District Report
+            </h1>
+            <p className="text-xl">
+              {region}
+              {' '}
+              Region Land Cover Analysis
+            </p>
+            <p className="text-gray-500">
+              Data Period:
+              {yearRange}
+            </p>
+          </div>
 
-                {processedData.length > 0 && (
-                  <div className="h-48">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={processedData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip formatter={value => [Number(value).toFixed(2), 'People/km²']} />
-                        <Line
-                          type="monotone"
-                          dataKey="popDensity"
-                          stroke="#8884d8"
-                          name="Population Density"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                )}
-              </div>
+          {/* Executive Summary */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Executive Summary</h2>
+            <div className="border p-4 rounded-md bg-gray-50">
+              <p className="mb-2">
+                This report provides a comprehensive analysis of land cover changes and environmental trends in
+                {' '}
+                <span className="font-bold">{selectedDistrict}</span>
+                {' '}
+                district from
+                {' '}
+                <span className="font-bold">{yearRange}</span>
+                .
+              </p>
+              <p>
+                Key findings include
+                {' '}
+                <span className="font-bold">{populationStats.change > 5 ? 'significant population growth' : populationStats.change < -5 ? 'population decline' : 'stable population'}</span>
+                ,
+                {' '}
+                <span className="font-bold">{rainfallStats.arvi > 0.3 ? 'high rainfall variability' : rainfallStats.arvi > 0.15 ? 'moderate rainfall variability' : 'stable rainfall patterns'}</span>
+                , and
+                {' '}
+                <span className="font-bold">
+                  {latestYearData
+                    ? latestYearData.openShrublands > 40
+                      ? 'predominant open shrubland coverage'
+                      : latestYearData.grasslands > 40
+                        ? 'predominant grassland coverage'
+                        : latestYearData.croplands > 40
+                          ? 'predominant cropland usage'
+                          : latestYearData.barren > 40
+                            ? 'significant barren land areas'
+                            : 'mixed land cover distribution'
+                    : 'insufficient data for land cover analysis'}
+                </span>
+                .
+              </p>
+            </div>
+          </div>
 
-              {/* Annual Rainfall Variability Index */}
-              <div>
-                <h2 className="text-xl font-bold mb-2">Annual Rainfall Variability Index</h2>
-                <p className="text-sm mb-4">
-                  The district received an average annual rainfall of
-                  {' '}
-                  {rainfallStats.avg.toFixed(2)}
-                  {' '}
-                  mm over
-                  the last
-                  {' '}
-                  {yearRange}
-                  {' '}
-                  period. The Annual Rainfall Variability
-                  Index (ARVI) is calculated at
+          {/* Land Cover Distribution */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Land Cover Distribution</h2>
+            <div className="h-64 mb-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={processedData}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="year" />
+                  <YAxis />
+                  <Tooltip formatter={(value) => `${Number(value).toFixed(2)}%`} />
+                  <Legend />
+                  <Bar dataKey="openShrublands" stackId="a" name="Open Shrublands" fill="#8884d8" />
+                  <Bar dataKey="grasslands" stackId="a" name="Grasslands" fill="#82ca9d" />
+                  <Bar dataKey="croplands" stackId="a" name="Croplands" fill="#ff8042" />
+                  <Bar dataKey="barren" stackId="a" name="Barren Land" fill="#d3d3d3" />
+                  <Bar dataKey="unknown" stackId="a" name="Other" fill="#ffc658" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Land Cover Table */}
+            <LandCoverTable processedData={processedData} />
+          </div>
+
+          {/* Environmental Metrics */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Environmental Metrics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="border p-4 rounded-md">
+                <h3 className="text-lg font-semibold mb-2">Rainfall Variability</h3>
+                <p className="mb-1">
+                  <span className="font-medium">ARVI:</span>
                   {' '}
                   {rainfallStats.arvi.toFixed(2)}
-                  , indicating
-                  {rainfallStats.arvi < 0.2 ? ' low' : rainfallStats.arvi < 0.4 ? ' moderate' : ' high'}
-                  {' '}
-                  variability.
-                  Rainfall ranged from a low of
-                  {' '}
-                  {rainfallStats.min.toFixed(2)}
-                  {' '}
-                  mm in
-                  {rainfallStats.minYear}
-                  {' '}
-                  to a high of
-                  {' '}
-                  {rainfallStats.max.toFixed(2)}
-                  {' '}
-                  mm in
-                  {rainfallStats.maxYear}
-                  .
-                  High ARVI values correlate with agricultural yield fluctuations, water stress periods, extreme drought/flood events.
                 </p>
+                <p className="mb-1">
+                  <span className="font-medium">Min:</span>
+                  {' '}
+                  {rainfallStats.min.toFixed(2)} mm (
+                  {rainfallStats.minYear}
+                  )
+                </p>
+                <p className="mb-1">
+                  <span className="font-medium">Max:</span>
+                  {' '}
+                  {rainfallStats.max.toFixed(2)} mm (
+                  {rainfallStats.maxYear}
+                  )
+                </p>
+                <p>
+                  <span className="font-medium">Avg:</span>
+                  {' '}
+                  {rainfallStats.avg.toFixed(2)} mm
+                </p>
+              </div>
 
-                {processedData.length > 0 && (
-                  <div className="h-48">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={processedData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip formatter={value => [Number(value).toFixed(2), 'mm']} />
-                        <Line
-                          type="monotone"
-                          dataKey="precip"
-                          stroke="#82ca9d"
-                          name="Precipitation"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
+              <div className="border p-4 rounded-md">
+                <h3 className="text-lg font-semibold mb-2">Population Trends</h3>
+                <p className="mb-1">
+                  <span className="font-medium">Change:</span>
+                  {' '}
+                  {populationStats.change.toFixed(2)}%
+                </p>
+                <p className="mb-1">
+                  <span className="font-medium">Annual Change:</span>
+                  {' '}
+                  {populationStats.avgChange.toFixed(2)}%
+                </p>
+                <p className="mb-1">
+                  <span className="font-medium">Trend:</span>
+                  {' '}
+                  {populationStats.trend}
+                </p>
+                <p>
+                  <span className="font-medium">Projected (5yr):</span>
+                  {' '}
+                  {populationStats.projectedPopulation.toFixed(2)} people/km²
+                </p>
+              </div>
+
+              <div className="border p-4 rounded-md">
+                <h3 className="text-lg font-semibold mb-2">Current Land Cover</h3>
+                {latestYearData && (
+                  <>
+                    <p className="mb-1">
+                      <span className="font-medium">Open Shrublands:</span>
+                      {' '}
+                      {latestYearData.openShrublands.toFixed(2)}%
+                    </p>
+                    <p className="mb-1">
+                      <span className="font-medium">Grasslands:</span>
+                      {' '}
+                      {latestYearData.grasslands.toFixed(2)}%
+                    </p>
+                    <p className="mb-1">
+                      <span className="font-medium">Croplands:</span>
+                      {' '}
+                      {latestYearData.croplands.toFixed(2)}%
+                    </p>
+                    <p>
+                      <span className="font-medium">Barren Land:</span>
+                      {' '}
+                      {latestYearData.barren.toFixed(2)}%
+                    </p>
+                  </>
                 )}
               </div>
             </div>
+          </div>
 
-            {/* Land Cover Distribution */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold mb-4">Land Cover Distribution</h3>
-              <div className="flex flex-wrap">
-                {processedData.map(data => (
-                  <div
-                    key={`landcover-year-${data.year}`}
-                    className="w-1/2 p-2"
-                  >
-                    <h4 className="text-lg font-bold mb-2">{data.year}</h4>
-                    <ResponsiveContainer width="100%" height={200}>
-                      <BarChart data={[data]}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip formatter={value => [`${Number(value).toFixed(2)}%`, '']} />
-                        <Legend />
-                        <Bar dataKey="openShrublands" stackId="a" fill="#8884d8" name="Open Shrublands" />
-                        <Bar dataKey="grasslands" stackId="a" fill="#82ca9d" name="Grasslands" />
-                        <Bar dataKey="croplands" stackId="a" fill="#ff8042" name="Croplands" />
-                        <Bar dataKey="barren" stackId="a" fill="#d3d3d3" name="Barren Land" />
-                        <Bar dataKey="unknown" stackId="a" fill="#ffc658" name="Other" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Raw Data Table */}
-            <div>
-              <h2 className="text-xl font-bold mb-4">Environmental Data Summary</h2>
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
+          {/* Raw Data */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Raw Data</h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse text-sm">
+                <thead className="bg-gray-200">
+                  <tr>
                     <th className="border p-2 text-left">Year</th>
                     <th className="border p-2 text-left">Precipitation (mm)</th>
                     <th className="border p-2 text-left">GPP (kg_C/m²/year)</th>
-                    <th className="border p-2 text-left">Population Density</th>
+                    <th className="border p-2 text-left">Population Density (People/km²)</th>
                   </tr>
                 </thead>
                 <tbody>
                   {processedData.map((data, index) => (
-                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                       <td className="border p-2">{data.year}</td>
                       <td className="border p-2">{data.precip.toFixed(2)}</td>
                       <td className="border p-2">{data.gpp.toFixed(2)}</td>
@@ -418,16 +610,13 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                 </tbody>
               </table>
             </div>
+          </div>
 
-            {/* Footer */}
-            <div className="mt-8 text-center text-sm text-gray-500">
-              <p>
-                Generated on
-                {' '}
-                {new Date().toLocaleDateString()}
-              </p>
-              <p>G20 Global Land Initiative - United Nations Convention to Combat Desertification</p>
-            </div>
+          {/* Footer */}
+          <div className="text-center text-sm text-gray-500 mt-12 pt-4 border-t">
+            <p> {new Date().getFullYear()} G20 Global Land Initiative</p>
+            <p>United Nations Convention to Combat Desertification</p>
+            <p>For official use only</p>
           </div>
         </div>
       </div>
