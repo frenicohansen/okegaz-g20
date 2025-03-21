@@ -2,7 +2,7 @@ import { Sidebar, SidebarBody, SidebarLink } from '@/components/ui/sidebar'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ChartArea, LandPlot, ReceiptText } from 'lucide-react'
+import { ChartArea, ReceiptText } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 

@@ -17,16 +17,12 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  LabelList,
   Legend,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts'
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart'
 
 // Define the type for the raw district data from district_data.json
 interface DistrictDataRow {

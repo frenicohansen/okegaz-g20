@@ -200,12 +200,30 @@ export function LandCoverTable({ processedData }: { processedData: any[] }) {
             return (
               <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                 <td className="border p-2">{data.year}</td>
-                <td className="border p-2">{data.openShrublands.toFixed(2)}%</td>
-                <td className="border p-2">{data.grasslands.toFixed(2)}%</td>
-                <td className="border p-2">{data.croplands.toFixed(2)}%</td>
-                <td className="border p-2">{data.barren.toFixed(2)}%</td>
-                <td className="border p-2">{data.unknown.toFixed(2)}%</td>
-                <td className="border p-2">{total.toFixed(2)}%</td>
+                <td className="border p-2">
+                  {data.openShrublands.toFixed(2)}
+                  %
+                </td>
+                <td className="border p-2">
+                  {data.grasslands.toFixed(2)}
+                  %
+                </td>
+                <td className="border p-2">
+                  {data.croplands.toFixed(2)}
+                  %
+                </td>
+                <td className="border p-2">
+                  {data.barren.toFixed(2)}
+                  %
+                </td>
+                <td className="border p-2">
+                  {data.unknown.toFixed(2)}
+                  %
+                </td>
+                <td className="border p-2">
+                  {total.toFixed(2)}
+                  %
+                </td>
                 <td className="border p-2">
                   <StackedBar values={barValues} />
                 </td>
@@ -403,7 +421,9 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
               <h3 className="text-3xl font-bold mb-2">District Report</h3>
               <p className="text-xl mb-4">{selectedDistrict}</p>
               <p className="text-gray-500">
-                Generated on: {new Date().toLocaleDateString()}
+                Generated on:
+                {' '}
+                {new Date().toLocaleDateString()}
               </p>
             </div>
           </div>
@@ -484,7 +504,7 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="year" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `${Number(value).toFixed(2)}%`} />
+                  <Tooltip formatter={value => `${Number(value).toFixed(2)}%`} />
                   <Legend />
                   <Bar dataKey="openShrublands" stackId="a" name="Open Shrublands" fill="#8884d8" />
                   <Bar dataKey="grasslands" stackId="a" name="Grasslands" fill="#82ca9d" />
@@ -513,21 +533,27 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                 <p className="mb-1">
                   <span className="font-medium">Min:</span>
                   {' '}
-                  {rainfallStats.min.toFixed(2)} mm (
+                  {rainfallStats.min.toFixed(2)}
+                  {' '}
+                  mm (
                   {rainfallStats.minYear}
                   )
                 </p>
                 <p className="mb-1">
                   <span className="font-medium">Max:</span>
                   {' '}
-                  {rainfallStats.max.toFixed(2)} mm (
+                  {rainfallStats.max.toFixed(2)}
+                  {' '}
+                  mm (
                   {rainfallStats.maxYear}
                   )
                 </p>
                 <p>
                   <span className="font-medium">Avg:</span>
                   {' '}
-                  {rainfallStats.avg.toFixed(2)} mm
+                  {rainfallStats.avg.toFixed(2)}
+                  {' '}
+                  mm
                 </p>
               </div>
 
@@ -536,12 +562,14 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                 <p className="mb-1">
                   <span className="font-medium">Change:</span>
                   {' '}
-                  {populationStats.change.toFixed(2)}%
+                  {populationStats.change.toFixed(2)}
+                  %
                 </p>
                 <p className="mb-1">
                   <span className="font-medium">Annual Change:</span>
                   {' '}
-                  {populationStats.avgChange.toFixed(2)}%
+                  {populationStats.avgChange.toFixed(2)}
+                  %
                 </p>
                 <p className="mb-1">
                   <span className="font-medium">Trend:</span>
@@ -551,7 +579,9 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                 <p>
                   <span className="font-medium">Projected (5yr):</span>
                   {' '}
-                  {populationStats.projectedPopulation.toFixed(2)} people/km²
+                  {populationStats.projectedPopulation.toFixed(2)}
+                  {' '}
+                  people/km²
                 </p>
               </div>
 
@@ -562,22 +592,26 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
                     <p className="mb-1">
                       <span className="font-medium">Open Shrublands:</span>
                       {' '}
-                      {latestYearData.openShrublands.toFixed(2)}%
+                      {latestYearData.openShrublands.toFixed(2)}
+                      %
                     </p>
                     <p className="mb-1">
                       <span className="font-medium">Grasslands:</span>
                       {' '}
-                      {latestYearData.grasslands.toFixed(2)}%
+                      {latestYearData.grasslands.toFixed(2)}
+                      %
                     </p>
                     <p className="mb-1">
                       <span className="font-medium">Croplands:</span>
                       {' '}
-                      {latestYearData.croplands.toFixed(2)}%
+                      {latestYearData.croplands.toFixed(2)}
+                      %
                     </p>
                     <p>
                       <span className="font-medium">Barren Land:</span>
                       {' '}
-                      {latestYearData.barren.toFixed(2)}%
+                      {latestYearData.barren.toFixed(2)}
+                      %
                     </p>
                   </>
                 )}
@@ -614,7 +648,12 @@ export function DistrictReport({ districtData, districtName, region = 'Sahel' }:
 
           {/* Footer */}
           <div className="text-center text-sm text-gray-500 mt-12 pt-4 border-t">
-            <p> {new Date().getFullYear()} G20 Global Land Initiative</p>
+            <p>
+              {' '}
+              {new Date().getFullYear()}
+              {' '}
+              G20 Global Land Initiative
+            </p>
             <p>United Nations Convention to Combat Desertification</p>
             <p>For official use only</p>
           </div>

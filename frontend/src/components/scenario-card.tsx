@@ -1,17 +1,17 @@
+import type { Scenario } from './district-profile'
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import type { Scenario } from "./district-profile";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 
 interface ScenarioCardProps {
-  scenario: Scenario;
-  isSelected: boolean;
-  displayedPercentage: string | undefined;
-  onSelectScenario: (id: string) => void;
+  scenario: Scenario
+  isSelected: boolean
+  displayedPercentage: string | undefined
+  onSelectScenario: (id: string) => void
 }
 
 export function ScenarioCard({
@@ -20,12 +20,12 @@ export function ScenarioCard({
   displayedPercentage,
   onSelectScenario,
 }: ScenarioCardProps) {
-  const percentageValue = displayedPercentage ? displayedPercentage : "0%";
+  const percentageValue = displayedPercentage || '0%'
   return (
     <Card
       onClick={() => onSelectScenario(scenario.id)}
       className={`border p-4 cursor-pointer ${
-        isSelected ? "bg-emerald-100" : "bg-white"
+        isSelected ? 'bg-emerald-100' : 'bg-white'
       }`}
     >
       <CardHeader>
@@ -33,10 +33,10 @@ export function ScenarioCard({
 
         <p
           className={cn(
-            "text-xl font-semibold",
-            Number(percentageValue.replace("%", "")) < 0
-              ? "text-destructive"
-              : "text-emerald-600"
+            'text-xl font-semibold',
+            Number(percentageValue.replace('%', '')) < 0
+              ? 'text-destructive'
+              : 'text-emerald-600',
           )}
         >
           {percentageValue}
@@ -45,5 +45,5 @@ export function ScenarioCard({
         <CardDescription>{scenario.description}</CardDescription>
       </CardHeader>
     </Card>
-  );
+  )
 }

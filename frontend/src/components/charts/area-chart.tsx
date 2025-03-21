@@ -1,60 +1,62 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import { useData } from "@/context/DataContext";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-} from "@/components/ui/chart";
-import { AreaChart, Area, CartesianGrid, XAxis, ReferenceLine } from "recharts";
-import { Slider } from "@/components/ui/slider";
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart'
+import { Slider } from '@/components/ui/slider'
+import { useData } from '@/context/DataContext'
+import React, { useState } from 'react'
+import { Area, AreaChart, CartesianGrid, ReferenceLine, XAxis } from 'recharts'
 
 interface ChartData {
-  date: string;
-  desktop: number;
-  mobile: number;
+  date: string
+  desktop: number
+  mobile: number
 }
 
 interface AreaChartInteractiveProps {
-  chartConfig: any;
-  chartData: ChartData[];
+  chartConfig: any
+  chartData: ChartData[]
   // Only a single scenario string now:
-  selectedScenario: string;
+  selectedScenario: string
 }
 
 /** Helper that returns the config for a single scenario. */
 function getScenarioConfig(scenario: string) {
-  if (scenario === "climate") {
+  if (scenario === 'climate') {
     return {
-      dataKey: "desktop",
-      fillId: "fillDesktop",
-      strokeVar: "--color-desktop",
-    };
-  } else if (scenario === "carbon") {
+      dataKey: 'desktop',
+      fillId: 'fillDesktop',
+      strokeVar: '--color-desktop',
+    }
+  }
+  else if (scenario === 'carbon') {
     return {
-      dataKey: "mobile",
-      fillId: "fillMobile",
-      strokeVar: "--color-mobile",
-    };
-  } else if (scenario === "population") {
+      dataKey: 'mobile',
+      fillId: 'fillMobile',
+      strokeVar: '--color-mobile',
+    }
+  }
+  else if (scenario === 'population') {
     return {
-      dataKey: "pop",
-      fillId: "fillPopulation",
-      strokeVar: "black",
-    };
-  } else if (scenario === "land") {
+      dataKey: 'pop',
+      fillId: 'fillPopulation',
+      strokeVar: 'black',
+    }
+  }
+  else if (scenario === 'land') {
     return {
-      dataKey: "land",
-      fillId: "fillLandCover",
-      strokeVar: "--color-landCover",
-    };
+      dataKey: 'land',
+      fillId: 'fillLandCover',
+      strokeVar: '--color-landCover',
+    }
   }
   // Add more if needed...
-  return null;
+  return null
 }
 
 export function AreaChartInteractive({
@@ -62,19 +64,20 @@ export function AreaChartInteractive({
   chartData,
   selectedScenario,
 }: AreaChartInteractiveProps) {
-  const { selectedYear, setSelectedYear } = useData();
+  const { selectedYear, setSelectedYear } = useData()
 
-  const [selectedDate, setSelectedDate] = useState<string>("2010-01-01");
+  const [selectedDate, setSelectedDate] = useState<string>('2010-01-01')
 
   const handleClick = (e: any) => {
-    if (!e || !e.activeLabel) return;
-    setSelectedDate(e.activeLabel); // this is the X axis value, i.e. "2010-01-01"
-    const year = new Date(e.activeLabel).getFullYear();
-    setSelectedYear(year);
-  };
+    if (!e || !e.activeLabel)
+      return
+    setSelectedDate(e.activeLabel) // this is the X axis value, i.e. "2010-01-01"
+    const year = new Date(e.activeLabel).getFullYear()
+    setSelectedYear(year)
+  }
 
   // Look up scenario config
-  const scenarioConfig = getScenarioConfig(selectedScenario);
+  const scenarioConfig = getScenarioConfig(selectedScenario)
 
   return (
     <div>
@@ -86,9 +89,9 @@ export function AreaChartInteractive({
           step={1}
           value={[selectedYear]}
           onValueChange={([val]) => {
-            const isoDate = `${val}-01-01`;
-            setSelectedYear(val);
-            setSelectedDate(isoDate); // keep chart and UI in sync
+            const isoDate = `${val}-01-01`
+            setSelectedYear(val)
+            setSelectedDate(isoDate) // keep chart and UI in sync
           }}
         />
       </div>
@@ -151,16 +154,16 @@ export function AreaChartInteractive({
           <CartesianGrid />
           <XAxis
             dataKey="date"
-            tickLine={true}
+            tickLine
             axisLine={false}
             tickCount={5}
             minTickGap={50}
-            onClick={() => console.log("clicked")}
+            onClick={() => console.log('clicked')}
             tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                year: "numeric",
-              });
+              const date = new Date(value)
+              return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+              })
             }}
           />
 
@@ -168,16 +171,15 @@ export function AreaChartInteractive({
 
           <ChartTooltip
             cursor={false}
-            content={
+            content={(
               <ChartTooltipContent
-                labelFormatter={(value) =>
-                  new Date(value).toLocaleDateString("en-US", {
-                    year: "numeric",
-                  })
-                }
+                labelFormatter={value =>
+                  new Date(value).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                  })}
                 indicator="dot"
               />
-            }
+            )}
           />
 
           {/* Render an <Area> only if scenarioConfig is valid */}
@@ -194,5 +196,5 @@ export function AreaChartInteractive({
         </AreaChart>
       </ChartContainer>
     </div>
-  );
+  )
 }
