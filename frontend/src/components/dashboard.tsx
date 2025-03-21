@@ -152,34 +152,6 @@ export function Dashboard() {
       <div className="rounded-lg bg-card">
         <DashboardMap />
       </div>
-      <ToggleGroup.Root
-        type="multiple"
-        value={selectedScenarios}
-        onValueChange={handleScenarioChange}
-      >
-        <div className="flex mt-8 gap-4">
-          {scenarios.map((scenario) => (
-            <ToggleGroup.Item
-              className={cn("shadow-sm")}
-              key={scenario.id}
-              value={scenario.id}
-              style={
-                selectedScenarios.includes(scenario.id)
-                  ? ({
-                      "--tw-shadow-color": getScenarioColor(scenario.id),
-                    } as React.CSSProperties)
-                  : undefined
-              }
-            ></ToggleGroup.Item>
-          ))}
-        </div>
-      </ToggleGroup.Root>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
-        <div className="bg-white md:col-span-2 lg:col-span-3"></div>
-
-        <DashboardBarChart />
-        <DashboardBarChart />
-      </div>
     </>
   );
 }

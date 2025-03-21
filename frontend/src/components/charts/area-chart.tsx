@@ -42,7 +42,7 @@ function getScenarioConfig(scenario: string) {
     };
   } else if (scenario === "population") {
     return {
-      dataKey: "population",
+      dataKey: "pop",
       fillId: "fillPopulation",
       strokeVar: "black",
     };
