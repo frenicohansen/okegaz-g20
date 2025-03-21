@@ -22,7 +22,7 @@ export function MapPanel({ layers, toggleLayer, selectedBase, setSelectedBase }:
   const tiffLayers = layers.filter(layer => layer.type === 'tiff')
 
   return (
-    <div className="absolute bottom-2 left-2 z-10 w-72 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
+    <div className="absolute bottom-12 left-2 z-10 w-72 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
       <Tabs defaultValue="layers" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2 mb-4">
           <TabsTrigger value="layers" className="flex items-center gap-2">

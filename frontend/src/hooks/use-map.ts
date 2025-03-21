@@ -1,5 +1,6 @@
 import type { GeoJSONFeature } from 'ol/format/GeoJSON'
 import type { RefObject } from 'react'
+import { useData } from '@/context/DataContext'
 import { defaults as defaultControls } from 'ol/control'
 import { click } from 'ol/events/condition'
 import GeoJSON from 'ol/format/GeoJSON'
@@ -14,6 +15,7 @@ import GeoTIFF from 'ol/source/GeoTIFF'
 import VectorSource from 'ol/source/Vector'
 import { Fill, Stroke, Style } from 'ol/style'
 import View from 'ol/View'
+
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 export type StyleKey = keyof typeof styles
@@ -40,31 +42,29 @@ export const styles = {
   },
 }
 
-import { useData } from "@/context/DataContext";
-
 const scenarios = [
   {
-    id: "carbon",
-    title: "Carbon absorbtion",
-    description: "Carbon absorbtion",
+    id: 'carbon',
+    title: 'Carbon absorbtion',
+    description: 'Carbon absorbtion',
   },
   {
-    id: "climate",
-    title: "Climate",
-    description: "Climate",
+    id: 'climate',
+    title: 'Climate',
+    description: 'Climate',
   },
   {
-    id: "land",
-    title: "Land cover",
-    description: "Land cover",
+    id: 'land',
+    title: 'Land cover',
+    description: 'Land cover',
   },
-];
+]
 
 function createTiffLayer(
   name: string,
   url: string,
   year: number,
-  tiffOpacity: number
+  tiffOpacity: number,
 ) {
   const tiffSource = new GeoTIFF({
     sources: [
@@ -72,7 +72,6 @@ function createTiffLayer(
         url,
       },
     ],
-    projection: 'EPSG:4326',
   })
 
   return new WebGLTileLayer({
@@ -81,68 +80,68 @@ function createTiffLayer(
     opacity: tiffOpacity,
     properties: {
       title: `${name} ${year.toString()}`,
-      type: "overlay",
+      type: 'overlay',
     },
     zIndex: 100,
-  });
+  })
 }
 
 function getTiffLayers(tiffOpacity: number) {
-  const years = Array.from({ length: 14 }, (_, i) => 2010 + i);
+  const years = Array.from({ length: 14 }, (_, i) => 2010 + i)
   const carbon = years.map((year) => {
     return {
       year,
       layer: createTiffLayer(
-        "Carbon absorbtion",
+        'Carbon absorbtion',
         `/data_display/carbon_absorbtion/${year}_GP.tif`,
         year,
-        tiffOpacity
+        tiffOpacity,
       ),
-    };
-  });
+    }
+  })
 
   const climate = years.map((year) => {
     return {
       year,
       layer: createTiffLayer(
-        "Climate",
+        'Climate',
         `/data_display/climate/${year}R.tif`,
         year,
-        tiffOpacity
+        tiffOpacity,
       ),
-    };
-  });
+    }
+  })
 
   const land = years.map((year) => {
     return {
       year,
       layer: createTiffLayer(
-        "Land cover",
+        'Land cover',
         `/data_display/land_cover/${year}LCT.tif`,
         year,
-        tiffOpacity
+        tiffOpacity,
       ),
-    };
-  });
+    }
+  })
 
-  return { carbon, climate, land };
+  return { carbon, climate, land }
 }
 
 function getMapBaseLayers() {
   const regionSource = new VectorSource({
-    url: "/GeoJSON/Assaba_Region.geojson",
+    url: '/GeoJSON/Assaba_Region.geojson',
     format: new GeoJSON(),
-  });
+  })
 
   const roadSource = new VectorSource({
-    url: "/GeoJSON/Main_Road.geojson",
+    url: '/GeoJSON/Main_Road.geojson',
     format: new GeoJSON(),
-  });
+  })
 
   const waterSource = new VectorSource({
-    url: "/GeoJSON/Streamwater.geojson",
+    url: '/GeoJSON/Streamwater.geojson',
     format: new GeoJSON(),
-  });
+  })
 
   const regionStyle = new Style({
     fill: new Fill({
@@ -152,14 +151,14 @@ function getMapBaseLayers() {
       color: styles.Region.stroke,
       width: 3,
     }),
-  });
+  })
 
   const roadStyle = new Style({
     stroke: new Stroke({
       color: styles.Roads.stroke,
       width: 2,
     }),
-  });
+  })
 
   const waterStyle = new Style({
     fill: new Fill({
@@ -169,100 +168,100 @@ function getMapBaseLayers() {
       color: styles.Water.stroke,
       width: 1,
     }),
-  });
+  })
 
   const osmLayer = new TileLayer({
     source: new OSM(),
     properties: {
-      title: "OpenStreetMap",
-      type: "base",
+      title: 'OpenStreetMap',
+      type: 'base',
     },
-  });
+  })
 
   const satelliteLayer = new TileLayer({
     source: new XYZ({
-      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-      attributions: "Tiles Esri",
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      attributions: 'Tiles Esri',
     }),
     properties: {
-      title: "Satellite",
-      type: "base",
+      title: 'Satellite',
+      type: 'base',
     },
-  });
+  })
 
   const regionLayer = new VectorLayer({
     source: regionSource,
     style: regionStyle,
     properties: {
-      title: "Region",
-      type: "overlay",
+      title: 'Region',
+      type: 'overlay',
     },
-  });
+  })
 
   const roadLayer = new VectorLayer({
     source: roadSource,
     style: roadStyle,
     properties: {
-      title: "Roads",
-      type: "overlay",
+      title: 'Roads',
+      type: 'overlay',
     },
-  });
+  })
 
   const waterLayer = new VectorLayer({
     source: waterSource,
     style: waterStyle,
     properties: {
-      title: "Water",
-      type: "overlay",
+      title: 'Water',
+      type: 'overlay',
     },
-  });
+  })
 
-  return [osmLayer, satelliteLayer, regionLayer, roadLayer, waterLayer];
+  return [osmLayer, satelliteLayer, regionLayer, roadLayer, waterLayer]
 }
 
 function getDistrictLayer() {
   const districtSource = new VectorSource({
-    url: "/GeoJSON/Assaba_Districts_Layer.geojson",
+    url: '/GeoJSON/Assaba_Districts_Layer.geojson',
     format: new GeoJSON(),
-  });
+  })
   const districtStyle = new Style({
     fill: new Fill({
-      color: "rgba(204, 204, 255, 0.3)",
+      color: 'rgba(204, 204, 255, 0.3)',
     }),
     stroke: new Stroke({
-      color: "#6666cc",
+      color: '#6666cc',
       width: 2,
     }),
     zIndex: 1, // Base zIndex for normal features
-  });
+  })
 
   const districtLayer = new VectorLayer({
     source: districtSource,
     style: districtStyle,
     properties: {
-      title: "Districts",
-      type: "overlay",
+      title: 'Districts',
+      type: 'overlay',
     },
-  });
+  })
 
-  return districtLayer;
+  return districtLayer
 }
 
 function getSelectedStyle() {
   return [
     new Style({
       fill: new Fill({
-        color: "rgba(255, 204, 0, 0.4)",
+        color: 'rgba(255, 204, 0, 0.4)',
       }),
       stroke: new Stroke({
-        color: "#ff9900",
+        color: '#ff9900',
         width: 3,
-        lineCap: "round",
-        lineJoin: "round",
+        lineCap: 'round',
+        lineJoin: 'round',
       }),
       zIndex: 1000, // Very high zIndex to ensure it's on top
     }),
-  ];
+  ]
 }
 
 export interface BasicLayerInfo {
@@ -272,16 +271,16 @@ export interface BasicLayerInfo {
 }
 
 export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
-  const [map, setMap] = useState<Map | null>(null);
+  const [map, setMap] = useState<Map | null>(null)
 
-  const selectInteractionRef = useRef<Select | null>(null);
-  const [selectedDistrict, setSelectedDistrict] =
-    useState<GeoJSONFeature | null>(null);
-  const [selectedScenario, setSelectedScenario] = useState<string>("carbon");
-  const [tiffOpacity, setTiffOpacity] = useState<number>(0.7);
-  const [selectedYear, setSelectedYear] = useState<number>(2010);
-  const [districtNames, setDistrictNames] = useState<string[]>([]);
-  const districtSourceRef = useRef<VectorSource | null>(null);
+  const selectInteractionRef = useRef<Select | null>(null)
+  const [selectedDistrict, setSelectedDistrict]
+    = useState<GeoJSONFeature | null>(null)
+  const [selectedScenario, setSelectedScenario] = useState<string>('carbon')
+  const [tiffOpacity, setTiffOpacity] = useState<number>(0.7)
+  const [selectedYear, setSelectedYear] = useState<number>(2010)
+  const [districtNames, setDistrictNames] = useState<string[]>([])
+  const districtSourceRef = useRef<VectorSource | null>(null)
 
   const baseLayers = useMemo(() => getMapBaseLayers(), [])
   const districtLayer = useMemo(() => getDistrictLayer(), [])
@@ -300,10 +299,11 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
     ])
   }, [selectedYear])
 
-  const { setSelectedDistrict: setSelectedDistrictStr } = useData();
+  const { setSelectedDistrict: setSelectedDistrictStr } = useData()
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current)
+      return
 
     const map = new Map({
       layers: baseLayers,
@@ -316,17 +316,16 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
         rotate: false,
         attribution: true,
       }),
-    });
-    map.setTarget(mapRef.current);
-    setMap(map);
+    })
+    map.setTarget(mapRef.current)
+    setMap(map)
 
     return () => {
       if (map) {
-        map.dispose();
+        map.dispose()
       }
-    };
-  }, [baseLayers, mapRef]);
-
+    }
+  }, [baseLayers, mapRef])
 
   useEffect(() => {
     if (!map)
@@ -340,28 +339,29 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
   }, [map, selectedBase])
 
   useEffect(() => {
-    if (!map) return;
+    if (!map)
+      return
 
-    map.addLayer(districtLayer);
+    map.addLayer(districtLayer)
 
     // Store the district source for later use in search
     if (districtLayer.getSource()) {
-      districtSourceRef.current = districtLayer.getSource() as VectorSource;
+      districtSourceRef.current = districtLayer.getSource() as VectorSource
 
       // When source is loaded, extract district names
-      districtSourceRef.current.once("change", () => {
+      districtSourceRef.current.once('change', () => {
         if (
-          districtSourceRef.current &&
-          districtSourceRef.current.getState() === "ready"
+          districtSourceRef.current
+          && districtSourceRef.current.getState() === 'ready'
         ) {
-          const features = districtSourceRef.current.getFeatures();
+          const features = districtSourceRef.current.getFeatures()
           const names = features
-            .map((feature) => feature.get("ADM3_EN"))
-            .filter((name) => !!name); // Filter out undefined/null values
-          setDistrictNames(names);
-          setSelectedDistrictStr(features[0].get("ADM3_EN"));
+            .map(feature => feature.get('ADM3_EN'))
+            .filter(name => !!name) // Filter out undefined/null values
+          setDistrictNames(names)
+          setSelectedDistrictStr(features[0].get('ADM3_EN'))
         }
-      });
+      })
     }
 
     const currentSelect = new Select({
@@ -370,100 +370,106 @@ export function useMap(mapRef: RefObject<HTMLDivElement | null>) {
       condition: click,
       multi: false,
       hitTolerance: 0,
-    });
+    })
 
     if (currentSelect) {
-      map.addInteraction(currentSelect);
-      selectInteractionRef.current = currentSelect;
+      map.addInteraction(currentSelect)
+      selectInteractionRef.current = currentSelect
 
-      currentSelect.on("select", (_e) => {
-        const features = currentSelect.getFeatures();
-        const featureCount = features.getLength();
+      currentSelect.on('select', (_e) => {
+        const features = currentSelect.getFeatures()
+        const featureCount = features.getLength()
 
         if (featureCount > 0) {
-          const feature = features.item(0);
-          const geometry = feature.getGeometry();
+          const feature = features.item(0)
+          const geometry = feature.getGeometry()
           if (geometry) {
-            const extent = geometry.getExtent();
+            const extent = geometry.getExtent()
             map.getView().fit(extent, {
               duration: 1000,
               padding: [50, 50, 50, 50],
               maxZoom: 10,
-            });
+            })
           }
-          setSelectedDistrict(feature.getProperties());
-          const districtName = feature.get("ADM3_EN");
+          setSelectedDistrict(feature.getProperties())
+          const districtName = feature.get('ADM3_EN')
 
-          setSelectedDistrictStr(districtName);
-        } else {
-          setSelectedDistrict(null);
+          setSelectedDistrictStr(districtName)
         }
-      });
+        else {
+          setSelectedDistrict(null)
+        }
+      })
     }
 
     return () => {
       if (map) {
-        map.removeLayer(districtLayer);
+        map.removeLayer(districtLayer)
         if (selectInteractionRef.current) {
-          map.removeInteraction(selectInteractionRef.current);
+          map.removeInteraction(selectInteractionRef.current)
         }
       }
-    };
-  }, [map, districtLayer, selectedStyle]);
+    }
+  }, [map, districtLayer, selectedStyle])
 
   useEffect(() => {
-    if (!map) return;
+    if (!map)
+      return
 
-    const layersSelectedYear = Object.values(tiffLayers).map((layers) =>
-      layers.find(({ year }) => year === selectedYear)
-    );
+    const layersSelectedYear = Object.values(tiffLayers).map(layers =>
+      layers.find(({ year }) => year === selectedYear),
+    )
     layersSelectedYear.forEach((layer) => {
-      if (layer) map.addLayer(layer.layer);
-    });
+      if (layer)
+        map.addLayer(layer.layer)
+    })
 
     return () => {
       if (map) {
         layersSelectedYear.forEach((layer) => {
-          if (layer) map.removeLayer(layer.layer);
-        });
+          if (layer)
+            map.removeLayer(layer.layer)
+        })
       }
-    };
-  }, [map, tiffLayers, selectedYear]);
+    }
+  }, [map, tiffLayers, selectedYear])
 
   // Function to search for a district by name and zoom to it
   const searchDistrict = (query: string) => {
-    if (!map || !districtSourceRef.current) return;
+    if (!map || !districtSourceRef.current)
+      return
 
     // Get all features from the district source
-    const features = districtSourceRef.current.getFeatures();
+    const features = districtSourceRef.current.getFeatures()
 
     // Find the feature that matches the query (case insensitive)
     const matchedFeature = features.find((feature) => {
-      const name = feature.get("ADM3_EN");
-      return name && name.toLowerCase().includes(query.toLowerCase());
-    });
+      const name = feature.get('ADM3_EN')
+      return name && name.toLowerCase().includes(query.toLowerCase())
+    })
 
     if (matchedFeature) {
       // Get the geometry and its extent
-      const geometry = matchedFeature.getGeometry();
+      const geometry = matchedFeature.getGeometry()
       if (geometry) {
         // Zoom to the feature's extent with padding
-        const extent = geometry.getExtent();
+        const extent = geometry.getExtent()
         map.getView().fit(extent, {
           duration: 1000,
           padding: [50, 50, 50, 50],
           maxZoom: 10,
-        });
+        })
 
         // Select the feature
         if (selectInteractionRef.current) {
-          selectInteractionRef.current.getFeatures().clear();
-          selectInteractionRef.current.getFeatures().push(matchedFeature);
-          setSelectedDistrict(matchedFeature.getProperties() as GeoJSONFeature);
+          selectInteractionRef.current.getFeatures().clear()
+          selectInteractionRef.current.getFeatures().push(matchedFeature)
+          setSelectedDistrict(matchedFeature.getProperties() as GeoJSONFeature)
         }
       }
-    } else {
-      console.warn("District not found:", query);
+    }
+    else {
+      console.warn('District not found:', query)
     }
   }
 
